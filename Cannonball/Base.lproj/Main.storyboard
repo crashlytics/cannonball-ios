@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lee-FR-LJd">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Popular Poems-->
+        <scene sceneID="xvW-ne-Fdi">
+            <objects>
+                <tableViewController id="Vc8-Wc-foP" customClass="TweetListViewController" customModule="Cannonball" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="1qJ-gv-FWZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Vc8-Wc-foP" id="i8n-EU-aNW"/>
+                            <outlet property="delegate" destination="Vc8-Wc-foP" id="mny-ZX-IZh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Popular Poems" id="A4z-bM-j9w"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HKI-d7-bOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="776" y="1273.03"/>
+        </scene>
+        <!--Theme Chooser View Controller-->
+        <scene sceneID="pHw-4S-UaI">
+            <objects>
+                <tableViewController id="aG1-dm-mAd" customClass="ThemeChooserViewController" customModule="Cannonball" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="yzx-Zk-q3D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="1" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ThemeCell" id="oBe-yw-yTx" customClass="ThemeCell" customModule="Cannonball" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="oBe-yw-yTx" id="2gR-N6-Uys">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eNL-DI-kCC">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Theme" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="z1g-4J-H8u">
+                                            <rect key="frame" x="0.0" y="90" width="320" height="28"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="eNL-DI-kCC" firstAttribute="top" secondItem="2gR-N6-Uys" secondAttribute="top" id="ErH-LF-3mo"/>
+                                        <constraint firstItem="eNL-DI-kCC" firstAttribute="leading" secondItem="z1g-4J-H8u" secondAttribute="leading" id="G13-7c-Vvf"/>
+                                        <constraint firstAttribute="trailing" secondItem="eNL-DI-kCC" secondAttribute="trailing" id="SQc-Pg-l5F"/>
+                                        <constraint firstItem="z1g-4J-H8u" firstAttribute="bottom" secondItem="2gR-N6-Uys" secondAttribute="bottomMargin" id="UF4-bS-tJk"/>
+                                        <constraint firstAttribute="bottom" secondItem="eNL-DI-kCC" secondAttribute="bottom" id="WIA-Yt-LdJ"/>
+                                        <constraint firstItem="z1g-4J-H8u" firstAttribute="leading" secondItem="2gR-N6-Uys" secondAttribute="leading" id="fml-xC-gqs"/>
+                                        <constraint firstItem="eNL-DI-kCC" firstAttribute="trailing" secondItem="z1g-4J-H8u" secondAttribute="trailing" id="rRk-wv-0B3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="z1g-4J-H8u" id="S7z-JG-WIx"/>
+                                    <outlet property="pictureImageView" destination="eNL-DI-kCC" id="JQ1-PR-ufm"/>
+                                    <segue destination="vXZ-lx-hvc" kind="push" identifier="" id="Qbz-ja-RdJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aG1-dm-mAd" id="mnP-CG-ZCZ"/>
+                            <outlet property="delegate" destination="aG1-dm-mAd" id="6RF-MW-iEI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="5Vr-7D-geR">
+                        <barButtonItem key="leftBarButtonItem" image="History" id="e6j-wo-e5J">
+                            <connections>
+                                <segue destination="wiA-rN-OmI" kind="push" id="PGs-2w-0OG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Popular" id="Brd-vp-Ykq">
+                            <connections>
+                                <segue destination="Vc8-Wc-foP" kind="push" id="3W5-0s-bxT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="historyButton" destination="e6j-wo-e5J" id="kh7-iB-0s5"/>
+                        <outlet property="tweetsButton" destination="Brd-vp-Ykq" id="NeO-0U-6c5"/>
+                        <segue destination="oFl-4R-C3q" kind="modal" identifier="ShowAbout" id="rAS-nZ-AL1"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wiU-aB-91w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="344.80000000000001" y="587.88"/>
+        </scene>
+        <!--Poem Composer View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="PoemComposerViewController" customModule="Cannonball" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U83-9S-r9r">
+                                <rect key="frame" x="135" y="482" width="50" height="34"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Shuffle">
+                                    <color key="titleColor" red="0.066666666669999999" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shuffleWordBank" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uiC-bD-dVl"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-rd-bqU" customClass="ImageCarouselView" customModule="Cannonball" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="79" width="320" height="240"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cp8-n0-7pf" userLabel="Poem Collection View">
+                                <rect key="frame" x="16" y="279" width="288" height="32"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="oGI-lo-KaW"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U8q-xy-8g9">
+                                    <size key="itemSize" width="60" height="32"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PoemComposerWordCell" id="hk5-qQ-wxi" customClass="PoemComposerWordCell" customModule="Cannonball" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMw-oL-AUo">
+                                                    <rect key="frame" x="8" y="8" width="44" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="RMw-oL-AUo" firstAttribute="leading" secondItem="hk5-qQ-wxi" secondAttribute="leadingMargin" id="5wt-dd-7IO"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="RMw-oL-AUo" secondAttribute="trailing" id="MIU-MI-eZd"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="RMw-oL-AUo" secondAttribute="bottom" id="icF-nB-tue"/>
+                                            <constraint firstItem="RMw-oL-AUo" firstAttribute="top" secondItem="hk5-qQ-wxi" secondAttribute="topMargin" id="roo-ch-o3J"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="word" destination="RMw-oL-AUo" id="bDR-9H-da4"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="eg1-zs-zjR"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="AWG-DY-oaZ"/>
+                                </connections>
+                            </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yAG-cP-b7r" userLabel="Bank Collection View">
+                                <rect key="frame" x="16" y="335" width="288" height="139"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FgD-Zp-KNC">
+                                    <size key="itemSize" width="60" height="32"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PoemComposerWordCell" id="sgX-gk-Kji" customClass="PoemComposerWordCell" customModule="Cannonball" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="44" placeholderIntrinsicHeight="16" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="LVJ-ba-vjB">
+                                                    <rect key="frame" x="8" y="8" width="44" height="16"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                                    <color key="textColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="LVJ-ba-vjB" secondAttribute="bottom" id="DfS-49-gad"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="LVJ-ba-vjB" secondAttribute="trailing" id="aH5-F1-2l3"/>
+                                            <constraint firstItem="LVJ-ba-vjB" firstAttribute="top" secondItem="sgX-gk-Kji" secondAttribute="topMargin" id="hsC-pa-iXH"/>
+                                            <constraint firstItem="LVJ-ba-vjB" firstAttribute="leading" secondItem="sgX-gk-Kji" secondAttribute="leadingMargin" id="mmw-LW-KpA"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="word" destination="LVJ-ba-vjB" id="fVf-3j-aoB"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="hch-aA-i9A"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="IpD-eM-TTa"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99607843137254903" green="0.90980392156862744" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="BrB-rd-bqU" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="1Dl-Vw-fMN"/>
+                            <constraint firstItem="U83-9S-r9r" firstAttribute="top" secondItem="yAG-cP-b7r" secondAttribute="bottom" constant="8" id="515-Mu-2SI"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="U83-9S-r9r" secondAttribute="bottom" constant="8" id="7RR-Fb-YQx"/>
+                            <constraint firstItem="BrB-rd-bqU" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.75" id="C0I-Zr-Vab"/>
+                            <constraint firstAttribute="centerX" secondItem="U83-9S-r9r" secondAttribute="centerX" id="DXK-A2-thc"/>
+                            <constraint firstItem="Cp8-n0-7pf" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="UOn-VO-Zno"/>
+                            <constraint firstItem="Cp8-n0-7pf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Vib-Wo-0Ie"/>
+                            <constraint firstAttribute="centerX" secondItem="BrB-rd-bqU" secondAttribute="centerX" id="czR-UK-Zss"/>
+                            <constraint firstItem="yAG-cP-b7r" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="dQk-wG-pLu"/>
+                            <constraint firstItem="BrB-rd-bqU" firstAttribute="bottom" secondItem="Cp8-n0-7pf" secondAttribute="bottom" constant="8" id="unM-xv-Mhb"/>
+                            <constraint firstItem="yAG-cP-b7r" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="vTP-Cs-had"/>
+                            <constraint firstItem="yAG-cP-b7r" firstAttribute="top" secondItem="BrB-rd-bqU" secondAttribute="bottom" constant="16" id="xqP-zU-zVq"/>
+                            <constraint firstItem="BrB-rd-bqU" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="15" id="yr6-8C-lvC"/>
+                            <constraint firstAttribute="trailing" secondItem="BrB-rd-bqU" secondAttribute="trailing" id="zsF-zZ-sjn"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="mjF-vC-pyi">
+                        <barButtonItem key="rightBarButtonItem" image="Tick" id="fbt-8X-F2f">
+                            <connections>
+                                <segue destination="wiA-rN-OmI" kind="push" identifier="ShowHistory" id="8ZM-rV-Mkz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="bankCollectionView" destination="yAG-cP-b7r" id="Gyv-IW-7RS"/>
+                        <outlet property="doneButton" destination="fbt-8X-F2f" id="I75-SP-uCw"/>
+                        <outlet property="imageCarousel" destination="BrB-rd-bqU" id="alx-pG-pRj"/>
+                        <outlet property="poemCollectionView" destination="Cp8-n0-7pf" id="NFl-QS-Wct"/>
+                        <outlet property="poemHeightContraint" destination="oGI-lo-KaW" id="sTK-cH-6jq"/>
+                        <outlet property="shuffleButton" destination="U83-9S-r9r" id="aVv-AJ-Pmg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="776" y="587.88"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="CFx-V6-lSn">
+            <objects>
+                <viewController storyboardIdentifier="AboutViewController" id="pr7-c2-wS1" customClass="AboutViewController" customModule="Cannonball" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1vY-Oh-eSh"/>
+                        <viewControllerLayoutGuide type="bottom" id="bb1-FW-h3R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r9n-OK-HN6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="749" misplaced="YES" image="Fabric" translatesAutoresizingMaskIntoConstraints="NO" id="021-ub-dBp">
+                                <rect key="frame" x="60" y="301" width="200" height="172"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="1000" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" adjustsLetterSpacingToFitWidth="YES" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="fte-6x-rkU">
+                                <rect key="frame" x="16" y="96" width="288" height="140"/>
+                                <string key="text">Cannonball is the fun way to create and share stories and poems on your phone. Start with a beautiful image from the gallery, then choose words about #adventure, #romance, #nature or #mystery to complete the story and share it with friends. Browse top stories created by other users for inspiration.</string>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cannonball was built with Fabric." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aF8-7O-FCQ">
+                                <rect key="frame" x="16" y="268" width="288" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="7Pt-Bl-9bY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evP-r6-ZKB">
+                                <rect key="frame" x="127" y="486" width="65" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="fmQ-0d-wYf"/>
+                                    <constraint firstAttribute="height" constant="30" id="qLF-dX-23n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Sign Out">
+                                    <color key="titleColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOut:" destination="pr7-c2-wS1" eventType="touchUpInside" id="cbO-jP-G8U"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnl-GV-vgG">
+                                <rect key="frame" x="52" y="481" width="216" height="34"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Learn more at t.co/cannonball">
+                                    <color key="titleColor" red="0.27450980390000002" green="0.60392156860000001" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="learnMore:" destination="pr7-c2-wS1" eventType="touchUpInside" id="Am7-NG-yS9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="fte-6x-rkU" firstAttribute="leading" secondItem="r9n-OK-HN6" secondAttribute="leadingMargin" id="13D-5V-QFM"/>
+                            <constraint firstItem="aF8-7O-FCQ" firstAttribute="trailing" secondItem="fte-6x-rkU" secondAttribute="trailing" id="AyS-vK-bsB"/>
+                            <constraint firstItem="aF8-7O-FCQ" firstAttribute="leading" secondItem="fte-6x-rkU" secondAttribute="leading" id="EJB-ds-ayw"/>
+                            <constraint firstItem="021-ub-dBp" firstAttribute="centerX" secondItem="aF8-7O-FCQ" secondAttribute="centerX" id="Fui-SN-4Az"/>
+                            <constraint firstItem="aF8-7O-FCQ" firstAttribute="top" secondItem="fte-6x-rkU" secondAttribute="bottom" constant="32" id="Izd-WY-3Ld"/>
+                            <constraint firstItem="bb1-FW-h3R" firstAttribute="top" secondItem="evP-r6-ZKB" secondAttribute="bottom" constant="8" symbolic="YES" id="Rbn-dV-GPm"/>
+                            <constraint firstItem="tnl-GV-vgG" firstAttribute="top" secondItem="021-ub-dBp" secondAttribute="bottom" constant="8" symbolic="YES" id="S0V-YA-hF3"/>
+                            <constraint firstItem="tnl-GV-vgG" firstAttribute="centerX" secondItem="021-ub-dBp" secondAttribute="centerX" id="a6j-Xm-qtA"/>
+                            <constraint firstItem="021-ub-dBp" firstAttribute="centerX" secondItem="r9n-OK-HN6" secondAttribute="centerX" id="gCI-oB-euv"/>
+                            <constraint firstItem="fte-6x-rkU" firstAttribute="top" secondItem="1vY-Oh-eSh" secondAttribute="bottom" constant="32" id="hO6-OU-Ryb"/>
+                            <constraint firstItem="021-ub-dBp" firstAttribute="top" secondItem="aF8-7O-FCQ" secondAttribute="bottom" constant="8" symbolic="YES" id="nh7-oa-bvu"/>
+                            <constraint firstItem="tnl-GV-vgG" firstAttribute="centerX" secondItem="evP-r6-ZKB" secondAttribute="centerX" id="qAz-Vb-7Nm"/>
+                            <constraint firstItem="evP-r6-ZKB" firstAttribute="top" secondItem="tnl-GV-vgG" secondAttribute="bottom" constant="10" id="vPd-ek-F3k"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="dUw-8F-GoS">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="1cW-3q-Gl2">
+                            <color key="tintColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="dismiss:" destination="pr7-c2-wS1" id="TD0-Tu-tnQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="signOutButton" destination="evP-r6-ZKB" id="KAG-JU-LiC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ojv-YX-hWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="344.80000000000001" y="-94.429999999999993"/>
+        </scene>
+        <!--Your Poems-->
+        <scene sceneID="JKy-0w-neF">
+            <objects>
+                <tableViewController id="wiA-rN-OmI" customClass="PoemHistoryViewController" customModule="Cannonball" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="300" sectionHeaderHeight="22" sectionFooterHeight="22" id="N3E-QV-6TX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PoemCell" rowHeight="300" id="MZM-vt-ysW" customClass="PoemCell" customModule="Cannonball" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MZM-vt-ysW" id="5uG-5F-Cpp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fK9-8j-XTc">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qz-N8-KEQ">
+                                            <rect key="frame" x="280" y="8" width="32" height="32"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <state key="normal" image="Share"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="kGB-O4-8mF">
+                                            <rect key="frame" x="100" y="8" width="120" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="tR1-6l-gWm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poem" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="384" translatesAutoresizingMaskIntoConstraints="NO" id="m1l-yR-daE">
+                                            <rect key="frame" x="8" y="150" width="304" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="lno-VO-5Cd"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerX" secondItem="m1l-yR-daE" secondAttribute="centerX" id="08Q-go-9iT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="m1l-yR-daE" secondAttribute="trailing" id="4YO-l6-AdW"/>
+                                        <constraint firstItem="kGB-O4-8mF" firstAttribute="top" secondItem="5uG-5F-Cpp" secondAttribute="topMargin" id="HbK-zN-eqc"/>
+                                        <constraint firstAttribute="centerX" secondItem="kGB-O4-8mF" secondAttribute="centerX" id="L5Q-DT-mEl"/>
+                                        <constraint firstItem="fK9-8j-XTc" firstAttribute="leading" secondItem="5uG-5F-Cpp" secondAttribute="leading" id="LT6-62-ZoM"/>
+                                        <constraint firstItem="m1l-yR-daE" firstAttribute="leading" secondItem="5uG-5F-Cpp" secondAttribute="leadingMargin" id="YIp-z6-udu"/>
+                                        <constraint firstAttribute="centerY" secondItem="m1l-yR-daE" secondAttribute="centerY" constant="-50" id="aBr-RN-JsO"/>
+                                        <constraint firstItem="8Qz-N8-KEQ" firstAttribute="top" secondItem="kGB-O4-8mF" secondAttribute="top" id="csQ-sG-X4V"/>
+                                        <constraint firstItem="8Qz-N8-KEQ" firstAttribute="trailing" secondItem="m1l-yR-daE" secondAttribute="trailing" id="i1z-Fl-GJ9"/>
+                                        <constraint firstAttribute="bottom" secondItem="fK9-8j-XTc" secondAttribute="bottom" id="ogk-Wl-3nF"/>
+                                        <constraint firstAttribute="trailing" secondItem="fK9-8j-XTc" secondAttribute="trailing" id="ovs-eN-m1x"/>
+                                        <constraint firstItem="fK9-8j-XTc" firstAttribute="top" secondItem="5uG-5F-Cpp" secondAttribute="top" id="pin-rs-dQG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="pictureImageView" destination="fK9-8j-XTc" id="aGV-kW-Qnh"/>
+                                    <outlet property="poemLabel" destination="m1l-yR-daE" id="b1F-Dc-m49"/>
+                                    <outlet property="shareButton" destination="8Qz-N8-KEQ" id="nLs-Xn-M7m"/>
+                                    <outlet property="themeLabel" destination="kGB-O4-8mF" id="lTe-gg-Gqc"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wiA-rN-OmI" id="kta-8Q-x5X"/>
+                            <outlet property="delegate" destination="wiA-rN-OmI" id="LFl-4z-mLo"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Your Poems" id="Cgt-Hq-0LL"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tqm-rW-1b8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="776" y="-94.429999999999993"/>
+        </scene>
+        <!--Sign In View Controller-->
+        <scene sceneID="Or4-ha-qWJ">
+            <objects>
+                <viewController storyboardIdentifier="SignInViewController" id="LWk-Ji-zOn" customClass="SignInViewController" customModule="Cannonball" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="egf-QX-w66"/>
+                        <viewControllerLayoutGuide type="bottom" id="7GY-bx-6m5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B6o-fU-7HD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7eD-LI-DDW">
+                                <rect key="frame" x="35" y="220" width="250" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="aQI-oY-o65"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                <color key="tintColor" red="0.2784313725" green="0.60392156860000001" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
+                                <state key="normal" title="  Sign In with Twitter" image="Twitter">
+                                    <color key="titleColor" red="0.27843137254901962" green="0.60392156862745094" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInWithTwitter:" destination="LWk-Ji-zOn" eventType="touchUpInside" id="grY-Bw-c9e"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyF-uy-Dc6">
+                                <rect key="frame" x="35" y="300" width="250" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="dhH-3p-BiM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                <color key="tintColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
+                                <state key="normal" title="  Sign In with Phone" image="Phone">
+                                    <color key="titleColor" red="0.074509803920000006" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInWithPhone:" destination="LWk-Ji-zOn" eventType="touchUpInside" id="634-sC-ktg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syj-zi-fhc">
+                                <rect key="frame" x="144" y="526" width="31" height="34"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" red="0.066666666669999999" green="0.59607843140000005" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Lee-FR-LJd" kind="modal" identifier="ShowThemeChooser" id="ixt-1E-UyI"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="PFT-X7-KfD">
+                                <rect key="frame" x="140" y="120" width="40" height="40"/>
+                                <color key="tintColor" red="0.42745098040000001" green="0.53333333329999999" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Syj-zi-fhc" firstAttribute="centerX" secondItem="uyF-uy-Dc6" secondAttribute="centerX" id="5Zp-qF-Wb4"/>
+                            <constraint firstAttribute="centerX" secondItem="PFT-X7-KfD" secondAttribute="centerX" id="e3I-1A-nT3"/>
+                            <constraint firstAttribute="centerX" secondItem="7eD-LI-DDW" secondAttribute="centerX" id="hCI-GM-xi3"/>
+                            <constraint firstAttribute="centerY" secondItem="uyF-uy-Dc6" secondAttribute="centerY" constant="-40" id="kIm-bK-QO1"/>
+                            <constraint firstAttribute="centerY" secondItem="7eD-LI-DDW" secondAttribute="centerY" constant="40" id="moF-SL-mOV"/>
+                            <constraint firstAttribute="centerX" secondItem="uyF-uy-Dc6" secondAttribute="centerX" id="npG-cH-02h"/>
+                            <constraint firstItem="7GY-bx-6m5" firstAttribute="top" secondItem="Syj-zi-fhc" secondAttribute="bottom" constant="8" symbolic="YES" id="nvx-QU-6st"/>
+                            <constraint firstItem="PFT-X7-KfD" firstAttribute="top" secondItem="egf-QX-w66" secondAttribute="bottom" constant="100" id="uKg-WV-b9G"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoView" destination="PFT-X7-KfD" id="8nt-sK-TZy"/>
+                        <outlet property="signInPhoneButton" destination="uyF-uy-Dc6" id="9w2-Vs-3BF"/>
+                        <outlet property="signInTwitterButton" destination="7eD-LI-DDW" id="4iD-62-Uzn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PMd-PQ-HmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-526.39999999999998" y="587.88"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vON-Lt-Uie">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lee-FR-LJd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="NOO-Xk-feS"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hXA-VW-2PF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.074509803921568626" green="0.59607843137254901" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="0.0"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="aG1-dm-mAd" kind="relationship" relationship="rootViewController" id="Vuo-7U-FWl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AoZ-ZD-rd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-89.599999999999994" y="587.88"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XOn-XC-3it">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oFl-4R-C3q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="956-wL-v5O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.99607843139999996" green="0.90980392160000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pr7-c2-wS1" kind="relationship" relationship="rootViewController" id="1bf-ys-dNb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cz6-8o-FHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-89.599999999999994" y="-94.429999999999993"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Fabric" width="200" height="172"/>
+        <image name="History" width="32" height="32"/>
+        <image name="Logo" width="40" height="40"/>
+        <image name="Phone" width="26" height="22"/>
+        <image name="Popular" width="32" height="32"/>
+        <image name="Share" width="32" height="32"/>
+        <image name="Tick" width="32" height="32"/>
+        <image name="Twitter" width="26" height="22"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="8ZM-rV-Mkz"/>
+    </inferredMetricsTieBreakers>
+</document>
