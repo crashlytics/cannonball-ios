@@ -1,3 +1,4 @@
 language: objective-c
 xcode_project: Cannonball.xcodeproj
-xcode_scheme: CannonballTests
+xcode_scheme: Cannonball
+osx_image: xcode61
