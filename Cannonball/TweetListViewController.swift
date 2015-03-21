@@ -147,11 +147,7 @@ class TweetListViewController: UITableViewController, TWTRTweetViewDelegate {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let tweet = self.tweets[indexPath.row]
         self.prototypeCell?.configureWithTweet(tweet)
-        if let height = self.prototypeCell?.calculatedHeightForWidth(self.view.bounds.width) {
-            return height
-        } else {
-            return self.tableView.estimatedRowHeight
-        }
+        return TWTRTweetTableViewCell.heightForTweet(tweet, width: self.view.bounds.width)
     }
 
 }
