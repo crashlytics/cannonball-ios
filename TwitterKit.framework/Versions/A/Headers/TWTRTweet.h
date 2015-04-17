@@ -1,7 +1,7 @@
 //
 //  TWTRTweet.h
 //
-//  Copyright (c) 2014 Twitter. All rights reserved.
+//  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -87,11 +87,23 @@
 @property (nonatomic, assign, readonly) BOOL isRetweeted;
 
 /**
- *  The retweet ID of the authenticated user's retweet of this Tweet.
+ *  The Tweet ID of the authenticated user's retweet of this Tweet. This will be `nil` if there is no
+ *  authenticated user or the user has not retweeted this Tweet.
  *
  *  @warning The value of this property depends on the authenticated user.
  */
 @property (nonatomic, copy, readonly) NSString *retweetID;
+
+/**
+ *  The original, fully-hydrated Tweet that was retweeted. This corresponds to the `retweeted_status` API field.
+ *  This is `nil` unless `self.isRetweet == YES`.
+ */
+@property (nonatomic, strong, readonly) TWTRTweet *retweetedTweet;
+
+/**
+ *  Indicates whether this Tweet is a retweet of another Tweet.
+ */
+@property (nonatomic, assign, readonly) BOOL isRetweet;
 
 # pragma mark - Init
 

@@ -2,7 +2,7 @@
 //  TWTRShareEmailViewController.h
 //  TwitterKit
 //
-//  Copyright (c) 2014 Twitter. All rights reserved.
+//  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

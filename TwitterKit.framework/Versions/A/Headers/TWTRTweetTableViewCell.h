@@ -1,7 +1,7 @@
 //
 //  TWTRTweetTableViewCell.h
 //
-//  Copyright (c) 2014 Twitter. All rights reserved.
+//  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -27,10 +27,37 @@
 - (void)configureWithTweet:(TWTRTweet *)tweet;
 
 /**
- *  Returns the height calculated using a given width. Generally just for use with prototype cells.
- *
+ *  Returns the height calculated using a given width. Usable from a background thread. This is the preferred approach to calculating height for tableview cells.
+
+     - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+         TWTRTweet *tweet = self.tweets[indexPath.row];
+         
+         // Grab the height for this cell
+         CGFloat height = [TWTRTweetTableViewCell heightForTweet:tweet width:CGRectGetWidth(self.view.bounds)];
+         return height;
+     }
+ 
  *  @param width The table view cell width.
  */
-- (CGFloat)calculatedHeightForWidth:(CGFloat)width;
++ (CGFloat)heightForTweet:(TWTRTweet *)tweet width:(CGFloat)width;
+
+/**
+  DEPRECATED
+
+  Returns the height calculated using a given width. Generally just for use with prototype cells.
+ 
+    - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+        TWTRTweet *tweet = self.tweets[indexPath.row];
+        
+        // Grab the height for this cell
+        CGFloat height = [TWTRTweetTableViewCell heightForTweet:tweet width:CGRectGetWidth(self.view.bounds)];
+        return height;
+    }
+
+  @deprecated Use +heightForTweet:width: instead. Deprecated in version 1.3.0
+
+  @param width The table view cell width.
+ */
+- (CGFloat)calculatedHeightForWidth:(CGFloat)width __attribute__((deprecated("Use +heightForTweet:width: instead.")));
 
 @end

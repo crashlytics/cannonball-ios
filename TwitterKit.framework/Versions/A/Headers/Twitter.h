@@ -1,7 +1,7 @@
 //
 //  Twitter.h
 //
-//  Copyright (c) 2014 Twitter. All rights reserved.
+//  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import "TwitterKit.h"
@@ -10,6 +10,7 @@
 
 /**
  *  The central class of the Twitter Kit.
+ *  @note This class can only be used from the main thread.
  */
 @interface Twitter : NSObject
 
@@ -49,13 +50,20 @@
 
 /**
  *  The Twitter application consumer key.
+ *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
  */
-@property (nonatomic, copy, readonly) NSString *consumerKey;
+@property (nonatomic, copy, readonly) NSString *consumerKey __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
 
 /**
  *  The Twitter application consumer secret.
+ *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
  */
-@property (nonatomic, copy, readonly) NSString *consumerSecret;
+@property (nonatomic, copy, readonly) NSString *consumerSecret __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
+
+/**
+ *  Authentication configuration details. Encapsulates the `consumerKey` and `consumerSecret` credentials required to authenticate a Twitter application.
+ */
+@property (nonatomic, strong, readonly) TWTRAuthConfig *authConfig;
 
 /**
  *  @name Authentication

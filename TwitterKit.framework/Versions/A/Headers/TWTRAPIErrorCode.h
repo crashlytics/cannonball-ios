@@ -1,7 +1,7 @@
 //
 //  TWTRAPIErrorCode.h
 //
-//  Copyright (c) 2014 Twitter. All rights reserved.
+//  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -112,6 +112,11 @@ typedef NS_ENUM(NSUInteger, TWTRAPIErrorCode) {
     TWTRAPIErrorCodeUserMustVerifyLogin = 231,
 
     /**
+     *  "Bad guest token." The token has probably expired. Try calling `-[Twitter logInGuestWithCompletion:]` again later.
+     */
+    TWTRAPIErrorCodeBadGuestToken = 239,
+
+    /**
      *  Corresponds to a HTTP request to a retired URL.
      */
     TWTRAPIErrorCodeEndpointRetired = 251,
@@ -130,6 +135,11 @@ typedef NS_ENUM(NSUInteger, TWTRAPIErrorCode) {
      *  Corresponds with HTTP 403. The authenticated user account is not muting the account a call is attempting to unmute.
      */
     TWTRAPIErrorCodeCannotMuteSpecifiedUser = 272,
+
+    /**
+     *  You have already retweeted this tweet.
+     */
+    TWTRAPIErrorCodeAlreadyRetweeted = 327,
 
     /**
      *  Returned in API v1.1 when a request cannot be served due to the application's rate limit having been exhausted for the resource. See [Rate Limiting in API v1.1](https://dev.twitter.com/docs/rate-limiting/1.1).

@@ -29,6 +29,7 @@
 #import "MPServerAdPositioning.h"
 #import "MPNativeAdSampleTableViewCell.h"
 #import "MPNativeAdSampleView.h"
+#import "MPNativeAdDelegate.h"
 
 // Import these frameworks for module support.
 #import <AdSupport/AdSupport.h>
@@ -45,9 +46,29 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <UIKit/UIKit.h>
 
-#define MoPubKit [[MoPub alloc] init]
+#define MoPubKit [MoPub sharedInstance]
 
 @interface MoPub : NSObject
+
+/**
+ * Returns the MoPub singleton object.
+ *
+ * @return The MoPub singleton object.
+ */
++ (MoPub *)sharedInstance;
+
+/**
+ * A Boolean value indicating whether the MoPub SDK should use Core Location APIs to automatically
+ * derive targeting information for location-based ads.
+ *
+ * When set to NO, the SDK will not attempt to determine device location. When set to YES, the
+ * SDK will periodically try to listen for location updates in order to request location-based ads.
+ * This only occurs if location services are enabled and the user has already authorized the use
+ * of location services for the application. The default value is YES.
+ *
+ * @param enabled A Boolean value indicating whether the SDK should listen for location updates.
+ */
+@property (nonatomic, assign) BOOL locationUpdatesEnabled;
 
 - (void)start;
 - (NSString *)version;

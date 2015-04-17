@@ -1,7 +1,7 @@
 //
 //  TWTRConstants.h
 //
-//  Copyright (c) 2014 Twitter. All rights reserved.
+//  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -40,7 +40,15 @@ typedef NS_ENUM(NSInteger, TWTRErrorCode) {
     /**
      *  A resource has been requested by ID, but that ID was not found.
      */
-    TWTRErrorCodeInvalidResourceID = 4
+    TWTRErrorCodeInvalidResourceID = 4,
+    /**
+     *  A request has been issued for an invalid URL.
+     */
+    TWTRErrorCodeInvalidURL = 5,
+    /**
+     *  Type mismatch in parsing JSON from the Twitter API.
+     */
+    TWTRErrorCodeMismatchedJSONType = 6,
 };
 
 /**
