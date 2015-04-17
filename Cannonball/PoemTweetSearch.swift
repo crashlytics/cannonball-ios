@@ -71,11 +71,11 @@ private func tweetsFromJSONData(jsonData: NSData) -> PoemTweetsResult {
         return PoemTweetsResult.Error(JSONError)
     } else {
         // Make the JSON data a dictionary.
-        let jsonDictionary = jsonData as [String:AnyObject]
+        let jsonDictionary = jsonData as! [String:AnyObject]
 
         // Extract the Tweets and create Tweet objects from the JSON data.
-        let jsonTweets = jsonDictionary["statuses"] as NSArray
-        let tweets = TWTRTweet.tweetsWithJSONArray(jsonTweets) as [TWTRTweet]
+        let jsonTweets = jsonDictionary["statuses"] as! [AnyObject]
+        let tweets = TWTRTweet.tweetsWithJSONArray(jsonTweets) as! [TWTRTweet]
 
         return .Tweets(tweets)
     }

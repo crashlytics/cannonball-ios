@@ -127,7 +127,7 @@ class TweetListViewController: UITableViewController, TWTRTweetViewDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Retrieve the Tweet cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier(tweetTableCellReuseIdentifier, forIndexPath: indexPath) as TWTRTweetTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(tweetTableCellReuseIdentifier, forIndexPath: indexPath) as! TWTRTweetTableViewCell
 
         // Assign the delegate to control events on Tweets.
         cell.tweetView.delegate = self

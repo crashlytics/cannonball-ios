@@ -43,7 +43,7 @@ class AboutViewController: UIViewController {
 
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
-        self.navigationController?.navigationBar.titleTextAttributes = titleDict
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -65,7 +65,7 @@ class AboutViewController: UIViewController {
 
         // Present the Sign In again.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInViewController: UIViewController! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController") as UIViewController
+        let signInViewController: UIViewController! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController") as! UIViewController
         self.presentViewController(signInViewController, animated: true, completion: nil)
     }
 

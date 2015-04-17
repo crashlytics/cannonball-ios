@@ -34,7 +34,7 @@ public class PoemPersistence {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var poems: [Poem]
         if let poemsArchived: AnyObject = userDefaults.objectForKey(userDefaultsKey) {
-            poems = NSKeyedUnarchiver.unarchiveObjectWithData(poemsArchived as NSData) as [Poem]
+            poems = NSKeyedUnarchiver.unarchiveObjectWithData(poemsArchived as! NSData) as! [Poem]
         } else {
             poems = []
         }
@@ -57,7 +57,7 @@ public class PoemPersistence {
         var poems: [Poem]
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let poemsArchived: AnyObject = userDefaults.objectForKey(userDefaultsKey) {
-            poems = NSKeyedUnarchiver.unarchiveObjectWithData(poemsArchived as NSData) as [Poem]
+            poems = NSKeyedUnarchiver.unarchiveObjectWithData(poemsArchived as! NSData) as! [Poem]
         } else {
             poems = []
         }

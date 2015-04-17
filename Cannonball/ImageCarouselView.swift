@@ -90,7 +90,7 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         precondition(self.delegate != nil, "Delegate should be set by now")
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellReuseID, forIndexPath: indexPath) as ImageCarouselCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellReuseID, forIndexPath: indexPath) as! ImageCarouselCollectionViewCell
 
         cell.image = self.delegate?.imageCarousel(self, imageAtIndex: indexPath.row)
 

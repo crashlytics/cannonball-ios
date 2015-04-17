@@ -46,7 +46,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
         // Add targeting parameters.
         var targeting = MPNativeAdRequestTargeting()
-        targeting.desiredAssets = NSSet(objects: kAdIconImageKey, kAdMainImageKey, kAdCTATextKey, kAdTextKey, kAdTitleKey)
+        targeting.desiredAssets = Set([kAdIconImageKey, kAdMainImageKey, kAdCTATextKey, kAdTextKey, kAdTitleKey])
 
         // Begin loading ads and placing them into your feed, using the ad unit ID.
         placer.loadAdsForAdUnitID(MoPubAdUnitID)
@@ -87,7 +87,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Use the MoPub-specific version of the table view method.
-        let cell = tableView.mp_dequeueReusableCellWithIdentifier(poemTableCellReuseIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.mp_dequeueReusableCellWithIdentifier(poemTableCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
 
         if let poemCell = cell as? PoemCell {
             poemCell.delegate = self
@@ -136,10 +136,10 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         composer.setImage(poemImage)
 
         // Present the composer to the user.
-        composer.showWithCompletion({ (result: TWTRComposerResult!) -> Void in
+        composer.showWithCompletion { (result: TWTRComposerResult) -> Void in
             if result == .Done {
                 println("Tweet composition completed")
             }
-        })
+        }
     }
 }

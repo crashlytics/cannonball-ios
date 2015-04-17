@@ -72,11 +72,11 @@ public class Poem: NSObject, NSCoding {
     // MARK: NSCoding
 
     required public init(coder aDecoder: NSCoder) {
-        words = aDecoder.decodeObjectForKey(SerializationKeys.words) as [String]
-        picture = aDecoder.decodeObjectForKey(SerializationKeys.picture) as String
-        theme = aDecoder.decodeObjectForKey(SerializationKeys.theme) as String
-        date = aDecoder.decodeObjectForKey(SerializationKeys.date) as NSDate
-        UUID = aDecoder.decodeObjectForKey(SerializationKeys.uuid) as NSUUID
+        words = aDecoder.decodeObjectForKey(SerializationKeys.words) as! [String]
+        picture = aDecoder.decodeObjectForKey(SerializationKeys.picture) as! String
+        theme = aDecoder.decodeObjectForKey(SerializationKeys.theme) as! String
+        date = aDecoder.decodeObjectForKey(SerializationKeys.date) as! NSDate
+        UUID = aDecoder.decodeObjectForKey(SerializationKeys.uuid) as! NSUUID
     }
 
     public func encodeWithCoder(aCoder: NSCoder) {
