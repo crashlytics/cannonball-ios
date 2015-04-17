@@ -55,7 +55,7 @@ class TweetListViewController: UITableViewController, TWTRTweetViewDelegate {
         self.navigationController?.navigationBar.topItem?.title = ""
 
         // Add a table header.
-        let headerHeight: CGFloat = 20
+        let headerHeight: CGFloat = 15
         let contentHeight = self.view.frame.size.height - headerHeight
         let navHeight = self.navigationController?.navigationBar.frame.height
         let navYOrigin = self.navigationController?.navigationBar.frame.origin.y

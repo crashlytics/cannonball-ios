@@ -30,7 +30,6 @@ class ThemeCell: UITableViewCell {
         // Add the gradient to the picture image view.
         gradient = CAGradientLayer()
         let colors: [AnyObject] = [UIColor.clearColor().CGColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).CGColor]
-        gradient.frame = pictureImageView.frame
         gradient.colors = colors
         gradient.startPoint = CGPointMake(0.0, 0.4)
         gradient.endPoint = CGPointMake(0.0, 1.0)
@@ -39,8 +38,7 @@ class ThemeCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        gradient.frame = pictureImageView.frame
+        gradient.frame = self.bounds
     }
 
     func configureWithTheme(theme: Theme) {

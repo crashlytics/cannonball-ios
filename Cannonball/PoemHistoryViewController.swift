@@ -65,7 +65,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         }
 
         // Add a table header and computer the cell height so they perfectly fit the screen.
-        let headerHeight: CGFloat = 20
+        let headerHeight: CGFloat = 15
         let contentHeight = self.view.frame.size.height - headerHeight
         let navHeight = self.navigationController?.navigationBar.frame.height
         let navYOrigin = self.navigationController?.navigationBar.frame.origin.y
