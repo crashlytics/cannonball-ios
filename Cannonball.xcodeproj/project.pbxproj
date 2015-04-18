@@ -30,7 +30,6 @@
 		9966A6CF19F5CF4F00BD9150 /* PoemPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966A6CE19F5CF4F00BD9150 /* PoemPersistenceTests.swift */; };
 		9966A6D019F5CF5300BD9150 /* PoemPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966A6BE19F582E100BD9150 /* PoemPersistence.swift */; };
 		9966A6D119F5CF5600BD9150 /* Poem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E857019A012BE008801A3 /* Poem.swift */; };
-		BF425FD719F6D25C00FAA04C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BF425FD619F6D25C00FAA04C /* README.md */; };
 		BF5386B819F57BE0006617BB /* PoemTweetSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5386B719F57BE0006617BB /* PoemTweetSearch.swift */; };
 		BF6BE6A619F5CB870039073B /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6BE6A519F5CB870039073B /* ImageCarouselView.swift */; };
 		BF6BE6AB19F5CE070039073B /* ImageCarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6BE6AA19F5CE070039073B /* ImageCarouselCollectionViewCell.swift */; };
@@ -79,7 +78,6 @@
 		92F79C7819DEC378002F9484 /* PoemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemCell.swift; sourceTree = "<group>"; };
 		9966A6BE19F582E100BD9150 /* PoemPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemPersistence.swift; sourceTree = "<group>"; };
 		9966A6CE19F5CF4F00BD9150 /* PoemPersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemPersistenceTests.swift; sourceTree = "<group>"; };
-		BF425FD619F6D25C00FAA04C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BF5386B719F57BE0006617BB /* PoemTweetSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemTweetSearch.swift; sourceTree = "<group>"; };
 		BF6BE6A519F5CB870039073B /* ImageCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
 		BF6BE6AA19F5CE070039073B /* ImageCarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		92A47B0A199FCE4D00EDF6A8 = {
 			isa = PBXGroup;
 			children = (
-				BF425FD619F6D25C00FAA04C /* README.md */,
 				92A67BC119BC9C6900DF3A5B /* Frameworks */,
 				92A47B15199FCE4D00EDF6A8 /* Cannonball */,
 				92A47B28199FCE4E00EDF6A8 /* CannonballTests */,
@@ -343,7 +340,6 @@
 			files = (
 				92C618B719CF32C200C09DEA /* NativeAdCell.swift in Sources */,
 				920D9A2219C1E1AC004401F2 /* TweetListViewController.swift in Sources */,
-				BF425FD719F6D25C00FAA04C /* README.md in Sources */,
 				921E857319A0175F008801A3 /* ThemeChooserViewController.swift in Sources */,
 				BF6BE6AB19F5CE070039073B /* ImageCarouselCollectionViewCell.swift in Sources */,
 				92AFFC5119EC82B7008297D2 /* AboutViewController.swift in Sources */,
@@ -483,7 +479,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = Cannonball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -502,7 +497,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = Cannonball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
