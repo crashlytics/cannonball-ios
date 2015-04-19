@@ -52,7 +52,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         placer.loadAdsForAdUnitID(MoPubAdUnitID)
 
         // Retrieve the poems.
-        self.poems = PoemPersistence.sharedInstance.retrievePoems();
+        self.poems = PoemPersistence.sharedInstance.retrievePoems()
 
         // Customize the navigation bar.
         self.navigationController?.navigationBar.topItem?.title = ""
