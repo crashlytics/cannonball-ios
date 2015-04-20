@@ -18,6 +18,10 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    class func cannonballBeigeColor() -> UIColor {
+        return UIColor(red: 1, green: 237/255, blue: 210/255, alpha: 1.0)
+    }
+
     class func cannonballGreenColor() -> UIColor {
         return UIColor(red: 0, green: 167/255, blue: 155/255, alpha: 1.0)
     }
