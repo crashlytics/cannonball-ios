@@ -5,6 +5,10 @@
 //  Copyright (c) 2014 MoPub. All rights reserved.
 //
 
+#if __has_include("MPNativeAdSampleTableViewCell.h")
+    #import "MPNativeAdSampleTableViewCell.h"
+#endif
+
 #import "MPAdConversionTracker.h"
 #import "MPAdView.h"
 #import "MPBannerCustomEvent.h"
@@ -27,8 +31,12 @@
 #import "MPTableViewAdPlacer.h"
 #import "MPClientAdPositioning.h"
 #import "MPServerAdPositioning.h"
-#import "MPNativeAdSampleTableViewCell.h"
-#import "MPNativeAdSampleView.h"
+#import "MPNativeAdDelegate.h"
+#import "MPMediationSettingsProtocol.h"
+#import "MPRewardedVideo.h"
+#import "MPRewardedVideoReward.h"
+#import "MPRewardedVideoCustomEvent.h"
+#import "MPRewardedVideoError.h"
 
 // Import these frameworks for module support.
 #import <AdSupport/AdSupport.h>
@@ -45,9 +53,49 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <UIKit/UIKit.h>
 
-#define MoPubKit [[MoPub alloc] init]
+#define MoPubKit [MoPub sharedInstance]
 
 @interface MoPub : NSObject
+
+/**
+ * Returns the MoPub singleton object.
+ *
+ * @return The MoPub singleton object.
+ */
++ (MoPub *)sharedInstance;
+
+/**
+ * A Boolean value indicating whether the MoPub SDK should use Core Location APIs to automatically
+ * derive targeting information for location-based ads.
+ *
+ * When set to NO, the SDK will not attempt to determine device location. When set to YES, the
+ * SDK will periodically try to listen for location updates in order to request location-based ads.
+ * This only occurs if location services are enabled and the user has already authorized the use
+ * of location services for the application. The default value is YES.
+ *
+ * @param enabled A Boolean value indicating whether the SDK should listen for location updates.
+ */
+@property (nonatomic, assign) BOOL locationUpdatesEnabled;
+
+/** @name Rewarded Video */
+/**
+ * Initializes the rewarded video system.
+ *
+ * This method should only be called once. It should also be called prior to requesting any rewarded video ads.
+ * Once the global mediation settings and delegate are set, they cannot be changed.
+ *
+ * @param globalMediationSettings Global configurations for all rewarded video ad networks your app supports.
+ *
+ * @param delegate The delegate that will receive all events related to rewarded video.
+ */
+- (void)initializeRewardedVideoWithGlobalMediationSettings:(NSArray *)globalMediationSettings delegate:(id<MPRewardedVideoDelegate>)delegate;
+
+/**
+ * Retrieves the global mediation settings for a given class type.
+*
+ * @param aClass The type of mediation settings object you want to receive from the collection.
+ */
+- (id<MPMediationSettingsProtocol>)globalMediationSettingsForClass:(Class)aClass;
 
 - (void)start;
 - (NSString *)version;

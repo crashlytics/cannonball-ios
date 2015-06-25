@@ -57,8 +57,7 @@ class PoemCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        gradient.frame = pictureImageView.frame
+        gradient.frame = self.bounds
     }
 
     func configureWithPoem(poem: Poem) {

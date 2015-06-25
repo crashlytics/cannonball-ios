@@ -166,7 +166,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PoemComposerWordCell", forIndexPath: indexPath) as PoemComposerWordCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PoemComposerWordCell", forIndexPath: indexPath) as! PoemComposerWordCell
 
         cell.contentView.frame = cell.bounds
         cell.contentView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
@@ -199,7 +199,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         return cell
     }
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView!) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
@@ -260,7 +260,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: UICollectionView Utilities
 
     func sizeForWord(word: String) -> CGSize {
-        return CGSize(width: 18 + countElements(word) * 10, height: 32)
+        return CGSize(width: 18 + count(word) * 10, height: 32)
     }
 
     func resizePoemToFitContentSize() {
@@ -333,7 +333,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: ImageCarouselViewDelegate
 
     func numberOfImagesInImageCarousel(imageCarousel: ImageCarouselView) -> Int {
-        return countElements(self.themePictures)
+        return count(self.themePictures)
     }
 
     func imageCarousel(imageCarousel: ImageCarouselView, imageAtIndex index: Int) -> UIImage {

@@ -55,7 +55,7 @@ class ThemeChooserViewController: UITableViewController {
         self.tableView.alwaysBounceVertical = false
 
         // Add a table header and computer the cell height so they perfectly fit the screen.
-        let headerHeight: CGFloat = 20
+        let headerHeight: CGFloat = 15
         let contentHeight = self.view.frame.size.height - headerHeight
         let navHeight = self.navigationController?.navigationBar.frame.height
         let navYOrigin = self.navigationController?.navigationBar.frame.origin.y
@@ -67,7 +67,7 @@ class ThemeChooserViewController: UITableViewController {
 
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
-        self.navigationController?.navigationBar.titleTextAttributes = titleDict
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.topItem?.title = ""
@@ -109,7 +109,7 @@ class ThemeChooserViewController: UITableViewController {
         if sender!.isKindOfClass(ThemeCell) {
             let indexPath = self.tableView.indexPathForSelectedRow()
             if let row = indexPath?.row {
-                let poemComposerViewController = segue.destinationViewController as PoemComposerViewController
+                let poemComposerViewController = segue.destinationViewController as! PoemComposerViewController
                 poemComposerViewController.theme = self.themes[row]
             }
         }
@@ -128,7 +128,7 @@ class ThemeChooserViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(themeTableCellReuseIdentifier, forIndexPath: indexPath) as ThemeCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(themeTableCellReuseIdentifier, forIndexPath: indexPath) as! ThemeCell
 
         // Find the corresponding theme.
         let theme = themes[indexPath.row]

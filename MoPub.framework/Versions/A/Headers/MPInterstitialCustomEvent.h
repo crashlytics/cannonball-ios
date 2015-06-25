@@ -30,8 +30,8 @@
  * Called when the MoPub SDK requires a new interstitial ad.
  *
  * When the MoPub SDK receives a response indicating it should load a custom event, it will send
- * this message to your custom event class. Your implementation of this method can either load an
- * interstitial ad from a third-party ad network, or execute any application code. It must also notify the
+ * this message to your custom event class. Your implementation of this method should load an
+ * interstitial ad from a third-party ad network. It must also notify the
  * `MPInterstitialCustomEventDelegate` of certain lifecycle events.
  *
  * @param info A  dictionary containing additional custom data associated with a given custom event
@@ -52,7 +52,6 @@
  *
  * @param rootViewController The controller to use to present the interstitial modally.
  *
- * @warning **Important**: You should not attempt to display the interstitial until you receive this message.
  */
 - (void)showInterstitialFromRootViewController:(UIViewController *)rootViewController;
 

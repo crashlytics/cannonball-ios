@@ -55,7 +55,7 @@ class TweetListViewController: UITableViewController, TWTRTweetViewDelegate {
         self.navigationController?.navigationBar.topItem?.title = ""
 
         // Add a table header.
-        let headerHeight: CGFloat = 20
+        let headerHeight: CGFloat = 15
         let contentHeight = self.view.frame.size.height - headerHeight
         let navHeight = self.navigationController?.navigationBar.frame.height
         let navYOrigin = self.navigationController?.navigationBar.frame.origin.y
@@ -127,7 +127,7 @@ class TweetListViewController: UITableViewController, TWTRTweetViewDelegate {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Retrieve the Tweet cell.
-        let cell = tableView.dequeueReusableCellWithIdentifier(tweetTableCellReuseIdentifier, forIndexPath: indexPath) as TWTRTweetTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(tweetTableCellReuseIdentifier, forIndexPath: indexPath) as! TWTRTweetTableViewCell
 
         // Assign the delegate to control events on Tweets.
         cell.tweetView.delegate = self
@@ -147,11 +147,7 @@ class TweetListViewController: UITableViewController, TWTRTweetViewDelegate {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let tweet = self.tweets[indexPath.row]
         self.prototypeCell?.configureWithTweet(tweet)
-        if let height = self.prototypeCell?.calculatedHeightForWidth(self.view.bounds.width) {
-            return height
-        } else {
-            return self.tableView.estimatedRowHeight
-        }
+        return TWTRTweetTableViewCell.heightForTweet(tweet, width: self.view.bounds.width)
     }
 
 }

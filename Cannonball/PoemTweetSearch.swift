@@ -46,13 +46,13 @@ extension TWTRAPIClient {
             }
 
             // Perform the Twitter API request.
-            self.sendTwitterRequest(request, completion: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            self.sendTwitterRequest(request, completion: { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
                 if error != nil {
-                    completion(.Error(error))
+                    completion(.Error(error!))
                     return
                 }
 
-                let poemSearchResult = tweetsFromJSONData(data)
+                let poemSearchResult = tweetsFromJSONData(data!)
 
                 completion(poemSearchResult)
             })
@@ -71,11 +71,11 @@ private func tweetsFromJSONData(jsonData: NSData) -> PoemTweetsResult {
         return PoemTweetsResult.Error(JSONError)
     } else {
         // Make the JSON data a dictionary.
-        let jsonDictionary = jsonData as [String:AnyObject]
+        let jsonDictionary = jsonData as! [String:AnyObject]
 
         // Extract the Tweets and create Tweet objects from the JSON data.
-        let jsonTweets = jsonDictionary["statuses"] as NSArray
-        let tweets = TWTRTweet.tweetsWithJSONArray(jsonTweets) as [TWTRTweet]
+        let jsonTweets = jsonDictionary["statuses"] as! [AnyObject]
+        let tweets = TWTRTweet.tweetsWithJSONArray(jsonTweets) as! [TWTRTweet]
 
         return .Tweets(tweets)
     }

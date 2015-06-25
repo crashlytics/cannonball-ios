@@ -16,8 +16,9 @@
 
 import UIKit
 import Fabric
-import TwitterKit
 import Crashlytics
+import TwitterKit
+import DigitsKit
 import MoPub
 
 @UIApplicationMain
@@ -25,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         assert(NSBundle.mainBundle().objectForInfoDictionaryKey("Fabric") != nil, "Welcome to Cannonball. Please remember to onboard using the Fabric Mac app. Check the instructions in the README file.")
 
-        // Register Twitter, Crashlytics and MoPub with Fabric.
-        Fabric.with([Twitter(), Crashlytics(), MoPub()])
+        // Register Crashlytics, Twitter, Digits and MoPub with Fabric.
+        Fabric.with([Crashlytics(), Twitter(), Digits(), MoPub()])
 
         // Check if the user is logged in or not to present the sign in screen.
         if Twitter.sharedInstance().session() == nil {
