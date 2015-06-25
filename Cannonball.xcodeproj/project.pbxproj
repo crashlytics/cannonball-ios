@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DDAD3F71B3C352300E415F8 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDAD3F41B3C352300E415F8 /* TwitterCore.framework */; };
+		7DDAD3F81B3C352300E415F8 /* DigitsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDAD3F51B3C352300E415F8 /* DigitsKit.framework */; };
+		7DDAD3F91B3C352300E415F8 /* DigitsKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAD3F61B3C352300E415F8 /* DigitsKitResources.bundle */; };
 		920430DA19CB574200BB6BEC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920430D919CB574200BB6BEC /* SignInViewController.swift */; };
 		920C15D519F19D4E008E344C /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920C15D419F19D4E008E344C /* ColorConstants.swift */; };
 		920D9A2219C1E1AC004401F2 /* TweetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D9A2119C1E1AC004401F2 /* TweetListViewController.swift */; };
@@ -53,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7DDAD3F41B3C352300E415F8 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
+		7DDAD3F51B3C352300E415F8 /* DigitsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DigitsKit.framework; sourceTree = "<group>"; };
+		7DDAD3F61B3C352300E415F8 /* DigitsKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = DigitsKitResources.bundle; path = ../../DigitsKit.framework/Versions/A/Resources/DigitsKitResources.bundle; sourceTree = "<group>"; };
 		920430D919CB574200BB6BEC /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		920C15D419F19D4E008E344C /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ColorConstants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		920D9A2119C1E1AC004401F2 /* TweetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetListViewController.swift; sourceTree = "<group>"; };
@@ -95,8 +101,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DDAD3F71B3C352300E415F8 /* TwitterCore.framework in Frameworks */,
 				BFAD6AE619F6DF4A00C6B5E3 /* Crashlytics.framework in Frameworks */,
 				BFAD6AE819F6DF4A00C6B5E3 /* MoPub.framework in Frameworks */,
+				7DDAD3F81B3C352300E415F8 /* DigitsKit.framework in Frameworks */,
 				BFAD6AE719F6DF4A00C6B5E3 /* Fabric.framework in Frameworks */,
 				BFAD6AE919F6DF4A00C6B5E3 /* TwitterKit.framework in Frameworks */,
 			);
@@ -154,6 +162,7 @@
 		921E857719A0CD46008801A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7DDAD3F61B3C352300E415F8 /* DigitsKitResources.bundle */,
 				BFAD6AEC19F6DF5F00C6B5E3 /* MoPub.bundle */,
 				BFAD6AEA19F6DF5700C6B5E3 /* TwitterKitResources.bundle */,
 				D18FAC0419A0FC0100CFAF83 /* Themes.json */,
@@ -226,8 +235,10 @@
 			isa = PBXGroup;
 			children = (
 				BFAD6AE219F6DF4A00C6B5E3 /* Crashlytics.framework */,
+				7DDAD3F51B3C352300E415F8 /* DigitsKit.framework */,
 				BFAD6AE319F6DF4A00C6B5E3 /* Fabric.framework */,
 				BFAD6AE419F6DF4A00C6B5E3 /* MoPub.framework */,
+				7DDAD3F41B3C352300E415F8 /* TwitterCore.framework */,
 				BFAD6AE519F6DF4A00C6B5E3 /* TwitterKit.framework */,
 			);
 			name = Frameworks;
@@ -321,6 +332,7 @@
 				BFAD6AED19F6DF5F00C6B5E3 /* MoPub.bundle in Resources */,
 				92A47B20199FCE4D00EDF6A8 /* Images.xcassets in Resources */,
 				BFAD6AEB19F6DF5700C6B5E3 /* TwitterKitResources.bundle in Resources */,
+				7DDAD3F91B3C352300E415F8 /* DigitsKitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

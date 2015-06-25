@@ -46,13 +46,13 @@ extension TWTRAPIClient {
             }
 
             // Perform the Twitter API request.
-            self.sendTwitterRequest(request, completion: { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            self.sendTwitterRequest(request, completion: { (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
                 if error != nil {
-                    completion(.Error(error))
+                    completion(.Error(error!))
                     return
                 }
 
-                let poemSearchResult = tweetsFromJSONData(data)
+                let poemSearchResult = tweetsFromJSONData(data!)
 
                 completion(poemSearchResult)
             })

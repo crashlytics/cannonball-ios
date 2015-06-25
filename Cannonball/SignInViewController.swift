@@ -16,6 +16,7 @@
 
 import UIKit
 import TwitterKit
+import DigitsKit
 
 class SignInViewController: UIViewController, UIAlertViewDelegate {
 
