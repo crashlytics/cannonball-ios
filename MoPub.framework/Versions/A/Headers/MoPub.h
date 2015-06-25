@@ -5,6 +5,10 @@
 //  Copyright (c) 2014 MoPub. All rights reserved.
 //
 
+#if __has_include("MPNativeAdSampleTableViewCell.h")
+    #import "MPNativeAdSampleTableViewCell.h"
+#endif
+
 #import "MPAdConversionTracker.h"
 #import "MPAdView.h"
 #import "MPBannerCustomEvent.h"
@@ -27,9 +31,12 @@
 #import "MPTableViewAdPlacer.h"
 #import "MPClientAdPositioning.h"
 #import "MPServerAdPositioning.h"
-#import "MPNativeAdSampleTableViewCell.h"
-#import "MPNativeAdSampleView.h"
 #import "MPNativeAdDelegate.h"
+#import "MPMediationSettingsProtocol.h"
+#import "MPRewardedVideo.h"
+#import "MPRewardedVideoReward.h"
+#import "MPRewardedVideoCustomEvent.h"
+#import "MPRewardedVideoError.h"
 
 // Import these frameworks for module support.
 #import <AdSupport/AdSupport.h>
@@ -69,6 +76,26 @@
  * @param enabled A Boolean value indicating whether the SDK should listen for location updates.
  */
 @property (nonatomic, assign) BOOL locationUpdatesEnabled;
+
+/** @name Rewarded Video */
+/**
+ * Initializes the rewarded video system.
+ *
+ * This method should only be called once. It should also be called prior to requesting any rewarded video ads.
+ * Once the global mediation settings and delegate are set, they cannot be changed.
+ *
+ * @param globalMediationSettings Global configurations for all rewarded video ad networks your app supports.
+ *
+ * @param delegate The delegate that will receive all events related to rewarded video.
+ */
+- (void)initializeRewardedVideoWithGlobalMediationSettings:(NSArray *)globalMediationSettings delegate:(id<MPRewardedVideoDelegate>)delegate;
+
+/**
+ * Retrieves the global mediation settings for a given class type.
+*
+ * @param aClass The type of mediation settings object you want to receive from the collection.
+ */
+- (id<MPMediationSettingsProtocol>)globalMediationSettingsForClass:(Class)aClass;
 
 - (void)start;
 - (NSString *)version;

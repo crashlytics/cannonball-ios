@@ -25,7 +25,7 @@
 /**
  * The view controller instance to use when presenting modals.
  *
- * @return `viewControllerForPresentingModalView` returns theMP same view controller that you
+ * @return `viewControllerForPresentingModalView` returns the same view controller that you
  * specify when implementing the `MPAdViewDelegate` protocol.
  */
 - (UIViewController *)viewControllerForPresentingModalView;

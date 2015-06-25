@@ -14,6 +14,7 @@ typedef enum MPNativeAdErrorCode {
     MPNativeAdErrorInvalidServerResponse = -1001,
     MPNativeAdErrorNoInventory = -1002,
     MPNativeAdErrorImageDownloadFailed = -1003,
+    MPNativeAdErrorAdUnitWarmingUp = -1004,
     
     MPNativeAdErrorContentDisplayError = -1100,
 } MPNativeAdErrorCode;
