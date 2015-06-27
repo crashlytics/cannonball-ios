@@ -17,7 +17,7 @@
 import UIKit
 import TwitterKit
 
-class TweetListViewController: TWTRTimelineViewController {
+class PoemTimelineViewController: TWTRTimelineViewController {
 
     // Search query for Tweets matching the right hashtags and containing an attached poem picture.
     let poemSearchQuery = "#cannonballapp AND pic.twitter.com AND (#adventure OR #romance OR #nature OR #mystery)"

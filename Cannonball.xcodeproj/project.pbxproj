@@ -12,7 +12,7 @@
 		7DDAD3F91B3C352300E415F8 /* DigitsKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAD3F61B3C352300E415F8 /* DigitsKitResources.bundle */; };
 		920430DA19CB574200BB6BEC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920430D919CB574200BB6BEC /* SignInViewController.swift */; };
 		920C15D519F19D4E008E344C /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920C15D419F19D4E008E344C /* ColorConstants.swift */; };
-		920D9A2219C1E1AC004401F2 /* TweetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D9A2119C1E1AC004401F2 /* TweetListViewController.swift */; };
+		920D9A2219C1E1AC004401F2 /* PoemTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D9A2119C1E1AC004401F2 /* PoemTimelineViewController.swift */; };
 		921E856E19A00B95008801A3 /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E856D19A00B95008801A3 /* ThemeCell.swift */; };
 		921E857119A012BE008801A3 /* Poem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E857019A012BE008801A3 /* Poem.swift */; };
 		921E857319A0175F008801A3 /* ThemeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E857219A0175F008801A3 /* ThemeChooserViewController.swift */; };
@@ -33,7 +33,6 @@
 		9966A6CF19F5CF4F00BD9150 /* PoemPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966A6CE19F5CF4F00BD9150 /* PoemPersistenceTests.swift */; };
 		9966A6D019F5CF5300BD9150 /* PoemPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9966A6BE19F582E100BD9150 /* PoemPersistence.swift */; };
 		9966A6D119F5CF5600BD9150 /* Poem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921E857019A012BE008801A3 /* Poem.swift */; };
-		BF5386B819F57BE0006617BB /* PoemTweetSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5386B719F57BE0006617BB /* PoemTweetSearch.swift */; };
 		BF6BE6A619F5CB870039073B /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6BE6A519F5CB870039073B /* ImageCarouselView.swift */; };
 		BF6BE6AB19F5CE070039073B /* ImageCarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6BE6AA19F5CE070039073B /* ImageCarouselCollectionViewCell.swift */; };
 		BFAD6AE619F6DF4A00C6B5E3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAD6AE219F6DF4A00C6B5E3 /* Crashlytics.framework */; };
@@ -61,7 +60,7 @@
 		7DDAD3F61B3C352300E415F8 /* DigitsKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = DigitsKitResources.bundle; path = ../../DigitsKit.framework/Versions/A/Resources/DigitsKitResources.bundle; sourceTree = "<group>"; };
 		920430D919CB574200BB6BEC /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		920C15D419F19D4E008E344C /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ColorConstants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		920D9A2119C1E1AC004401F2 /* TweetListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetListViewController.swift; sourceTree = "<group>"; };
+		920D9A2119C1E1AC004401F2 /* PoemTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemTimelineViewController.swift; sourceTree = "<group>"; };
 		921E856D19A00B95008801A3 /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
 		921E857019A012BE008801A3 /* Poem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poem.swift; sourceTree = "<group>"; };
 		921E857219A0175F008801A3 /* ThemeChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ThemeChooserViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -84,7 +83,6 @@
 		92F79C7819DEC378002F9484 /* PoemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemCell.swift; sourceTree = "<group>"; };
 		9966A6BE19F582E100BD9150 /* PoemPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemPersistence.swift; sourceTree = "<group>"; };
 		9966A6CE19F5CF4F00BD9150 /* PoemPersistenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemPersistenceTests.swift; sourceTree = "<group>"; };
-		BF5386B719F57BE0006617BB /* PoemTweetSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoemTweetSearch.swift; sourceTree = "<group>"; };
 		BF6BE6A519F5CB870039073B /* ImageCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
 		BF6BE6AA19F5CE070039073B /* ImageCarouselCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		BFAD6AE219F6DF4A00C6B5E3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			children = (
 				921E857019A012BE008801A3 /* Poem.swift */,
 				9966A6BE19F582E100BD9150 /* PoemPersistence.swift */,
-				BF5386B719F57BE0006617BB /* PoemTweetSearch.swift */,
 				9251C03B19A2711D00388ABA /* Theme.swift */,
 			);
 			name = Models;
@@ -152,9 +149,9 @@
 				92AFFC5019EC82B7008297D2 /* AboutViewController.swift */,
 				92A47B1A199FCE4D00EDF6A8 /* PoemComposerViewController.swift */,
 				9249491219CF066200D88E79 /* PoemHistoryViewController.swift */,
+				920D9A2119C1E1AC004401F2 /* PoemTimelineViewController.swift */,
 				920430D919CB574200BB6BEC /* SignInViewController.swift */,
 				921E857219A0175F008801A3 /* ThemeChooserViewController.swift */,
-				920D9A2119C1E1AC004401F2 /* TweetListViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -351,7 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92C618B719CF32C200C09DEA /* NativeAdCell.swift in Sources */,
-				920D9A2219C1E1AC004401F2 /* TweetListViewController.swift in Sources */,
+				920D9A2219C1E1AC004401F2 /* PoemTimelineViewController.swift in Sources */,
 				921E857319A0175F008801A3 /* ThemeChooserViewController.swift in Sources */,
 				BF6BE6AB19F5CE070039073B /* ImageCarouselCollectionViewCell.swift in Sources */,
 				92AFFC5119EC82B7008297D2 /* AboutViewController.swift in Sources */,
@@ -359,7 +356,6 @@
 				9249491319CF066200D88E79 /* PoemHistoryViewController.swift in Sources */,
 				9966A6BF19F582E100BD9150 /* PoemPersistence.swift in Sources */,
 				92A47B19199FCE4D00EDF6A8 /* AppDelegate.swift in Sources */,
-				BF5386B819F57BE0006617BB /* PoemTweetSearch.swift in Sources */,
 				921E856E19A00B95008801A3 /* ThemeCell.swift in Sources */,
 				921E857B19A116FC008801A3 /* PoemComposerWordCell.swift in Sources */,
 				92F79C7919DEC378002F9484 /* PoemCell.swift in Sources */,
