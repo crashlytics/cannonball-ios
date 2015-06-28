@@ -77,6 +77,17 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
         // Make sure the navigation bar is not translucent when scrolling the table view.
         self.navigationController?.navigationBar.translucent = false
+
+        // Display a label on the background if there are no poems to display.
+        let noPoemsLabel = UILabel()
+        noPoemsLabel.text = "You have not composed any poems yet."
+        noPoemsLabel.textAlignment = .Center
+        noPoemsLabel.textColor = UIColor.cannonballGreenColor()
+        noPoemsLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(14))
+        tableView.backgroundView = noPoemsLabel
+        tableView.backgroundView?.hidden = true
+        tableView.backgroundView?.alpha = 0
+        toggleNoPoemsLabel()
     }
 
     // MARK: UITableViewDataSource
@@ -106,6 +117,9 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
             // Remove the poem and reload the table view.
             self.poems = self.poems.filter( { $0 != poem })
             self.tableView.mp_deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+
+            // Display the no poems label if this was the last poem.
+            toggleNoPoemsLabel()
 
             // Archive and save the poems again.
             PoemPersistence.sharedInstance.overwritePoems(self.poems)
@@ -142,4 +156,22 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
             }
         }
     }
+
+    // MARK: Utilities
+
+    private func toggleNoPoemsLabel() {
+        if tableView.numberOfRowsInSection(0) == 0 {
+            UIView.animateWithDuration(0.15, animations: {
+                self.tableView.backgroundView!.hidden = false
+                self.tableView.backgroundView!.alpha = 1
+                }, completion: nil)
+        } else {
+            UIView.animateWithDuration(0.15, animations: {
+                self.tableView.backgroundView!.alpha = 0
+                }, completion: { finished in
+                    self.tableView.backgroundView!.hidden = true
+            })
+        }
+    }
+
 }

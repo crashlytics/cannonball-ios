@@ -53,7 +53,40 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         // Add an initial offset to the table view to show the animated refresh control.
         let refreshControlOffset = self.refreshControl?.frame.size.height
         tableView.frame.origin.y += refreshControlOffset!
+        refreshControl?.tintColor = UIColor.cannonballGreenColor()
         refreshControl?.beginRefreshing()
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Display a label on the background if there are no recent Tweets to display.
+        let noTweetsLabel = UILabel()
+        noTweetsLabel.text = "Sorry, there are no recent Tweets to display."
+        noTweetsLabel.textAlignment = .Center
+        noTweetsLabel.textColor = UIColor.cannonballGreenColor()
+        noTweetsLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(14))
+        tableView.backgroundView = noTweetsLabel
+        tableView.backgroundView?.hidden = true
+        tableView.backgroundView?.alpha = 0
+        toggleNoTweetsLabel()
+    }
+
+    // MARK: Utilities
+
+    private func toggleNoTweetsLabel() {
+        if tableView.numberOfRowsInSection(0) == 0 {
+            UIView.animateWithDuration(0.15, animations: {
+                self.tableView.backgroundView!.hidden = false
+                self.tableView.backgroundView!.alpha = 1
+                }, completion: nil)
+        } else {
+            UIView.animateWithDuration(0.15, animations: {
+                self.tableView.backgroundView!.alpha = 0
+                }, completion: { finished in
+                    self.tableView.backgroundView!.hidden = true
+            })
+        }
     }
 
 }
