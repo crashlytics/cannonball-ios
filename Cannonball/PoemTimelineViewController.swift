@@ -19,6 +19,8 @@ import TwitterKit
 
 class PoemTimelineViewController: TWTRTimelineViewController {
 
+    // MARK: Properties
+
     // Search query for Tweets matching the right hashtags and containing an attached poem picture.
     let poemSearchQuery = "#cannonballapp AND pic.twitter.com AND (#adventure OR #romance OR #nature OR #mystery)"
 
@@ -39,10 +41,10 @@ class PoemTimelineViewController: TWTRTimelineViewController {
 
         // Customize the table view.
         let headerHeight: CGFloat = 15
-        let contentHeight = self.view.frame.size.height - headerHeight
-        let navHeight = self.navigationController?.navigationBar.frame.height
-        let navYOrigin = self.navigationController?.navigationBar.frame.origin.y
-        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.bounds.size.width, headerHeight))
+        let contentHeight = view.frame.size.height - headerHeight
+        let navHeight = navigationController?.navigationBar.frame.height
+        let navYOrigin = navigationController?.navigationBar.frame.origin.y
+        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.cannonballBeigeColor()
 
@@ -51,7 +53,7 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         navigationController?.navigationBar.translucent = true
 
         // Add an initial offset to the table view to show the animated refresh control.
-        let refreshControlOffset = self.refreshControl?.frame.size.height
+        let refreshControlOffset = refreshControl?.frame.size.height
         tableView.frame.origin.y += refreshControlOffset!
         refreshControl?.tintColor = UIColor.cannonballGreenColor()
         refreshControl?.beginRefreshing()
@@ -76,16 +78,19 @@ class PoemTimelineViewController: TWTRTimelineViewController {
 
     private func toggleNoTweetsLabel() {
         if tableView.numberOfRowsInSection(0) == 0 {
-            UIView.animateWithDuration(0.15, animations: {
+            UIView.animateWithDuration(0.15) {
                 self.tableView.backgroundView!.hidden = false
                 self.tableView.backgroundView!.alpha = 1
-                }, completion: nil)
+            }
         } else {
-            UIView.animateWithDuration(0.15, animations: {
-                self.tableView.backgroundView!.alpha = 0
-                }, completion: { finished in
+            UIView.animateWithDuration(0.15,
+                animations: {
+                    self.tableView.backgroundView!.alpha = 0
+                },
+                completion: { finished in
                     self.tableView.backgroundView!.hidden = true
-            })
+                }
+            )
         }
     }
 

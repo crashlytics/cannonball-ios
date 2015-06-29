@@ -29,35 +29,35 @@ public class Theme {
            let optionalWords = jsonDictionary["words"] as? [String],
            let optionalPictures = jsonDictionary["pictures"] as? [String]
         {
-            self.name = optionalName
-            self.words = optionalWords
-            self.pictures = optionalPictures
+            name = optionalName
+            words = optionalWords
+            pictures = optionalPictures
         } else {
-            self.name = ""
-            self.words = []
-            self.pictures = []
+            name = ""
+            words = []
+            pictures = []
             return nil
         }
     }
 
     public func getRandomWords(wordCount: Int) -> [String] {
-        var words = [String](self.words)
+        var wordsCopy = [String](words)
 
         // Sort randomly the elements of the dictionary.
-        sort(&words, { (_,_) in return arc4random() < arc4random() })
+        sort(&wordsCopy, { (_,_) in return arc4random() < arc4random() })
 
         // Return the desired number of words.
-        return Array(words[0..<wordCount])
+        return Array(wordsCopy[0..<wordCount])
     }
 
     public func getRandomPicture() -> String? {
-        var pictures = [String](self.pictures)
+        var picturesCopy = [String](pictures)
 
         // Sort randomly the pictures.
-        sort(&pictures, { (_,_) in return arc4random() < arc4random() })
+        sort(&picturesCopy, { (_,_) in return arc4random() < arc4random() })
 
         // Return the first picture.
-        return pictures.first
+        return picturesCopy.first
     }
 
     class func getThemes() -> [Theme] {

@@ -25,7 +25,7 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     weak var delegate: ImageCarouselDataSource?
 
     func reloadData() {
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
 
     private(set) var currentImageIndex: Int = 0
@@ -56,7 +56,7 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.minimumLineSpacing = 0
 
-        collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: collectionViewLayout)
+        collectionView = UICollectionView(frame: bounds, collectionViewLayout: collectionViewLayout)
         collectionView.pagingEnabled = true
 
         collectionView.showsHorizontalScrollIndicator = false
@@ -66,15 +66,15 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.dataSource = self
         collectionView.delegate = self
 
-        self.addSubview(collectionView)
+        addSubview(collectionView)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        collectionView.frame = self.bounds
+        collectionView.frame = bounds
 
-        collectionViewLayout.itemSize = self.bounds.size
+        collectionViewLayout.itemSize = bounds.size
     }
 
     // MARK: UICollectionView
@@ -84,15 +84,15 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.delegate?.numberOfImagesInImageCarousel(self) ?? 0
+        return delegate?.numberOfImagesInImageCarousel(self) ?? 0
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        precondition(self.delegate != nil, "Delegate should be set by now")
+        precondition(delegate != nil, "Delegate should be set by now")
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellReuseID, forIndexPath: indexPath) as! ImageCarouselCollectionViewCell
 
-        cell.image = self.delegate?.imageCarousel(self, imageAtIndex: indexPath.row)
+        cell.image = delegate?.imageCarousel(self, imageAtIndex: indexPath.row)
 
         return cell
     }

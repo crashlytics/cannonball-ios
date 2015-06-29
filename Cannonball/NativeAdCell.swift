@@ -35,11 +35,11 @@ class NativeAdCell: UITableViewCell, MPNativeAdRendering {
 
     func layoutAdAssets(adObject: MPNativeAd!) {
         // Load ad assets.
-        adObject.loadTitleIntoLabel(self.titleLabel)
-        adObject.loadTextIntoLabel(self.mainTextLabel)
-        adObject.loadCallToActionTextIntoLabel(self.callToActionButton.titleLabel)
-        adObject.loadImageIntoImageView(self.mainImageView)
-        adObject.loadIconIntoImageView(self.iconImageView)
+        adObject.loadTitleIntoLabel(titleLabel)
+        adObject.loadTextIntoLabel(mainTextLabel)
+        adObject.loadCallToActionTextIntoLabel(callToActionButton.titleLabel)
+        adObject.loadImageIntoImageView(mainImageView)
+        adObject.loadIconIntoImageView(iconImageView)
 
         // Decorate the call to action button.
         callToActionButton.layer.masksToBounds = false
@@ -51,7 +51,7 @@ class NativeAdCell: UITableViewCell, MPNativeAdRendering {
         containerView.layer.cornerRadius = 6
 
         // Add the background color to the main view.
-        self.backgroundColor = UIColor(red: 55/255, green: 31/255, blue: 31/255, alpha: 1.0)
+        backgroundColor = UIColor.cannonballBrownColor()
     }
 
     class func sizeWithMaximumWidth(maximumWidth: CGFloat) -> CGSize {

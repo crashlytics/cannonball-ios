@@ -32,26 +32,24 @@ class AboutViewController: UIViewController {
         logoView = UIImageView(frame: CGRectMake(0, 0, 40, 40))
         logoView.image = UIImage(named: "Logo")?.imageWithRenderingMode(.AlwaysTemplate)
         logoView.tintColor = UIColor.cannonballGreenColor()
-        logoView.frame.origin.x = (self.view.frame.size.width - logoView.frame.size.width) / 2
+        logoView.frame.origin.x = (view.frame.size.width - logoView.frame.size.width) / 2
         logoView.frame.origin.y = 8
 
-        // Add the logo view to the navigation controller.
-        self.navigationController?.view.addSubview(logoView)
-
-        // Bring the logo view to the front.
-        self.navigationController?.view.bringSubviewToFront(logoView)
+        // Add the logo view to the navigation controller and bring it to the front.
+        navigationController?.view.addSubview(logoView)
+        navigationController?.view.bringSubviewToFront(logoView)
 
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
-        self.navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     // MARK: IBActions
 
     @IBAction func dismiss(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func learnMore(sender: AnyObject) {
@@ -66,7 +64,7 @@ class AboutViewController: UIViewController {
         // Present the Sign In again.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let signInViewController: UIViewController! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController") as! UIViewController
-        self.presentViewController(signInViewController, animated: true, completion: nil)
+        presentViewController(signInViewController, animated: true, completion: nil)
     }
 
 }

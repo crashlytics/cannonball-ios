@@ -49,15 +49,15 @@ class PoemCell: UITableViewCell {
         gradient.endPoint = CGPointMake(0.0, 1.0)
 
         // Add gradient to ImageView.
-        self.pictureImageView.layer.addSublayer(gradient)
+        pictureImageView.layer.addSublayer(gradient)
 
         // Add share button target.
-        self.shareButton.addTarget(self, action: Selector("shareButtonTapped"), forControlEvents: .TouchUpInside)
+        shareButton.addTarget(self, action: Selector("shareButtonTapped"), forControlEvents: .TouchUpInside)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradient.frame = self.bounds
+        gradient.frame = bounds
     }
 
     func configureWithPoem(poem: Poem) {
@@ -71,8 +71,8 @@ class PoemCell: UITableViewCell {
         shareButton.hidden = true
 
         // Capture a PNG of the view.
-        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0)
-        self.layer.renderInContext(UIGraphicsGetCurrentContext())
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
+        layer.renderInContext(UIGraphicsGetCurrentContext())
         var containerViewImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 

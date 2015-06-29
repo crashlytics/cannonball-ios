@@ -42,7 +42,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         var positioning = MPServerAdPositioning()
 
         // Instanciate the MPTableViewAdPlacer.
-        placer = MPTableViewAdPlacer(tableView: self.tableView, viewController: self, adPositioning: positioning, defaultAdRenderingClass: NativeAdCell.self)
+        placer = MPTableViewAdPlacer(tableView: tableView, viewController: self, adPositioning: positioning, defaultAdRenderingClass: NativeAdCell.self)
 
         // Add targeting parameters.
         var targeting = MPNativeAdRequestTargeting()
@@ -52,31 +52,31 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         placer.loadAdsForAdUnitID(MoPubAdUnitID)
 
         // Retrieve the poems.
-        self.poems = PoemPersistence.sharedInstance.retrievePoems()
+        poems = PoemPersistence.sharedInstance.retrievePoems()
 
         // Customize the navigation bar.
-        self.navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = ""
 
         // Remove the poem composer from the navigation controller if we're coming from it.
-        if let previousController: AnyObject = self.navigationController?.viewControllers[1] {
+        if let previousController: AnyObject = navigationController?.viewControllers[1] {
             if previousController.isKindOfClass(PoemComposerViewController.self) {
-                self.navigationController?.viewControllers.removeAtIndex(1)
+                navigationController?.viewControllers.removeAtIndex(1)
             }
         }
 
         // Add a table header and computer the cell height so they perfectly fit the screen.
         let headerHeight: CGFloat = 15
-        let contentHeight = self.view.frame.size.height - headerHeight
-        let navHeight = self.navigationController?.navigationBar.frame.height
-        let navYOrigin = self.navigationController?.navigationBar.frame.origin.y
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.bounds.size.width, headerHeight))
+        let contentHeight = view.frame.size.height - headerHeight
+        let navHeight = navigationController?.navigationBar.frame.height
+        let navYOrigin = navigationController?.navigationBar.frame.origin.y
+        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
         // Make sure the navigation bar is not translucent when scrolling the table view.
-        self.navigationController?.navigationBar.translucent = false
+        navigationController?.navigationBar.translucent = false
 
         // Display a label on the background if there are no poems to display.
         let noPoemsLabel = UILabel()
@@ -112,32 +112,32 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Find the poem displayed at this index path.
-            var poem = self.poems[indexPath.row]
+            var poem = poems[indexPath.row]
 
             // Remove the poem and reload the table view.
-            self.poems = self.poems.filter( { $0 != poem })
-            self.tableView.mp_deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            poems = poems.filter( { $0 != poem })
+            tableView.mp_deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 
             // Display the no poems label if this was the last poem.
             toggleNoPoemsLabel()
 
             // Archive and save the poems again.
-            PoemPersistence.sharedInstance.overwritePoems(self.poems)
+            PoemPersistence.sharedInstance.overwritePoems(poems)
         }
     }
 
     // MARK: UITableViewDelegate
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return self.tableView.frame.size.width * 0.75
+        return tableView.frame.size.width * 0.75
     }
 
     // MARK: PoemCellDelegate
 
     func poemCellWantsToSharePoem(poemCell: PoemCell) {
         // Find the poem displayed at this index path.
-        let indexPath = self.tableView.mp_indexPathForCell(poemCell)
-        let poem = self.poems[indexPath.row]
+        let indexPath = tableView.mp_indexPathForCell(poemCell)
+        let poem = poems[indexPath.row]
 
         // Generate the image of the poem.
         let poemImage = poemCell.capturePoemImage()
@@ -161,16 +161,19 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
     private func toggleNoPoemsLabel() {
         if tableView.numberOfRowsInSection(0) == 0 {
-            UIView.animateWithDuration(0.15, animations: {
+            UIView.animateWithDuration(0.15) {
                 self.tableView.backgroundView!.hidden = false
                 self.tableView.backgroundView!.alpha = 1
-                }, completion: nil)
+            }
         } else {
-            UIView.animateWithDuration(0.15, animations: {
-                self.tableView.backgroundView!.alpha = 0
-                }, completion: { finished in
+            UIView.animateWithDuration(0.15,
+                animations: {
+                    self.tableView.backgroundView!.alpha = 0
+                },
+                completion: { finished in
                     self.tableView.backgroundView!.hidden = true
-            })
+                }
+            )
         }
     }
 

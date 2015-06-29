@@ -48,7 +48,7 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
     }
 
     private func navigateToMainAppScreen() {
-        self.performSegueWithIdentifier("ShowThemeChooser", sender: self)
+        performSegueWithIdentifier("ShowThemeChooser", sender: self)
     }
 
     // MARK: IBActions

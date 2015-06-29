@@ -20,7 +20,7 @@ class ImageCarouselCollectionViewCell: UICollectionViewCell {
 
     var image: UIImage? {
         didSet {
-            self.imageView.image = image
+            imageView.image = image
         }
     }
 
@@ -39,14 +39,14 @@ class ImageCarouselCollectionViewCell: UICollectionViewCell {
     }
 
     private func commonInit() {
-        self.imageView = UIImageView()
-        self.contentView.addSubview(imageView)
+        imageView = UIImageView()
+        contentView.addSubview(imageView)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.imageView.frame = self.contentView.bounds
+        imageView.frame = contentView.bounds
     }
 
 }

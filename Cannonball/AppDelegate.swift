@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Twitter.sharedInstance().session() == nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let signInViewController: AnyObject! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
-            self.window?.rootViewController = signInViewController as? UIViewController
+            window?.rootViewController = signInViewController as? UIViewController
         }
 
         // Override point for customization after application launch.

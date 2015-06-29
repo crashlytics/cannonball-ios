@@ -43,62 +43,68 @@ class ThemeChooserViewController: UITableViewController {
         logoView = UIImageView(frame: CGRectMake(0, 0, 40, 40))
         logoView.image = UIImage(named: "Logo")?.imageWithRenderingMode(.AlwaysTemplate)
         logoView.tintColor = UIColor.cannonballGreenColor()
-        logoView.frame.origin.x = (self.view.frame.size.width - logoView.frame.size.width) / 2
+        logoView.frame.origin.x = (view.frame.size.width - logoView.frame.size.width) / 2
         logoView.frame.origin.y = -logoView.frame.size.height - 10
-        self.navigationController?.view.addSubview(logoView)
-        self.navigationController?.view.bringSubviewToFront(logoView)
+        navigationController?.view.addSubview(logoView)
+        navigationController?.view.bringSubviewToFront(logoView)
         let logoTapRecognizer = UITapGestureRecognizer(target: self, action: Selector("logoTapped"))
         logoView.userInteractionEnabled = true
         logoView.addGestureRecognizer(logoTapRecognizer)
 
         // Prevent vertical bouncing.
-        self.tableView.alwaysBounceVertical = false
+        tableView.alwaysBounceVertical = false
 
         // Add a table header and computer the cell height so they perfectly fit the screen.
         let headerHeight: CGFloat = 15
-        let contentHeight = self.view.frame.size.height - headerHeight
-        let navHeight = self.navigationController?.navigationBar.frame.height
-        let navYOrigin = self.navigationController?.navigationBar.frame.origin.y
-        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.bounds.size.width, headerHeight))
+        let contentHeight = view.frame.size.height - headerHeight
+        let navHeight = navigationController?.navigationBar.frame.height
+        let navYOrigin = navigationController?.navigationBar.frame.origin.y
+        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
 
         // Compute the perfect table cell height to fit the content.
         let themeTableCellHeight = (contentHeight - navHeight! - navYOrigin!) / CGFloat(themes.count)
-        self.tableView.rowHeight = themeTableCellHeight
+        tableView.rowHeight = themeTableCellHeight
 
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
-        self.navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.topItem?.title = ""
+        navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.topItem?.title = ""
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
         // Animate the logo when the view appears.
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut, animations: { () -> Void in
-            // Place the frame at the correct origin position.
-            self.logoView.frame.origin.y = 8
-        }, completion: nil)
+        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+            animations: {
+                // Place the frame at the correct origin position.
+                self.logoView.frame.origin.y = 8
+            },
+            completion: nil
+        )
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
         // Make sure the navigation bar is translucent.
-        self.navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.translucent = true
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
         // Move the logo view off screen if a new controller was pushed.
-        if self.navigationController?.viewControllers.count > 1 {
-            UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut, animations: { () -> Void in
-                // Place the frame at the correct origin position.
-                self.logoView.frame.origin.y = -self.logoView.frame.size.height - 10
-            }, completion: nil)
+        if navigationController?.viewControllers.count > 1 {
+            UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+                animations: {
+                    // Place the frame at the correct origin position.
+                    self.logoView.frame.origin.y = -self.logoView.frame.size.height - 10
+                },
+                completion: nil
+            )
         }
     }
 
@@ -107,17 +113,17 @@ class ThemeChooserViewController: UITableViewController {
     // Pass the selected theme to the poem composer.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if sender!.isKindOfClass(ThemeCell) {
-            let indexPath = self.tableView.indexPathForSelectedRow()
+            let indexPath = tableView.indexPathForSelectedRow()
             if let row = indexPath?.row {
                 let poemComposerViewController = segue.destinationViewController as! PoemComposerViewController
-                poemComposerViewController.theme = self.themes[row]
+                poemComposerViewController.theme = themes[row]
             }
         }
     }
 
     // Bring the about view when tapping the logo.
     func logoTapped() {
-        self.performSegueWithIdentifier("ShowAbout", sender: self)
+        performSegueWithIdentifier("ShowAbout", sender: self)
     }
 
     // MARK: UITableViewDataSource
