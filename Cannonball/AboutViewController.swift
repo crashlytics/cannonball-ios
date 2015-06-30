@@ -15,6 +15,7 @@
 //
 
 import UIKit
+import Crashlytics
 import TwitterKit
 
 class AboutViewController: UIViewController {
@@ -44,6 +45,9 @@ class AboutViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
+
+        // Log Answers Custom Event.
+        Crashlytics.sharedInstance().logEvent("Viewed About")
     }
 
     // MARK: IBActions
@@ -60,6 +64,9 @@ class AboutViewController: UIViewController {
         // Remove any Twitter or Digits local sessions for this app.
         Twitter.sharedInstance().logOut()
         Digits.sharedInstance().logOut()
+
+        // Log Answers Custom Event.
+        Crashlytics.sharedInstance().logEvent("Signed Out")
 
         // Present the Sign In again.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -17,6 +17,7 @@
 import UIKit
 import TwitterKit
 import DigitsKit
+import Crashlytics
 
 class SignInViewController: UIViewController, UIAlertViewDelegate {
 
@@ -56,7 +57,13 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
     @IBAction func signInWithTwitter(sender: UIButton) {
         Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
             if session != nil {
+                // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()
+                // Log Answers Custom Event.
+                Crashlytics.sharedInstance().logEvent("Completed Twitter Sign In", attributes: ["User ID": session.userID])
+            } else {
+                // Log Answers Custom Event.
+                Crashlytics.sharedInstance().logEvent("Failed Twitter Sign In", attributes: ["Error": error.localizedDescription])
             }
         }
     }
@@ -70,9 +77,20 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
         // Start the Digits authentication flow with the custom appearance.
         Digits.sharedInstance().authenticateWithDigitsAppearance(appearance, viewController: nil, title: nil) { (session: DGTSession!, error: NSError!) -> Void in
             if session != nil {
+                // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()
+                // Log Answers Custom Event.
+                Crashlytics.sharedInstance().logEvent("Completed Digits Sign In", attributes: ["User ID": session.userID])
+            } else {
+                // Log Answers Custom Event.
+                Crashlytics.sharedInstance().logEvent("Failed Digits Sign In", attributes: ["Error": error.localizedDescription])
             }
         }
+    }
+
+    @IBAction func skipSignIn(sender: AnyObject) {
+        // Log Answers Custom Event.
+        Crashlytics.sharedInstance().logEvent("Skipped Sign In")
     }
 
     // MARK: Utilities

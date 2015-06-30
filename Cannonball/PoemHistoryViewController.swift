@@ -15,8 +15,9 @@
 //
 
 import UIKit
-import MoPub
 import TwitterKit
+import Crashlytics
+import MoPub
 
 // Set your MoPub Ad Unit ID just below to display MoPub Native Ads.
 let MoPubAdUnitID = ""
@@ -37,6 +38,9 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Log Answers Custom Event.
+        Crashlytics.sharedInstance().logEvent("Viewed Poem History")
 
         // Configure the MoPub ad positioning.
         var positioning = MPServerAdPositioning()
@@ -123,6 +127,9 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
             // Archive and save the poems again.
             PoemPersistence.sharedInstance.overwritePoems(poems)
+
+            // Log Answers Custom Event.
+            Crashlytics.sharedInstance().logEvent("Removed Poem")
         }
     }
 
@@ -153,6 +160,16 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         composer.showWithCompletion { (result: TWTRComposerResult) -> Void in
             if result == .Done {
                 println("Tweet composition completed")
+
+                // Log Answers Custom Event.
+                Crashlytics.sharedInstance().logEvent("Shared Poem",
+                    attributes: [
+                        "Poem": poem.getSentence(),
+                        "Theme": poem.theme,
+                        "Length": poem.words.count,
+                        "Picture": poem.picture
+                    ]
+                )
             }
         }
     }

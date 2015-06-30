@@ -16,6 +16,7 @@
 
 import UIKit
 import QuartzCore
+import Crashlytics
 
 class ThemeChooserViewController: UITableViewController {
 
@@ -117,6 +118,9 @@ class ThemeChooserViewController: UITableViewController {
             if let row = indexPath?.row {
                 let poemComposerViewController = segue.destinationViewController as! PoemComposerViewController
                 poemComposerViewController.theme = themes[row]
+
+                // Log Answers Custom Event.
+                Crashlytics.sharedInstance().logEvent("Selected Theme", attributes: ["Theme": themes[row].name])
             }
         }
     }

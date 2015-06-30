@@ -16,6 +16,7 @@
 
 import UIKit
 import QuartzCore
+import Crashlytics
 
 class PoemComposerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ImageCarouselDataSource, CountdownViewDelegate {
 
@@ -57,6 +58,9 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     @IBAction func shuffleWordBank() {
         refreshWordBank()
         bankCollectionView.reloadData()
+
+        // Log Answers Custom Event.
+        Crashlytics.sharedInstance().logEvent("Shuffled Words")
     }
 
     // MARK: View Life Cycle
@@ -111,6 +115,19 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
+        if !contains(navigationController?.viewControllers as! Array<UIViewController>, self) {
+            // Back was pressed because self is no longer in the navigation stack.
+            // Log Answers Custom Event.
+            Crashlytics.sharedInstance().logEvent("Stopped Composing Poem",
+                attributes: [
+                    "Poem": poem.getSentence(),
+                    "Theme": theme.name,
+                    "Length": poem.words.count,
+                    "Picture": themePictures[imageCarousel.currentImageIndex]
+                ]
+            )
+        }
+
         countdownView.stop()
 
         // Animate the countdown off screen.
@@ -137,6 +154,16 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Save the poem.
         savePoem()
+
+        // Log Answers Custom Event.
+        Crashlytics.sharedInstance().logEvent("Finished Composing Poem",
+            attributes: [
+                "Poem": poem.getSentence(),
+                "Theme": poem.theme,
+                "Length": poem.words.count,
+                "Picture": poem.picture
+            ]
+        )
     }
 
     // MARK: CountdownViewDelegate

@@ -472,6 +472,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="skipSignIn:" destination="LWk-Ji-zOn" eventType="touchUpInside" id="vyA-9Z-oRn"/>
                                     <segue destination="Lee-FR-LJd" kind="modal" identifier="ShowThemeChooser" id="ixt-1E-UyI"/>
                                 </connections>
                             </button>
