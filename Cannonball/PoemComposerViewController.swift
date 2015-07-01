@@ -371,9 +371,11 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
             // Insert the cell for this word.
             collectionView.performBatchUpdates({
                 collectionView.insertItemsAtIndexPaths([poemIndexPath])
-            }, completion: { _ in
-                self.resizePoemToFitContentSize()
-            })
+                },
+                completion: { _ in
+                    self.resizePoemToFitContentSize()
+                }
+            )
 
             // Fade in so it appears more smoothly.
             if let cell = collectionView.cellForItemAtIndexPath(poemIndexPath) {

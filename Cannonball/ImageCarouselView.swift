@@ -97,8 +97,13 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        currentImageIndex = indexPath.row
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        // Update the currently displayed picture.
+        // Note: indexPathsForVisibleItems() can return multiple items hence the calculation below for accuracy.
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+        let visiblePoint = CGPointMake(CGRectGetMidX(visibleRect), CGRectGetMidY(visibleRect))
+        let indexPath = collectionView.indexPathForItemAtPoint(visiblePoint)
+        currentImageIndex = indexPath!.row
     }
 
 }
