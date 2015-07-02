@@ -361,7 +361,10 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
 
             // The word has not been found because a shuffle likely happened, so append it again.
             bankWords.append(word)
-            collectionView.reloadData()
+
+            // Display the new word accordingly at the last position.
+            let bankIndexPath = NSIndexPath(forItem: bankWords.count - 1, inSection: 0)
+            collectionView.insertItemsAtIndexPaths([bankIndexPath])
 
         } else if collectionView == poemCollectionView {
 
