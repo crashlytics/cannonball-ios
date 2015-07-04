@@ -27,13 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        assert(NSBundle.mainBundle().objectForInfoDictionaryKey("Fabric") != nil, "Welcome to Cannonball. Please remember to onboard using the Fabric Mac app. Check the instructions in the README file.")
+        // Developers: Welcome! Get started with Fabric.app.
+        let welcome = "Welcome to Cannonball! Please onboard with the Fabric Mac app. Check the instructions in the README file."
+        assert(NSBundle.mainBundle().objectForInfoDictionaryKey("Fabric") != nil, welcome)
 
         // Register Crashlytics, Twitter, Digits and MoPub with Fabric.
         Fabric.with([Crashlytics(), Twitter(), Digits(), MoPub()])
 
-        // Check if the user is logged in or not to present the sign in screen.
-        if Twitter.sharedInstance().session() == nil {
+        // Check for an existing Twitter or Digits session before presenting the sign in screen.
+        if Twitter.sharedInstance().session() == nil && Digits.sharedInstance().session() == nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let signInViewController: AnyObject! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
             window?.rootViewController = signInViewController as? UIViewController
