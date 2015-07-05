@@ -65,6 +65,10 @@ class AboutViewController: UIViewController {
         Twitter.sharedInstance().logOut()
         Digits.sharedInstance().logOut()
 
+        // Remove user information for any upcoming crashes in Crashlytics.
+        Crashlytics.sharedInstance().setUserIdentifier(nil)
+        Crashlytics.sharedInstance().setUserName(nil)
+
         // Log Answers Custom Event.
         Crashlytics.sharedInstance().logEvent("Signed Out")
 

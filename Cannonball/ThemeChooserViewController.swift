@@ -116,8 +116,12 @@ class ThemeChooserViewController: UITableViewController {
         if sender!.isKindOfClass(ThemeCell) {
             let indexPath = tableView.indexPathForSelectedRow()
             if let row = indexPath?.row {
+                // Pass the selected theme to the poem composer.
                 let poemComposerViewController = segue.destinationViewController as! PoemComposerViewController
                 poemComposerViewController.theme = themes[row]
+
+                // Tie this selected theme to any crashes in Crashlytics.
+                Crashlytics.sharedInstance().setObjectValue(themes[row].name, forKey: "Theme")
 
                 // Log Answers Custom Event.
                 Crashlytics.sharedInstance().logEvent("Selected Theme", attributes: ["Theme": themes[row].name])

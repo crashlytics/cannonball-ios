@@ -155,6 +155,9 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         // Save the poem.
         savePoem()
 
+        // Enhance Crashlytics reports with Advanced Custom Logging.
+        CLSLogv("Finished Poem: %d words in theme %@ with picture %@.", getVaList([poem.words.count, poem.theme, poem.picture]))
+
         // Log Answers Custom Event.
         Crashlytics.sharedInstance().logEvent("Finished Composing Poem",
             attributes: [
