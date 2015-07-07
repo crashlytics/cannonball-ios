@@ -6,6 +6,8 @@ Cannonball is the fun way to create and share stories and poems on your phone. S
 
 If you would like to play with the app, [Cannonball is available on the App Store](https://itunes.apple.com/us/app/cannonball-magnetic-poetry/id929750075).
 
+![Screenshots of Cannonball for iOS](screenshot.png "Screenshots of Cannonball for iOS")
+
 ## Fabric
 
 Cannonball is a canonical sample iOS app to demonstrate how to use [Fabric](https://dev.twitter.com/fabric/overview), the easiest way to build the best apps.
