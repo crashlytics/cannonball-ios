@@ -26,8 +26,6 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
     // MARK: Properties
 
-    let deletePoemPromptMessage = "Are you sure you would like to delete this poem from your history?"
-
     private let poemTableCellReuseIdentifier = "PoemCell"
 
     var placer: MPTableViewAdPlacer!
