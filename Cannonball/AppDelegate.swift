@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = signInViewController as? UIViewController
         }
 
-        // Override point for customization after application launch.
         return true
     }
 
