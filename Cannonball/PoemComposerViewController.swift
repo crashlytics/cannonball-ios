@@ -60,7 +60,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         bankCollectionView.reloadData()
 
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Shuffled Words")
+        Answers.logCustomEventWithName("Shuffled Words", customAttributes: nil)
     }
 
     // MARK: View Life Cycle
@@ -118,8 +118,8 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         if !contains(navigationController?.viewControllers as! Array<UIViewController>, self) {
             // Back was pressed because self is no longer in the navigation stack.
             // Log Answers Custom Event.
-            Crashlytics.sharedInstance().logEvent("Stopped Composing Poem",
-                attributes: [
+            Answers.logCustomEventWithName("Stopped Composing Poem",
+                customAttributes: [
                     "Poem": poem.getSentence(),
                     "Theme": theme.name,
                     "Length": poem.words.count,
@@ -159,8 +159,8 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         CLSLogv("Finished Poem: %d words in theme %@ with picture %@.", getVaList([poem.words.count, poem.theme, poem.picture]))
 
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Finished Composing Poem",
-            attributes: [
+        Answers.logCustomEventWithName("Finished Composing Poem",
+            customAttributes: [
                 "Poem": poem.getSentence(),
                 "Theme": poem.theme,
                 "Length": poem.words.count,

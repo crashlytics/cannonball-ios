@@ -31,7 +31,7 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         super.viewDidLoad()
 
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Viewed Poem Timeline")
+        Answers.logCustomEventWithName("Viewed Poem Timeline", customAttributes: nil)
 
         // Login as a guest on Twitter.
         Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) -> Void in

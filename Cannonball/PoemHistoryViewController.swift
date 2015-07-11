@@ -38,7 +38,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         super.viewDidLoad()
 
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Viewed Poem History")
+        Answers.logCustomEventWithName("Viewed Poem History", customAttributes: nil)
 
         // Configure the MoPub ad positioning.
         var positioning = MPServerAdPositioning()
@@ -127,7 +127,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
             PoemPersistence.sharedInstance.overwritePoems(poems)
 
             // Log Answers Custom Event.
-            Crashlytics.sharedInstance().logEvent("Removed Poem")
+            Answers.logCustomEventWithName("Removed Poem", customAttributes: nil)
         }
     }
 
@@ -157,11 +157,19 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         // Present the composer to the user.
         composer.showWithCompletion { (result: TWTRComposerResult) -> Void in
             if result == .Done {
-                println("Tweet composition completed")
-
                 // Log Answers Custom Event.
-                Crashlytics.sharedInstance().logEvent("Shared Poem",
-                    attributes: [
+                Answers.logShareWithMethod("Twitter", contentName: poem.getSentence(), contentType: "Poem", contentId: poem.UUID.description,
+                    customAttributes: [
+                        "Poem": poem.getSentence(),
+                        "Theme": poem.theme,
+                        "Length": poem.words.count,
+                        "Picture": poem.picture
+                    ]
+                )
+            } else if result == .Cancelled {
+                // Log Answers Custom Event.
+                Answers.logCustomEventWithName("Cancelled Twitter Sharing",
+                    customAttributes: [
                         "Poem": poem.getSentence(),
                         "Theme": poem.theme,
                         "Length": poem.words.count,

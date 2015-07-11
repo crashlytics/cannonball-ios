@@ -48,7 +48,7 @@ class AboutViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
 
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Viewed About")
+        Answers.logCustomEventWithName("Viewed About", customAttributes: nil)
     }
 
     // MARK: IBActions
@@ -71,7 +71,7 @@ class AboutViewController: UIViewController {
         Crashlytics.sharedInstance().setUserName(nil)
 
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Signed Out")
+        Answers.logCustomEventWithName("Signed Out", customAttributes: nil)
 
         // Present the Sign In again.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

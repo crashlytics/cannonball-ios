@@ -65,10 +65,10 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
                 Crashlytics.sharedInstance().setUserName(session.userName)
 
                 // Log Answers Custom Event.
-                Crashlytics.sharedInstance().logEvent("Completed Twitter Sign In", attributes: ["User ID": session.userID])
+                Answers.logLoginWithMethod("Twitter", success: 1, customAttributes: ["User ID": session.userID])
             } else {
                 // Log Answers Custom Event.
-                Crashlytics.sharedInstance().logEvent("Failed Twitter Sign In", attributes: ["Error": error.localizedDescription])
+                Answers.logLoginWithMethod("Twitter", success: 0, customAttributes: ["Error": error.localizedDescription])
             }
         }
     }
@@ -89,17 +89,17 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
                 Crashlytics.sharedInstance().setUserIdentifier(session.userID)
 
                 // Log Answers Custom Event.
-                Crashlytics.sharedInstance().logEvent("Completed Digits Sign In", attributes: ["User ID": session.userID])
+                Answers.logLoginWithMethod("Digits", success: 1, customAttributes: ["User ID": session.userID])
             } else {
                 // Log Answers Custom Event.
-                Crashlytics.sharedInstance().logEvent("Failed Digits Sign In", attributes: ["Error": error.localizedDescription])
+                Answers.logLoginWithMethod("Digits", success: 0, customAttributes: ["Error": error.localizedDescription])
             }
         }
     }
 
     @IBAction func skipSignIn(sender: AnyObject) {
         // Log Answers Custom Event.
-        Crashlytics.sharedInstance().logEvent("Skipped Sign In")
+        Answers.logCustomEventWithName("Skipped Sign In", customAttributes: nil)
     }
 
     // MARK: Utilities

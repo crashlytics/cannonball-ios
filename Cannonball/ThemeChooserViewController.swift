@@ -124,7 +124,7 @@ class ThemeChooserViewController: UITableViewController {
                 Crashlytics.sharedInstance().setObjectValue(themes[row].name, forKey: "Theme")
 
                 // Log Answers Custom Event.
-                Crashlytics.sharedInstance().logEvent("Selected Theme", attributes: ["Theme": themes[row].name])
+                Answers.logCustomEventWithName("Selected Theme", customAttributes: ["Theme": themes[row].name])
             }
         }
     }
