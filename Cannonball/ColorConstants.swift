@@ -37,4 +37,8 @@ extension UIColor {
     class func cannonballRedLightColor() -> UIColor {
         return UIColor(red: 238/255, green: 103/255, blue: 100/255, alpha: 0.2)
     }
+
+    class func cannonballBrownColor() -> UIColor {
+        return UIColor(red: 55/255, green: 31/255, blue: 31/255, alpha: 1.0)
+    }
 }

@@ -38,7 +38,7 @@ class ThemeCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradient.frame = self.bounds
+        gradient.frame = bounds
     }
 
     func configureWithTheme(theme: Theme) {

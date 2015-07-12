@@ -38,7 +38,7 @@ class CountdownView : UIView {
 
     private var secondsRemaining: Double {
         didSet {
-            self.progress = secondsRemaining / Double(countdownTime)
+            progress = secondsRemaining / Double(countdownTime)
 
             let wholeSeconds = Int(ceil(secondsRemaining))
             secondsLabel.text = String(wholeSeconds)
@@ -58,27 +58,27 @@ class CountdownView : UIView {
     private var displayLink: CADisplayLink?
 
     func start() {
-        self.secondsRemaining = Double(countdownTime)
+        secondsRemaining = Double(countdownTime)
 
-        self.displayLink?.invalidate()
-        self.displayLink = UIScreen.mainScreen().displayLinkWithTarget(self, selector: Selector("tick"))
-        self.displayLink!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        displayLink?.invalidate()
+        displayLink = UIScreen.mainScreen().displayLinkWithTarget(self, selector: Selector("tick"))
+        displayLink!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
     }
 
     func stop() {
-        self.displayLink?.invalidate()
+        displayLink?.invalidate()
     }
 
     // [1, 0]
     private var progress: Double = 1 {
         didSet {
             // Update remaining time circle and label.
-            foregroundCircle.strokeEnd = (CGFloat) (self.progress)
+            foregroundCircle.strokeEnd = (CGFloat) (progress)
         }
     }
 
     func tick() {
-        self.secondsRemaining -= self.displayLink!.duration
+        secondsRemaining -= displayLink!.duration
     }
 
     let textPadding: CGFloat = 5
@@ -99,8 +99,8 @@ class CountdownView : UIView {
         secondsLabel.textAlignment = NSTextAlignment.Center
 
         // Define the path for the circle strokes.
-        let arcCenter = CGPoint(x: self.bounds.width / 2, y: self.bounds.width / 2)
-        let radius: CGFloat = self.bounds.width / 2
+        let arcCenter = CGPoint(x: bounds.width / 2, y: bounds.width / 2)
+        let radius: CGFloat = bounds.width / 2
         let startAngle = CGFloat(-0.5 * M_PI)
         let endAngle = CGFloat(1.5 * M_PI)
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
@@ -122,9 +122,9 @@ class CountdownView : UIView {
         foregroundCircle.lineWidth = 2
 
         // Add the circles and label to the main view.
-        self.layer.addSublayer(backgroundCircle)
-        self.layer.addSublayer(foregroundCircle)
-        self.addSubview(secondsLabel)
+        layer.addSublayer(backgroundCircle)
+        layer.addSublayer(foregroundCircle)
+        addSubview(secondsLabel)
     }
 
     override convenience init(frame aRect: CGRect) {

@@ -17,6 +17,7 @@
 import UIKit
 import TwitterKit
 import DigitsKit
+import Crashlytics
 
 class SignInViewController: UIViewController, UIAlertViewDelegate {
 
@@ -48,7 +49,7 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
     }
 
     private func navigateToMainAppScreen() {
-        self.performSegueWithIdentifier("ShowThemeChooser", sender: self)
+        performSegueWithIdentifier("ShowThemeChooser", sender: self)
     }
 
     // MARK: IBActions
@@ -56,7 +57,18 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
     @IBAction func signInWithTwitter(sender: UIButton) {
         Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
             if session != nil {
+                // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()
+
+                // Tie crashes to a Twitter user ID and username in Crashlytics.
+                Crashlytics.sharedInstance().setUserIdentifier(session.userID)
+                Crashlytics.sharedInstance().setUserName(session.userName)
+
+                // Log Answers Custom Event.
+                Answers.logLoginWithMethod("Twitter", success: 1, customAttributes: ["User ID": session.userID])
+            } else {
+                // Log Answers Custom Event.
+                Answers.logLoginWithMethod("Twitter", success: 0, customAttributes: ["Error": error.localizedDescription])
             }
         }
     }
@@ -70,9 +82,24 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
         // Start the Digits authentication flow with the custom appearance.
         Digits.sharedInstance().authenticateWithDigitsAppearance(appearance, viewController: nil, title: nil) { (session: DGTSession!, error: NSError!) -> Void in
             if session != nil {
+                // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()
+
+                // Tie crashes to a Digits user ID in Crashlytics.
+                Crashlytics.sharedInstance().setUserIdentifier(session.userID)
+
+                // Log Answers Custom Event.
+                Answers.logLoginWithMethod("Digits", success: 1, customAttributes: ["User ID": session.userID])
+            } else {
+                // Log Answers Custom Event.
+                Answers.logLoginWithMethod("Digits", success: 0, customAttributes: ["Error": error.localizedDescription])
             }
         }
+    }
+
+    @IBAction func skipSignIn(sender: AnyObject) {
+        // Log Answers Custom Event.
+        Answers.logCustomEventWithName("Skipped Sign In", customAttributes: nil)
     }
 
     // MARK: Utilities
