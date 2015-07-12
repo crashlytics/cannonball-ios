@@ -155,7 +155,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         composer.setImage(poemImage)
 
         // Present the composer to the user.
-        composer.showWithCompletion { (result: TWTRComposerResult) -> Void in
+        composer.showFromViewController(self) { result in
             if result == .Done {
                 // Log Answers Custom Event.
                 Answers.logShareWithMethod("Twitter", contentName: poem.getSentence(), contentType: "Poem", contentId: poem.UUID.description,
