@@ -1,3 +1,5 @@
 language: objective-c
+osx_image: xcode6.4
 xcode_project: Cannonball.xcodeproj
 xcode_scheme: Cannonball
+xcode_sdk: iphonesimulator8.4
