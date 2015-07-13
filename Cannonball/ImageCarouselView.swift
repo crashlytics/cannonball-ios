@@ -73,6 +73,7 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         super.layoutSubviews()
 
         collectionView.frame = bounds
+        collectionView.backgroundColor = UIColor.cannonballBeigeColor()
 
         collectionViewLayout.itemSize = bounds.size
     }

@@ -66,6 +66,9 @@ class PoemTimelineViewController: TWTRTimelineViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        // Make sure the navigation bar is not translucent when scrolling the table view.
+        navigationController?.navigationBar.translucent = false
+
         // Display a label on the background if there are no recent Tweets to display.
         let noTweetsLabel = UILabel()
         noTweetsLabel.text = "Sorry, there are no recent Tweets to display."
