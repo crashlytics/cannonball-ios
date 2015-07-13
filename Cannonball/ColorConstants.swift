@@ -19,15 +19,15 @@ import UIKit
 
 extension UIColor {
     class func cannonballBeigeColor() -> UIColor {
-        return UIColor(red: 1, green: 237/255, blue: 210/255, alpha: 1.0)
+        return UIColor(red: 1, green: 232/255, blue: 202/255, alpha: 1.0)
     }
 
     class func cannonballGreenColor() -> UIColor {
-        return UIColor(red: 0, green: 167/255, blue: 155/255, alpha: 1.0)
+        return UIColor(red: 19/255, green: 152/255, blue: 138/255, alpha: 1.0)
     }
 
     class func cannonballGreenLightColor() -> UIColor {
-        return UIColor(red: 0, green: 167/255, blue: 155/255, alpha: 0.2)
+        return UIColor(red: 19/255, green: 152/255, blue: 138/255, alpha: 0.2)
     }
 
     class func cannonballRedColor() -> UIColor {
