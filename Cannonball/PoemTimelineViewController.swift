@@ -34,7 +34,7 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         Answers.logCustomEventWithName("Viewed Poem Timeline", customAttributes: nil)
 
         // Login as a guest on Twitter.
-        Twitter.sharedInstance().logInGuestWithCompletion { (session: TWTRGuestSession!, error: NSError!) -> Void in
+        Twitter.sharedInstance().logInGuestWithCompletion { session, error in
             // Check we have a valid guest session.
             if let validSession = session {
                 // Assign our search query to the data source of the Search Timeline which will then be rendered.

@@ -55,7 +55,7 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
     // MARK: IBActions
 
     @IBAction func signInWithTwitter(sender: UIButton) {
-        Twitter.sharedInstance().logInWithCompletion { (session: TWTRSession!, error: NSError!) -> Void in
+        Twitter.sharedInstance().logInWithCompletion { session, error in
             if session != nil {
                 // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()
@@ -65,10 +65,10 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
                 Crashlytics.sharedInstance().setUserName(session.userName)
 
                 // Log Answers Custom Event.
-                Answers.logLoginWithMethod("Twitter", success: 1, customAttributes: ["User ID": session.userID])
+                Answers.logLoginWithMethod("Twitter", success: true, customAttributes: ["User ID": session.userID])
             } else {
                 // Log Answers Custom Event.
-                Answers.logLoginWithMethod("Twitter", success: 0, customAttributes: ["Error": error.localizedDescription])
+                Answers.logLoginWithMethod("Twitter", success: false, customAttributes: ["Error": error.localizedDescription])
             }
         }
     }
@@ -80,7 +80,7 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
         appearance.accentColor = UIColor.cannonballGreenColor()
 
         // Start the Digits authentication flow with the custom appearance.
-        Digits.sharedInstance().authenticateWithDigitsAppearance(appearance, viewController: nil, title: nil) { (session: DGTSession!, error: NSError!) -> Void in
+        Digits.sharedInstance().authenticateWithDigitsAppearance(appearance, viewController: nil, title: nil) { session, error in
             if session != nil {
                 // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()
@@ -89,10 +89,10 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
                 Crashlytics.sharedInstance().setUserIdentifier(session.userID)
 
                 // Log Answers Custom Event.
-                Answers.logLoginWithMethod("Digits", success: 1, customAttributes: ["User ID": session.userID])
+                Answers.logLoginWithMethod("Digits", success: true, customAttributes: ["User ID": session.userID])
             } else {
                 // Log Answers Custom Event.
-                Answers.logLoginWithMethod("Digits", success: 0, customAttributes: ["Error": error.localizedDescription])
+                Answers.logLoginWithMethod("Digits", success: false, customAttributes: ["Error": error.localizedDescription])
             }
         }
     }

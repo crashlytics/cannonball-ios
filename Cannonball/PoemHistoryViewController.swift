@@ -158,7 +158,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         composer.showFromViewController(self) { result in
             if result == .Done {
                 // Log Answers Custom Event.
-                Answers.logShareWithMethod("Twitter", contentName: poem.getSentence(), contentType: "Poem", contentId: poem.UUID.description,
+                Answers.logShareWithMethod("Twitter", contentName: poem.theme, contentType: "Poem", contentId: poem.UUID.description,
                     customAttributes: [
                         "Poem": poem.getSentence(),
                         "Theme": poem.theme,
