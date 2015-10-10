@@ -57,6 +57,7 @@ typedef NS_ENUM(NSUInteger, TWTRTweetViewTheme) {
    - When a link is selected.
    - When the share button is tapped.
    - When the share action completes.
+   - When the favorite action completes.
  
  ## Usage in UITableView
  
@@ -80,6 +81,9 @@ typedef NS_ENUM(NSUInteger, TWTRTweetViewTheme) {
      [TWTRTweetView appearance].primaryTextColor = [UIColor yellowColor];
      [TWTRTweetView appearance].backgroundColor = [UIColor blueColor];
  
+     // Setting action button visibility
+     [TWTRTweetView appearance].showActionButtons = NO;
+ 
  _Note:_ You can't change the theme through an appearance proxy after the view has already been added to the view hierarchy. Direct `theme` property access will work though.
  */
 @interface TWTRTweetView : UIView <UIAppearanceContainer>
@@ -101,8 +105,18 @@ typedef NS_ENUM(NSUInteger, TWTRTweetViewTheme) {
 
 /**
  *  Set whether the border should be shown.
+ *  Defaults to YES.
  */
 @property (nonatomic, assign) BOOL showBorder UI_APPEARANCE_SELECTOR;
+
+/**
+ *  Set whether the action buttons (Favorite, Share) should be shown. When toggled,
+ *  both the visibility of the action buttons and the internal constraints are
+ *  updated immediately. The layout will be updated the next layout pass that occurs.
+ *
+ *  Defaults to NO.
+ */
+@property (nonatomic, assign) BOOL showActionButtons;
 
 /**
  *  Setting the theme of the Tweet view will change the color properties accordingly.
@@ -117,9 +131,15 @@ typedef NS_ENUM(NSUInteger, TWTRTweetViewTheme) {
 @property (nonatomic, assign, readonly) TWTRTweetViewStyle style;
 
 /**
- *  The optional delegate to allow presenting a webview with Tweet details.
+ *  Optional delegate to receive notifications when certain actions happen
  */
 @property (nonatomic, weak) IBOutlet id<TWTRTweetViewDelegate> delegate;
+
+/**
+ *  Optional property to set a UIViewController from which to present various new UI
+ *  e.g. when presenting a Share sheet, presenting a login view controller for actions, etc
+ */
+@property (nonatomic, weak) UIViewController *presenterViewController;
 
 /**
  *  Convenience initializer to configure a compact style Tweet view.

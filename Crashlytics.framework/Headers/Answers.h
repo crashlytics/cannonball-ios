@@ -6,36 +6,39 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Fabric/FABAttributes.h>
+#import "ANSCompatibility.h"
 
-FAB_START_NONNULL
+NS_ASSUME_NONNULL_BEGIN
 
 @interface Answers : NSObject
 
 /**
- *  Log an Answers Signup Event to track how users are signing up for your application.
+ *  Log a Sign Up event to see users signing up for your app in real-time, understand how
+ *  many users are signing up with different methods and their success rate signing up.
  *
  *  @param signUpMethodOrNil     The method by which a user logged in, e.g. Twitter or Digits.
  *  @param signUpSucceededOrNil  The ultimate success or failure of the login
  *  @param customAttributesOrNil A dictionary of custom attributes to associate with this purchase.
  */
-+ (void)logSignUpWithMethod:(NSString * FAB_NULLABLE)signUpMethodOrNil
-                    success:(NSNumber * FAB_NULLABLE)signUpSucceededOrNil
-           customAttributes:(NSDictionary * FAB_NULLABLE)customAttributesOrNil;
++ (void)logSignUpWithMethod:(nullable NSString *)signUpMethodOrNil
+                    success:(nullable NSNumber *)signUpSucceededOrNil
+           customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
- *  Log an Answers Login Event to track how users are logging in to your application.
+ *  Log an Log In event to see users logging into your app in real-time, understand how many
+ *  users are logging in with different methods and their success rate logging into your app.
  *
  *  @param loginMethodOrNil      The method by which a user logged in, e.g. email, Twitter or Digits.
  *  @param loginSucceededOrNil   The ultimate success or failure of the login
  *  @param customAttributesOrNil A dictionary of custom attributes to associate with this purchase.
  */
-+ (void)logLoginWithMethod:(NSString * FAB_NULLABLE)loginMethodOrNil
-                   success:(NSNumber * FAB_NULLABLE)loginSucceededOrNil
-          customAttributes:(NSDictionary * FAB_NULLABLE)customAttributesOrNil;
++ (void)logLoginWithMethod:(nullable NSString *)loginMethodOrNil
+                   success:(nullable NSNumber *)loginSucceededOrNil
+          customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
- *  Log an Answers Share Event to track what and how users are sharing content from your application.
+ *  Log a Share event to see users sharing from your app in real-time, letting you
+ *  understand what content they're sharing from the type or genre down to the specific id.
  *
  *  @param shareMethodOrNil      The method by which a user shared, e.g. email, Twitter, SMS.
  *  @param contentNameOrNil      The human readable name for this piece of content.
@@ -43,43 +46,142 @@ FAB_START_NONNULL
  *  @param contentIdOrNil        The unique identifier for this piece of content. Useful for finding the top shared item.
  *  @param customAttributesOrNil A dictionary of custom attributes to associate with this event.
  */
-+ (void)logShareWithMethod:(NSString * FAB_NULLABLE)shareMethodOrNil
-               contentName:(NSString * FAB_NULLABLE)contentNameOrNil
-               contentType:(NSString * FAB_NULLABLE)contentTypeOrNil
-                 contentId:(NSString * FAB_NULLABLE)contentIdOrNil
-          customAttributes:(NSDictionary * FAB_NULLABLE)customAttributesOrNil;
++ (void)logShareWithMethod:(nullable NSString *)shareMethodOrNil
+               contentName:(nullable NSString *)contentNameOrNil
+               contentType:(nullable NSString *)contentTypeOrNil
+                 contentId:(nullable NSString *)contentIdOrNil
+          customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
- *  Log an Answers Invite Event to track how users are inviting other users into
+ *  Log an Invite Event to track how users are inviting other users into
  *  your application.
  *
  *  @param inviteMethodOrNil     The method of invitation, e.g. GameCenter, Twitter, email.
  *  @param customAttributesOrNil A dictionary of custom attributes to associate with this purchase.
  */
-+ (void)logInviteWithMethod:(NSString * FAB_NULLABLE)inviteMethodOrNil
-           customAttributes:(NSDictionary * FAB_NULLABLE)customAttributesOrNil;
++ (void)logInviteWithMethod:(nullable NSString *)inviteMethodOrNil
+           customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
- *  Log an Answers Purchase Event to track when, how and what users are purchasing in your app.
+ *  Log a Purchase event to see your revenue in real-time, understand how many users are making purchases, see which
+ *  items are most popular, and track plenty of other important purchase-related metrics.
  *
  *  @param itemPriceOrNil         The purchased item's price.
  *  @param currencyOrNil          The ISO4217 currency code. Example: USD
  *  @param purchaseSucceededOrNil Was the purchase succesful or unsuccesful
  *  @param itemNameOrNil          The human-readable form of the item's name. Example:
- *  @param itemIdOrNil            The machine-readable, unique item identifier Example: SKU.
+ *  @param itemIdOrNil            The machine-readable, unique item identifier Example: SKU
  *  @param itemTypeOrNil          The type, or genre of the item. Example: Song
  *  @param customAttributesOrNil  A dictionary of custom attributes to associate with this purchase.
  */
-+ (void)logPurchaseWithPrice:(NSDecimalNumber * FAB_NULLABLE)itemPriceOrNil
-                    currency:(NSString * FAB_NULLABLE)currencyOrNil
-                     success:(NSNumber * FAB_NULLABLE)purchaseSucceededOrNil
-                    itemName:(NSString * FAB_NULLABLE)itemNameOrNil
-                    itemType:(NSString * FAB_NULLABLE)itemTypeOrNil
-                      itemId:(NSString * FAB_NULLABLE)itemIdOrNil
-            customAttributes:(NSDictionary * FAB_NULLABLE)customAttributesOrNil;
++ (void)logPurchaseWithPrice:(nullable NSDecimalNumber *)itemPriceOrNil
+                    currency:(nullable NSString *)currencyOrNil
+                     success:(nullable NSNumber *)purchaseSucceededOrNil
+                    itemName:(nullable NSString *)itemNameOrNil
+                    itemType:(nullable NSString *)itemTypeOrNil
+                      itemId:(nullable NSString *)itemIdOrNil
+            customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 /**
- *  Log a Custom Answers Event to track metrics and actions which are unique to your app.
+ *  Log a Level Start Event to track where users are in your game.
+ *
+ *  @param levelNameOrNil        The level name
+ *  @param customAttributesOrNil A dictionary of custom attributes to associate with this level start event.
+ */
++ (void)logLevelStart:(nullable NSString *)levelNameOrNil
+     customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log a Level End event to track how users are completing levels in your game.
+ *
+ *  @param levelNameOrNil                 The name of the level completed, E.G. "1" or "Training"
+ *  @param scoreOrNil                     The score the user completed the level with.
+ *  @param levelCompletedSuccesfullyOrNil A boolean representing whether or not the level was completed succesfully.
+ *  @param customAttributesOrNil          A dictionary of custom attributes to associate with this purchase.
+ */
++ (void)logLevelEnd:(nullable NSString *)levelNameOrNil
+              score:(nullable NSNumber *)scoreOrNil
+            success:(nullable NSNumber *)levelCompletedSuccesfullyOrNil
+   customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log an Add to Cart event to see users adding items to a shopping cart in real-time, understand how
+ *  many users start the purchase flow, see which items are most popular, and track plenty of other important
+ *  purchase-related metrics.
+ *
+ *  @param itemPriceOrNil         The purchased item's price.
+ *  @param currencyOrNil          The ISO4217 currency code. Example: USD
+ *  @param itemNameOrNil          The human-readable form of the item's name. Example:
+ *  @param itemTypeOrNil          The type, or genre of the item. Example: Song
+ *  @param itemIdOrNil            The machine-readable, unique item identifier Example: SKU
+ *  @param customAttributesOrNil  A dictionary of custom attributes to associate with this purchase.
+ */
++ (void)logAddToCartWithPrice:(nullable NSDecimalNumber *)itemPriceOrNil
+                     currency:(nullable NSString *)currencyOrNil
+                     itemName:(nullable NSString *)itemNameOrNil
+                     itemType:(nullable NSString *)itemTypeOrNil
+                       itemId:(nullable NSString *)itemIdOrNil
+             customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log a Start Checkout event to see users moving through the purchase funnel in real-time, understand how many
+ *  users are doing this and how much they're spending per checkout, and see how it related to other important
+ *  purchase-related metrics.
+ *
+ *  @param totalPriceOrNil        The total price of the cart.
+ *  @param currencyOrNil          The ISO4217 currency code. Example: USD
+ *  @param itemCountOrNil         The number of items in the cart.
+ *  @param customAttributesOrNil  A dictionary of custom attributes to associate with this purchase.
+ */
++ (void)logStartCheckoutWithPrice:(nullable NSDecimalNumber *)totalPriceOrNil
+                         currency:(nullable NSString *)currencyOrNil
+                        itemCount:(nullable NSNumber *)itemCountOrNil
+                 customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log a Rating event to see users rating content within your app in real-time and understand what
+ *  content is most engaging, from the type or genre down to the specific id.
+ *
+ *  @param ratingOrNil           The integer rating given by the user.
+ *  @param contentNameOrNil      The human readable name for this piece of content.
+ *  @param contentTypeOrNil      The type of content shared.
+ *  @param contentIdOrNil        The unique identifier for this piece of content. Useful for finding the top shared item.
+ *  @param customAttributesOrNil A dictionary of custom attributes to associate with this event.
+ */
++ (void)logRating:(nullable NSNumber *)ratingOrNil
+      contentName:(nullable NSString *)contentNameOrNil
+      contentType:(nullable NSString *)contentTypeOrNil
+        contentId:(nullable NSString *)contentIdOrNil
+ customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log a Content View event to see users viewing content within your app in real-time and
+ *  understand what content is most engaging, from the type or genre down to the specific id.
+ *
+ *  @param contentNameOrNil      The human readable name for this piece of content.
+ *  @param contentTypeOrNil      The type of content shared.
+ *  @param contentIdOrNil        The unique identifier for this piece of content. Useful for finding the top shared item.
+ *  @param customAttributesOrNil A dictionary of custom attributes to associate with this event.
+ */
++ (void)logContentViewWithName:(nullable NSString *)contentNameOrNil
+                   contentType:(nullable NSString *)contentTypeOrNil
+                     contentId:(nullable NSString *)contentIdOrNil
+              customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log a Search event allows you to see users searching within your app in real-time and understand
+ *  exactly what they're searching for.
+ *
+ *  @param queryOrNil            The user's query.
+ *  @param customAttributesOrNil A dictionary of custom attributes to associate with this event.
+ */
++ (void)logSearchWithQuery:(nullable NSString *)queryOrNil
+          customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
+
+/**
+ *  Log a Custom Event to see user actions that are uniquely important for your app in real-time, to see how often
+ *  they're performing these actions with breakdowns by different categories you add. Use a human-readable name for
+ *  the name of the event, since this is how the event will appear in Answers.
  *
  *  @param eventName             The human-readable name for the event.
  *  @param customAttributesOrNil A dictionary of custom attributes to associate with this purchase. Attribute keys
@@ -97,8 +199,8 @@ FAB_START_NONNULL
  *                               engagement.
  */
 + (void)logCustomEventWithName:(NSString *)eventName
-              customAttributes:(NSDictionary * FAB_NULLABLE)customAttributesOrNil;
+              customAttributes:(nullable ANS_GENERIC_NSDICTIONARY(NSString *, id) *)customAttributesOrNil;
 
 @end
 
-FAB_END_NONNULL
+NS_ASSUME_NONNULL_END

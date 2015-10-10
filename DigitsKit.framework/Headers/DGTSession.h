@@ -10,7 +10,7 @@
 /**
  *  A `DGTSession` object contains user session information after a successful Digits authentication.
  */
-@interface DGTSession : NSObject <TWTRAuthSession, NSCoding>
+@interface DGTSession : NSObject <TWTRAuthSession>
 
 /**
  *  The authorization token for this session. Save this token in order to make future authenticated requests to Digits APIs.

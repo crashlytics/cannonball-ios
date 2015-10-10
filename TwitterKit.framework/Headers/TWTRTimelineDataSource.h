@@ -5,13 +5,12 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
-#import "TWTRDefines.h"
 #import "TWTRTimelineType.h"
 @class TWTRTimelineCursor;
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^TWTRLoadTimelineCompletion)(NSArray * __twtr_nullable tweets, TWTRTimelineCursor * __twtr_nullable cursor, NSError *__twtr_nullable error);
+typedef void (^TWTRLoadTimelineCompletion)(NSArray * __twtr_nullable tweets, TWTRTimelineCursor * __twtr_nullable cursor, NSError * __twtr_nullable error);
 
 /**
  *  Responsible for building network parameters for requesting a timeline of Tweets.

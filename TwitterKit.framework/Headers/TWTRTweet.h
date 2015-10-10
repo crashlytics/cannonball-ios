@@ -123,4 +123,10 @@
  */
 + (NSArray *)tweetsWithJSONArray:(NSArray *)array;
 
+/**
+ *  Creates a new Tweet instance with a new value for the `isFavorited` boolean 
+ *  value which is the opposite of the current value.
+ */
+- (TWTRTweet *)tweetWithFavoriteToggled;
+
 @end

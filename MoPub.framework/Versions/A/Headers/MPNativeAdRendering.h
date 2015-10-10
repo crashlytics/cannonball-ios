@@ -28,6 +28,7 @@
  * @see [MPNativeAd loadCallToActionTextIntoLabel:]
  * @see [MPNativeAd loadCallToActionTextIntoButton:]
  * @see [MPNativeAd loadImageForURL:intoImageView:]
+ * @see [MPNativeAd loadDAAIconIntoImageView:]
  */
 - (void)layoutAdAssets:(MPNativeAd *)adObject;
 

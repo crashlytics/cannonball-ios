@@ -5,8 +5,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <TwitterCore/TWTRSession.h>
 #import "TWTRAPIClient.h"
-#import "TWTRSession.h"
+
+@class TWTRSessionStore;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The central class of the Twitter Kit.
@@ -34,14 +38,17 @@
 - (void)startWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret;
 
 /**
- *  Client for consuming the Twitter REST API.
+ *  Start Twitter with a consumer key, secret, and keychain access group. See -[Twitter startWithConsumerKey:consumerSecret:]
  *
- *  This API client is configured with your consumer key and secret if they are available to the Twitter
- *  object (either via initialization of the Twitter instance or your application's Info.plist).
+ *  @param consumerKey    Your Twitter application's consumer key.
+ *  @param consumerSecret Your Twitter application's consumer secret.
+ *  @param accessGroup    An optional keychain access group to apply to session objects stored in the keychain.
  *
- *  @warning To make authenticated requests, you need to call `loginWithCompletion:` or `loginGuestWithCompletion:`.
+ *  @note In the majority of situations applications will not need to specify an access group to use with Twitter sessions.
+ *  This value is only needed if you plan to share credentials with another application that you control or if you are
+ *  using TwitterKit with an app extension.
  */
-@property (nonatomic, strong, readonly) TWTRAPIClient *APIClient;
+- (void)startWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessGroup:(twtr_nullable NSString *)accessGroup;
 
 /**
  *  The current version of this kit.
@@ -49,25 +56,15 @@
 @property (nonatomic, copy, readonly) NSString *version;
 
 /**
- *  The Twitter application consumer key.
- *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
- */
-@property (nonatomic, copy, readonly) NSString *consumerKey __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
-
-/**
- *  The Twitter application consumer secret.
- *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
- */
-@property (nonatomic, copy, readonly) NSString *consumerSecret __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
-
-/**
  *  Authentication configuration details. Encapsulates the `consumerKey` and `consumerSecret` credentials required to authenticate a Twitter application.
  */
 @property (nonatomic, strong, readonly) TWTRAuthConfig *authConfig;
 
 /**
- *  @name Authentication
+ *  Session store exposing methods to fetch and manage active sessions. Applications that need to manage
+ *  multiple users should use the session store to authenticate and log out users.
  */
+@property (nonatomic, strong, readonly) TWTRSessionStore *sessionStore;
 
 /**
  *  Triggers user authentication with Twitter.
@@ -88,7 +85,23 @@
  *  @param completion The completion block will be called after authentication is successful or if there is an error.
  *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
  */
-- (void)logInWithViewController:(UIViewController *)viewController completion:(TWTRLogInCompletion)completion;
+- (void)logInWithViewController:(twtr_nullable UIViewController *)viewController completion:(TWTRLogInCompletion)completion;
+
+@end
+
+@interface Twitter (TWTRDeprecated)
+
+/**
+ *  The Twitter application consumer key.
+ *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
+ */
+@property (nonatomic, copy, readonly) NSString *consumerKey __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
+
+/**
+ *  The Twitter application consumer secret.
+ *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
+ */
+@property (nonatomic, copy, readonly) NSString *consumerSecret __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
 
 /**
  *  Log in a guest user. This can be used when the user is not a Twitter user.
@@ -97,6 +110,7 @@
  *
  *  @param completion The completion block will be called after authentication is successful or if there is an error.
  *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
+ *  @warning This method will soon be deprecated; it is no longer needed. Users can use the -[Twitter guestAPIClient] directly without needing to call this method.
  */
 - (void)logInGuestWithCompletion:(TWTRGuestLogInCompletion)completion;
 
@@ -111,31 +125,51 @@
  *  @param authTokenSecret The existing authTokenSecret to use for authentication.
  *  @param completion The completion block will be called after authentication is successful or if there is an error.
  *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
+ *  @warning This method will soon be deprecated; for a simpler approach see -[TWTRSessionStore saveSession:completion:].
  */
 - (void)logInWithExistingAuthToken:(NSString *)authToken authTokenSecret:(NSString *)authTokenSecret completion:(TWTRLogInCompletion)completion;
+
+/**
+ *  Client for consuming the Twitter REST API.
+ *
+ *  This API client is configured with your consumer key and secret if they are available to the Twitter
+ *  object (either via initialization of the Twitter instance or your application's Info.plist).
+ *
+ *  @warning To make authenticated requests, you need to call `loginWithCompletion:`
+ *  @warning This method will soon be deprecated. Using this method does not
+ *           give you control over which user you are making request on the behalf of. 
+ *           It is recommended that users migrate to using -[TWTRAPIClient initWithUserID:] to have more explicit control.
+ */
+@property (nonatomic, strong, readonly) TWTRAPIClient *APIClient;
 
 /**
  *  Returns the current user session or nil if there is no logged in user.
  *
  *  @return Returns the current user session or nil if there is no logged in user.
+ *  @warning This method will soon be deprecated; it is recommended to use -[TWTRSessionStore session] or -[TWTRSessionStore sessionForUserID:] if they are managing multiple users
  */
-- (TWTRSession *)session;
+- (twtr_nullable TWTRSession *)session;
 
 /**
  *  Returns the current guest session or nil if there is no logged in guest.
  *
  *  @return Returns the current guest session or nil if there is no logged in guest.
+ *  @warning This method will soon be deprecated; all network requests will fall back to using a guest session if no user session is provided.
  */
-- (TWTRGuestSession *)guestSession;
+- (twtr_nullable TWTRGuestSession *)guestSession;
 
 /**
  *  Deletes the local Twitter user session from this app. This will not remove the system Twitter account nor make a network request to invalidate the session.
+ *  @warning This method will soon be deprecated; users are encouraged to call -[TWTRSessionStore logOutUserID:] instead of calling this method on the Twitter instance directly
  */
 - (void)logOut;
 
 /**
  *  Deletes the local guest session. Does not make a network request to invalidate the session.
+ *  @warning This method will soon be deprecated; it is no longer needed as the guest authentication is managed by the session store.
  */
 - (void)logOutGuest;
 
 @end
+
+NS_ASSUME_NONNULL_END

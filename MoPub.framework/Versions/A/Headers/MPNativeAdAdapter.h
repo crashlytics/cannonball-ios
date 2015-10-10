@@ -89,6 +89,18 @@
 @optional
 
 /**
+ * Loads a Digital Advertising Alliance (DAA) icon into the image view. Sets up a tap handler
+ * on the image view as well.
+ *
+ * @param imageView The imageView that contains the DAA icon.
+ *
+ * Your implementation should place a DAA icon in the image view. Your implementation should also
+ * take care of the tap event and direct the user to the appropriate destination when the icon is
+ * tapped.
+ */
+- (void)loadDAAIconIntoImageView:(UIImageView *)imageView;
+
+/**
  * Tells the object to open the specified URL using an appropriate mechanism.
  *
  * @param URL The URL to be opened.

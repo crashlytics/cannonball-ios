@@ -5,8 +5,8 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
+#import <TwitterCore/TWTRSession.h>
 #import <UIKit/UIKit.h>
-#import "TWTRSession.h"
 
 /**
  *  A Button which launches the sign in to Twitter flow when tapped.

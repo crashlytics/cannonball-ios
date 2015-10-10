@@ -14,7 +14,10 @@
 "BUTTON_SENT_CONF_CODE" = "Sent confirmation code";
 
 /* Footnote disclaimer for send confirmation code screen */
-"FOOTNOTE_SEND_CONF_CODE" = "By tapping \"Send confirmation code\", <u>Digits by Twitter</u> will send an SMS message to confirm your phone number. Message & data rates may apply.";
+"FOOTNOTE_SEND_CONF_CODE" = "By tapping \"Send confirmation code\" above, <u>Digits by Twitter</u> will send you an SMS to confirm your phone number. Message & data rates may apply.";
+
+/* Footnote disclaimer for call me to send a confirmation code screen */
+"FOOTNOTE_CONF_CODE_CALL_ME" = "By tapping \"Call me\" above, <u>Digits by Twitter</u> will send you a voice call to confirm your phone number. Call & data rates may apply.";
 
 /* Label before confirmation code input field */
 "LABEL_ENTER_CONF_CODE" = "Enter confirmation code";
@@ -22,40 +25,34 @@
 /* Placeholder for confirmation code input field */
 "PLACEHOLDER_CONF_CODE" = "Confirmation code";
 
-/* Create account button title */
-"BUTTON_CREATE_ACCOUNT" = "Create account";
+/* Button title to indicate moving forward to the next step  */
+"BUTTON_CONTINUE" = "Continue";
 
-/* Creating account button title */
-"BUTTON_CREATING_ACCOUNT" = "Creating account";
+/* Button title for in-progress event */
+"BUTTON_SENDING" = "Sending...";
 
-/* Created account button title */
-"BUTTON_CREATED_ACCOUNT" = "Created account";
+/* Button title for successful continuation */
+"BUTTON_DONE" = "Done";
 
-/* Sign in button title */
-"BUTTON_SIGN_IN" = "Sign in";
+/* Wait for confirmation code before retry. Variable is a formatted phone number string */
+"WAIT_FOR_CONF_CODE" = "We'll send your phone a confirmation code within one minute.";
 
-/* Signing in button title */
-"BUTTON_SIGNING_IN" = "Sign in";
+/* Button title for initiating a voice verification call */
+"CALL_ME_ACTION" = "Call Me";
 
-/* Signed in button title */
-"BUTTON_SIGNED_IN" = "Signed in";
-
-/* Wait for confirmation code before retry */
-"WAIT_FOR_CONF_CODE" = "You will receive your confirmation code via text message within one minute.";
+/* Button title showing progress towards a phone call being initiated */
+"CALL_ME_LOADING" = "Calling...";
 
 /* Button title for resending the confirmation code */
 "BUTTON_RESEND_CONF_CODE" = "Resend confirmation code";
 
 /* Footnote when creating account */
-"FOOTNOTE_CREATE_ACCOUNT" = "By tapping \"Create account\" above, you agree to the <u>Terms of Service</u>, <u>Privacy Policy</u>, and <u>Cookies Policy</u> of Digits by Twitter, and that other users of %@ can discover you by phone number and/or email.";
+"FOOTNOTE_CREATE_ACCOUNT" = "By tapping \"Continue\" above, you agree to the <u>Terms of Service</u>, <u>Privacy Policy</u>, and <u>Cookies Policy</u> of Digits by Twitter, and that other users of %@ can discover you by phone number and/or email.";
 
-"FOOTNOTE_TOS_UPDATE" = "By tapping \"Sign in\" above, you agree to the updated <u>Terms of Service</u>, <u>Privacy Policy</u>, and <u>Cookies Policy</u> of Digits by Twitter, and that other users of %@ can discover you by phone number and/or email.";
+"FOOTNOTE_TOS_UPDATE" = "By tapping \"Continue\" above, you agree to the updated <u>Terms of Service</u>, <u>Privacy Policy</u>, and <u>Cookies Policy</u> of Digits by Twitter, and that other users of %@ can discover you by phone number and/or email.";
 
 /* Text to be inserted when the name of the app is unknown in the sentence: "... other users of [app name] can discover you..." */
 "PARTIAL_FOOTNOTE_THIS_APP" = "this app";
-
-/* OK button text */
-"BUTTON_OK" = "OK";
 
 /* Dismiss button text */
 "BUTTON_DISMISS" = "Dismiss";
@@ -96,6 +93,8 @@
 /* Error text when confirmation code may be invalid */
 "ERROR_CHECK_CODE_TRY_AGAIN" = "Please check your code and try again";
 
+"ERROR_CANT_SMS" = "Unable to send this number an SMS message.";
+
 /* Error text when network connection may be broken, includes error code */
 "ERROR_CHECK_CONNECTION_TRY_AGAIN" = "Whoops, looks like we hit a network issue. Let’s try that again? [%@]";
 
@@ -107,15 +106,6 @@
 
 /* PIN Code entry screen footer label */
 "FOOTNOTE_2_STEP_VERIFICATION_CODE" = "You have previously set a 2-step verification code on <u>digits.com</u>";
-
-/* PIN Code entry screen button title */
-"BUTTON_SEND_2_STEP_VERIFICATION_CODE" = "Verify";
-
-/* PIN Code entry screen button title in progress */
-"BUTTON_SEND_2_STEP_VERIFICATION_CODE_IN_PROGRESS" = "Verifying";
-
-/* PIN Code entry screen button title finished */
-"BUTTON_SEND_2_STEP_VERIFICATION_CODE_FINISHED" = "Verified";
 
 /* PIN Code field placeholder */
 "PLACEHOLDER_2_STEP_VERIFICATION_CODE" = "Verification code";

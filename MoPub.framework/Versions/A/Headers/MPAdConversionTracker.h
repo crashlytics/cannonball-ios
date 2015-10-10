@@ -22,11 +22,7 @@
  * events.
  */
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= MP_IOS_5_0
 @interface MPAdConversionTracker : NSObject <NSURLConnectionDataDelegate>
-#else
-@interface MPAdConversionTracker : NSObject
-#endif
 
 /** @name Recording Conversions */
 

@@ -2,13 +2,15 @@
 //  TWTRGuestSession.h
 //  TwitterKit
 //
-//  Created by Joey Carmello on 3/31/15.
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "TWTRAuthSession.h"
 
 @class TWTRGuestSession;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Completion block called when guest login succeeds or fails.
@@ -16,12 +18,12 @@
  *  @param guestSession A `TWTRGuestSession` containing the OAuth tokens or nil.
  *  @param error Error that will be non nil if the authentication request failed.
  */
-typedef void (^TWTRGuestLogInCompletion)(TWTRGuestSession *guestSession, NSError *error);
+typedef void (^TWTRGuestLogInCompletion)(TWTRGuestSession * __twtr_nullable guestSession, NSError * __twtr_nullable error);
 
 /**
  *  `TWTRGuestSession` represents a guest session authenticated with the Twitter API. See `TWTRSession` for user sessions.
  */
-@interface TWTRGuestSession : NSObject
+@interface TWTRGuestSession : NSObject <TWTRBaseSession>
 
 /**
  *  The bearer access token for guest auth.
@@ -41,8 +43,18 @@ typedef void (^TWTRGuestLogInCompletion)(TWTRGuestSession *guestSession, NSError
 - (instancetype)initWithSessionDictionary:(NSDictionary *)sessionDictionary;
 
 /**
+ *  Returns a `TWTRGuestSession` object
+ *
+ *  @param accessToken the access token
+ *  @param guestToken the guest access token
+ */
+- (instancetype)initWithAccessToken:(NSString *)accessToken guestToken:(twtr_nullable NSString *)guestToken NS_DESIGNATED_INITIALIZER;
+
+/**
  *  Unavailable. Use `-initWithSessionDictionary:` instead.
  */
-- (instancetype)init __attribute__((unavailable("Use -initWithSessionDictionary: instead.")));
+- (instancetype)init __attribute__((unavailable("Use -initWithSessionDictionary: or initWithAccessToken:guestToken: instead.")));
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -39,7 +39,7 @@
 
    @return A fully initialized `TWTRTimelineViewController` or nil if the data source is missing.
  */
-- (instancetype)initWithDataSource:(id<TWTRTimelineDataSource>)dataSource NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDataSource:(id<TWTRTimelineDataSource>)dataSource;
 
 /**
   The source of `TWTRTweet` objects for this `TWTRTimelineViewController`.
@@ -47,6 +47,11 @@
   May be set to update the tweets being shown by this table view. Must be set on the main thread.
  */
 @property (nonatomic, strong) id<TWTRTimelineDataSource> dataSource;
+
+/**
+ *  Whether action buttons (favorite, share) should be shown on the TWTRTweetTableViewCells inside the tableview.
+ */
+@property (nonatomic, assign) BOOL showTweetActions;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style __attribute__((unavailable("Use -initWithDataSource: instead")));
 

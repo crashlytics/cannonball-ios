@@ -21,7 +21,7 @@
 
 /**
  * Notifies when the current session has expired. At this moment the Digits session has been logged out and you should start the Digit's login flow again to fetch a new Session.
- * Examples of this: the user has been suspended or they have deactived their account.
+ * Examples of this: the user has been suspended or they have deactivated their account.
  *
  * @param userID    The id for which user the session has been invalidated
  */

@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, TWTRErrorCode) {
     /**
      *  A required parameter is missing.
      */
-    TWTRErrorCodeMissingParameter = 10,
+    TWTRErrorCodeMissingParameter = 10
 };
 
 /**
@@ -95,5 +95,18 @@ typedef NS_ENUM(NSInteger, TWTRLogInErrorCode) {
     /**
      * Reverse auth with linked account failed.
      */
-    TWTRLogInErrorCodeReverseAuthFailed = 3
+    TWTRLogInErrorCodeReverseAuthFailed = 3,
+    /**
+     *  Refreshing session tokens failed.
+     */
+    TWTRLogInErrorCodeCannotRefreshSession = 4,
+    /**
+     *  No such session or session is not tracked
+     *  in the associated session store.
+     */
+    TWTRLogInErrorCodeSessionNotFound = 5,
+    /**
+     * The login request failed.
+     */
+    TWTRLogInErrorCodeFailed = 6
 };

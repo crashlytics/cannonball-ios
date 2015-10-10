@@ -40,7 +40,7 @@
 /**
  * Star rating for the ad.
  *
- * This is a float value between 0 and 5. 
+ * This is a float value between 0 and 5.
  *
  * May be nil.
  */
@@ -69,21 +69,21 @@
 /**
  * Records an impression event.
  *
- * When -prepareForDisplayInView is called, -trackImpression will automatically be invoked at the 
+ * When -prepareForDisplayInView is called, -trackImpression will automatically be invoked at the
  * appropriate time, so there is no need to additionally invoke -trackImpression.
  */
 - (void)trackImpression;
 
 /**
  * Records a click event.
- * 
- * When -displaycontentForURL:rootViewController:completion: is called, a click event will 
+ *
+ * When -displaycontentForURL:rootViewController:completion: is called, a click event will
  * automatically be recorded, so there is no need to additionally invoke -trackClick.
  */
 - (void)trackClick;
 
 /**
- * Opens a resource defined by the ad using an appropriate mechanism (typically, an in-application 
+ * Opens a resource defined by the ad using an appropriate mechanism (typically, an in-application
  * modal web browser or a modal App Store controller).
  *
  * @param controller The view controller that should be used to present the modal view controller.
@@ -96,13 +96,13 @@
  * When this method is called, a click event will automatically be recorded, so there is no
  * need to additionally invoke -trackClick.
  *
- * WARNING: This method has been deprecated in favor of displayContentWithCompletion:. Using the new 
+ * WARNING: This method has been deprecated in favor of displayContentWithCompletion:. Using the new
  * method requires the MPNativeAd to have an MPNativeAdDelegate that implements viewControllerForPresentingModalView.
  */
 - (void)displayContentFromRootViewController:(UIViewController *)controller completion:(void (^)(BOOL success, NSError *error))completionBlock __deprecated;
 
 /**
- * Opens a URL using an appropriate mechanism (typically, an in-application modal web browser or a 
+ * Opens a URL using an appropriate mechanism (typically, an in-application modal web browser or a
  * modal App Store controller).
  *
  * @param URL The URL to be opened.
@@ -170,6 +170,15 @@
  * @param imageView An image view.
  */
 - (void)loadImageIntoImageView:(UIImageView *)imageView;
+
+/**
+ * Loads the ad object's Digital Advertising Alliance icon into the provided image view.
+ * The SDK takes control of the view. You should not do anything with the view other than
+ * position and size it in your native ad view. The SDK will handle all taps on the image view.
+ *
+ * @param imageView An image view.
+ */
+- (void)loadDAAIconIntoImageView:(UIImageView *)imageView;
 
 /**
  * Loads the ad object's title into the provided label.
