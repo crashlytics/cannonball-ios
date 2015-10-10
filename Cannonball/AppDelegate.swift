@@ -32,10 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         assert(NSBundle.mainBundle().objectForInfoDictionaryKey("Fabric") != nil, welcome)
 
         // Register Crashlytics, Twitter, Digits and MoPub with Fabric.
-        Fabric.with([Crashlytics(), Twitter(), Digits(), MoPub()])
+        Fabric.with([Crashlytics.self, Twitter.self, Digits.self, MoPub.self])
 
         // Check for an existing Twitter or Digits session before presenting the sign in screen.
-        if Twitter.sharedInstance().session() == nil && Digits.sharedInstance().session() == nil {
+        if Twitter.sharedInstance().sessionStore.session() == nil && Digits.sharedInstance().session() == nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let signInViewController: AnyObject! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
             window?.rootViewController = signInViewController as? UIViewController
