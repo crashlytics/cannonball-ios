@@ -23,7 +23,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     var theme: Theme! {
         didSet {
             // Randomize the order of pictures.
-            themePictures = theme.pictures.sorted { (_, _) in arc4random() < arc4random() }
+            themePictures = theme.pictures.sort { (_, _) in arc4random() < arc4random() }
         }
     }
 
@@ -65,7 +65,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
 
     // MARK: View Life Cycle
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         countdownView = CountdownView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), countdownTime: timeoutSeconds)
         poem = Poem()
         super.init(coder: aDecoder)
@@ -115,7 +115,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if !contains(navigationController?.viewControllers as! Array<UIViewController>, self) {
+        if !(navigationController?.viewControllers)!.contains(self) {
             // Back was pressed because self is no longer in the navigation stack.
             // Log Answers Custom Event.
             Answers.logCustomEventWithName("Stopped Composing Poem",
@@ -143,7 +143,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: UIStoryboardSegue Handling
 
     // Only perform the segue to the history if there is a composed poem.
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "ShowHistory" {
             return poem.words.count > 0
         }
@@ -205,7 +205,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PoemComposerWordCell", forIndexPath: indexPath) as! PoemComposerWordCell
 
         cell.contentView.frame = cell.bounds
-        cell.contentView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        cell.contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
 
         var word = ""
         if collectionView == bankCollectionView {
@@ -312,7 +312,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: UICollectionView Utilities
 
     func sizeForWord(word: String) -> CGSize {
-        return CGSize(width: 18 + count(word) * 10, height: 32)
+        return CGSize(width: 18 + word.characters.count * 10, height: 32)
     }
 
     func resizePoemToFitContentSize() {
@@ -345,7 +345,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         if collectionView == bankCollectionView {
 
             // Look for the word in the word bank.
-            for (index, bankWord) in enumerate(bankWords) {
+            for (index, bankWord) in bankWords.enumerate() {
                 if word == bankWord {
                     // Find the corresponding cell in the collection view and unhide it.
                     if let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) {
@@ -396,7 +396,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: ImageCarouselViewDelegate
 
     func numberOfImagesInImageCarousel(imageCarousel: ImageCarouselView) -> Int {
-        return count(themePictures)
+        return themePictures.count
     }
 
     func imageCarousel(imageCarousel: ImageCarouselView, imageAtIndex index: Int) -> UIImage {

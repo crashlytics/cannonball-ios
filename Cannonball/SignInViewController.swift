@@ -61,14 +61,14 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
                 self.navigateToMainAppScreen()
 
                 // Tie crashes to a Twitter user ID and username in Crashlytics.
-                Crashlytics.sharedInstance().setUserIdentifier(session.userID)
-                Crashlytics.sharedInstance().setUserName(session.userName)
+                Crashlytics.sharedInstance().setUserIdentifier(session!.userID)
+                Crashlytics.sharedInstance().setUserName(session!.userName)
 
                 // Log Answers Custom Event.
-                Answers.logLoginWithMethod("Twitter", success: true, customAttributes: ["User ID": session.userID])
+                Answers.logLoginWithMethod("Twitter", success: true, customAttributes: ["User ID": session!.userID])
             } else {
                 // Log Answers Custom Event.
-                Answers.logLoginWithMethod("Twitter", success: false, customAttributes: ["Error": error.localizedDescription])
+                Answers.logLoginWithMethod("Twitter", success: false, customAttributes: ["Error": error!.localizedDescription])
             }
         }
     }

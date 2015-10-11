@@ -68,7 +68,7 @@ class ThemeChooserViewController: UITableViewController {
 
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
-        navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.topItem?.title = ""
@@ -114,7 +114,7 @@ class ThemeChooserViewController: UITableViewController {
     // Pass the selected theme to the poem composer.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if sender!.isKindOfClass(ThemeCell) {
-            let indexPath = tableView.indexPathForSelectedRow()
+            let indexPath = tableView.indexPathForSelectedRow
             if let row = indexPath?.row {
                 // Pass the selected theme to the poem composer.
                 let poemComposerViewController = segue.destinationViewController as! PoemComposerViewController

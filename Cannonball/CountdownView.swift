@@ -131,7 +131,7 @@ class CountdownView : UIView {
         self.init(frame: aRect, countdownTime: 0)
     }
 
-    required init(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         fatalError("Nibs not supported in this UIView subclass")
     }
 

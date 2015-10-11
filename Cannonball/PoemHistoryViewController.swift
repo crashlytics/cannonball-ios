@@ -41,13 +41,13 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         Answers.logCustomEventWithName("Viewed Poem History", customAttributes: nil)
 
         // Configure the MoPub ad positioning.
-        var positioning = MPServerAdPositioning()
+        let positioning = MPServerAdPositioning()
 
         // Instanciate the MPTableViewAdPlacer.
         placer = MPTableViewAdPlacer(tableView: tableView, viewController: self, adPositioning: positioning, defaultAdRenderingClass: NativeAdCell.self)
 
         // Add targeting parameters.
-        var targeting = MPNativeAdRequestTargeting()
+        let targeting = MPNativeAdRequestTargeting()
         targeting.desiredAssets = Set([kAdIconImageKey, kAdMainImageKey, kAdCTATextKey, kAdTextKey, kAdTitleKey])
 
         // Begin loading ads and placing them into your feed, using the ad unit ID.
@@ -68,9 +68,6 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
 
         // Add a table header and computer the cell height so they perfectly fit the screen.
         let headerHeight: CGFloat = 15
-        let contentHeight = view.frame.size.height - headerHeight
-        let navHeight = navigationController?.navigationBar.frame.height
-        let navYOrigin = navigationController?.navigationBar.frame.origin.y
         tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
     }
 
@@ -114,7 +111,7 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Find the poem displayed at this index path.
-            var poem = poems[indexPath.row]
+            let poem = poems[indexPath.row]
 
             // Remove the poem and reload the table view.
             poems = poems.filter( { $0 != poem })

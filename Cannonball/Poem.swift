@@ -66,12 +66,12 @@ public class Poem: NSObject, NSCoding {
 
     // Retrieve the poem words as one sentence.
     func getSentence() -> String {
-        return " ".join(words)
+        return words.joinWithSeparator(" ")
     }
 
     // MARK: NSCoding
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         words = aDecoder.decodeObjectForKey(SerializationKeys.words) as! [String]
         picture = aDecoder.decodeObjectForKey(SerializationKeys.picture) as! String
         theme = aDecoder.decodeObjectForKey(SerializationKeys.theme) as! String

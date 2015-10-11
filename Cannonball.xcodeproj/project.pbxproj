@@ -285,7 +285,9 @@
 		92A47B0B199FCE4D00EDF6A8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Twitter;
 				TargetAttributes = {
 					92A47B12199FCE4D00EDF6A8 = {
@@ -421,6 +423,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -491,6 +494,7 @@
 				INFOPLIST_FILE = Cannonball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.fabric.samples.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cannonball;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -509,6 +513,7 @@
 				INFOPLIST_FILE = Cannonball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.fabric.samples.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cannonball;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -530,6 +535,7 @@
 				);
 				INFOPLIST_FILE = CannonballTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.twitter.fabric.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CannonballTests;
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cannonball.app/Cannonball";
@@ -548,6 +554,7 @@
 				);
 				INFOPLIST_FILE = CannonballTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.twitter.fabric.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CannonballTests;
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cannonball.app/Cannonball";

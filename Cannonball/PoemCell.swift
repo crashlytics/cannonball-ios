@@ -72,8 +72,8 @@ class PoemCell: UITableViewCell {
 
         // Capture a PNG of the view.
         UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
-        layer.renderInContext(UIGraphicsGetCurrentContext())
-        var containerViewImage = UIGraphicsGetImageFromCurrentImageContext()
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let containerViewImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         // Show the share button.

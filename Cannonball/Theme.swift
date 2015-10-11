@@ -24,7 +24,7 @@ public class Theme {
 
     let pictures: [String]
 
-    init?(jsonDictionary: [String: AnyObject]) {
+    init?(jsonDictionary: [String : AnyObject]) {
         if let optionalName = jsonDictionary["name"] as? String,
            let optionalWords = jsonDictionary["words"] as? [String],
            let optionalPictures = jsonDictionary["pictures"] as? [String]
@@ -44,7 +44,7 @@ public class Theme {
         var wordsCopy = [String](words)
 
         // Sort randomly the elements of the dictionary.
-        sort(&wordsCopy, { (_,_) in return arc4random() < arc4random() })
+        wordsCopy.sortInPlace({ (_,_) in return arc4random() < arc4random() })
 
         // Return the desired number of words.
         return Array(wordsCopy[0..<wordCount])
@@ -54,7 +54,7 @@ public class Theme {
         var picturesCopy = [String](pictures)
 
         // Sort randomly the pictures.
-        sort(&picturesCopy, { (_,_) in return arc4random() < arc4random() })
+        picturesCopy.sortInPlace({ (_,_) in return arc4random() < arc4random() })
 
         // Return the first picture.
         return picturesCopy.first
@@ -63,11 +63,10 @@ public class Theme {
     class func getThemes() -> [Theme] {
         var themes = [Theme]()
         let path = NSBundle.mainBundle().pathForResource("Themes", ofType: "json")!
-        if let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil),
-           let jsonArray = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: nil) as? [AnyObject] {
+        if let jsonData = try? NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe),
+           let jsonArray = (try? NSJSONSerialization.JSONObjectWithData(jsonData, options: [])) as? [AnyObject] {
             themes = jsonArray.flatMap() {
-                let theme = Theme(jsonDictionary: $0 as! [String:AnyObject])
-                return theme != nil ? [theme!] : []
+                return Theme(jsonDictionary: $0 as! [String : AnyObject])
             }
         }
         return themes

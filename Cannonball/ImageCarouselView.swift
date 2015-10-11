@@ -38,7 +38,7 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
 
     private let CellReuseID = "ImageCarouselCell"
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         commonInit()

@@ -36,7 +36,7 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         // Login as a guest on Twitter.
         Twitter.sharedInstance().logInGuestWithCompletion { session, error in
             // Check we have a valid guest session.
-            if let validSession = session {
+            if session != nil {
                 // Assign our search query to the data source of the Search Timeline which will then be rendered.
                 let client = Twitter.sharedInstance().APIClient
                 self.dataSource = TWTRSearchTimelineDataSource(searchQuery: self.poemSearchQuery, APIClient: client)
@@ -45,9 +45,6 @@ class PoemTimelineViewController: TWTRTimelineViewController {
 
         // Customize the table view.
         let headerHeight: CGFloat = 15
-        let contentHeight = view.frame.size.height - headerHeight
-        let navHeight = navigationController?.navigationBar.frame.height
-        let navYOrigin = navigationController?.navigationBar.frame.origin.y
         tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.cannonballBeigeColor()
