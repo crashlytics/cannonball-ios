@@ -29,7 +29,9 @@ Please note that in order to display Native Ads from MoPub on the History screen
 
 ## Compatibility
 
-This project is written in Swift and requires Xcode 6.4+. Cannonball for iOS is compatible with iOS 7+.
+This project is written in Swift. The code has been converted to Swift 2.0 so Cannonball now requires Xcode 7 to build and run.
+
+Cannonball for iOS is compatible with iOS 7+.
 
 ## Contributors
 
