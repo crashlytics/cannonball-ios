@@ -11,6 +11,7 @@
 #import "MPServerAdPositioning.h"
 
 @class MPNativeAdRequestTargeting;
+@protocol MPTableViewAdPlacerDelegate;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +26,8 @@
 
 @interface MPTableViewAdPlacer : NSObject
 
+@property (nonatomic, weak) id<MPTableViewAdPlacerDelegate> delegate;
+
 /** @name Initializing a Table View Ad Placer */
 
 /**
@@ -36,17 +39,18 @@
  * editing your ad unit's settings on the MoPub website.
  *
  * Using this method is equivalent to calling
- * +placerWithTableView:viewController:adPositioning:defaultAdRenderingClass: and passing in an
+ * +placerWithTableView:viewController:adPositioning:rendererConfigurations: and passing in an
  * `MPServerAdPositioning` object as the `positioning` parameter.
  *
  * @param tableView The table view in which to insert ads.
  * @param controller The view controller which should be used to present modal content.
- * @param defaultAdRenderingClass The class that will be used to render ads. This class must
- * implement the `MPNativeAdRendering` protocol and must be a subclass of `UITableViewCell`.
+ * @param rendererConfigurations An array of MPNativeAdRendererConfiguration objects that control how
+ * the native ad is rendered. You should pass in configurations that can render any ad type that
+ * may be displayed for the given ad unit.
  *
  * @return An `MPTableViewAdPlacer` object.
  */
-+ (instancetype)placerWithTableView:(UITableView *)tableView viewController:(UIViewController *)controller defaultAdRenderingClass:(Class)defaultAdRenderingClass;
++ (instancetype)placerWithTableView:(UITableView *)tableView viewController:(UIViewController *)controller rendererConfigurations:(NSArray *)rendererConfigurations;
 
 /**
  * Creates and returns an ad placer that will insert ads into a table view at specified positions.
@@ -67,12 +71,13 @@
  * @param tableView The table view in which to insert ads.
  * @param controller The view controller which should be used to present modal content.
  * @param positioning The positioning object that specifies where ads should be shown in the stream.
- * @param defaultAdRenderingClass The class that will be used to render ads. This class must
- * implement the `MPNativeAdRendering` protocol and must be a subclass of `UITableViewCell`.
+ * @param rendererConfigurations An array of MPNativeAdRendererConfiguration objects that control how
+ * the native ad is rendered. You should pass in configurations that can render any ad type that
+ * may be displayed for the given ad unit.
  *
  * @return An `MPTableViewAdPlacer` object.
  */
-+ (instancetype)placerWithTableView:(UITableView *)tableView viewController:(UIViewController *)controller adPositioning:(MPAdPositioning *)positioning defaultAdRenderingClass:(Class)defaultAdRenderingClass;
++ (instancetype)placerWithTableView:(UITableView *)tableView viewController:(UIViewController *)controller adPositioning:(MPAdPositioning *)positioning rendererConfigurations:(NSArray *)rendererConfigurations;
 
 /** @name Requesting Ads */
 
@@ -395,5 +400,32 @@
  * in the receiving table view.
  */
 - (NSArray *)mp_visibleCells;
+
+@end
+
+@protocol MPTableViewAdPlacerDelegate <NSObject>
+
+@optional
+
+/*
+ * This method is called when a native ad, placed by the table view ad placer, will present a modal view controller.
+ *
+ * @param placer The table view ad placer that contains the ad displaying the modal.
+ */
+-(void)nativeAdWillPresentModalForTableViewAdPlacer:(MPTableViewAdPlacer *)placer;
+
+/*
+ * This method is called when a native ad, placed by the table view ad placer, did dismiss its modal view controller.
+ *
+ * @param placer The table view ad placer that contains the ad that dismissed the modal.
+ */
+-(void)nativeAdDidDismissModalForTableViewAdPlacer:(MPTableViewAdPlacer *)placer;
+
+/*
+ * This method is called when a native ad, placed by the table view ad placer, will cause the app to background due to user interaction with the ad.
+ *
+ * @param placer The table view ad placer that contains the ad causing the app to background.
+ */
+-(void)nativeAdWillLeaveApplicationFromTableViewAdPlacer:(MPTableViewAdPlacer *)placer;
 
 @end

@@ -24,6 +24,27 @@
  */
 - (UIViewController *)viewControllerForPresentingModalView;
 
+/**
+ * You should call this method when your adapter's modal is about to be presented.
+ *
+ * @param adapter The adapter that will present the modal.
+ */
+- (void)nativeAdWillPresentModalForAdapter:(id<MPNativeAdAdapter>)adapter;
+
+/**
+ * You should call this method when your adapter's modal has been dismissed.
+ *
+ * @param adapter The adapter that dismissed the modal.
+ */
+- (void)nativeAdDidDismissModalForAdapter:(id<MPNativeAdAdapter>)adapter;
+
+/**
+ * You should call this method when your the user will leave the application due to interaction with the ad.
+ *
+ * @param adapter The adapter that represents the ad that caused the user to leave the application.
+ */
+- (void)nativeAdWillLeaveApplicationFromAdapter:(id<MPNativeAdAdapter>)adapter;
+
 @optional
 
 /**
@@ -89,41 +110,16 @@
 @optional
 
 /**
- * Loads a Digital Advertising Alliance (DAA) icon into the image view. Sets up a tap handler
- * on the image view as well.
- *
- * @param imageView The imageView that contains the DAA icon.
- *
- * Your implementation should place a DAA icon in the image view. Your implementation should also
- * take care of the tap event and direct the user to the appropriate destination when the icon is
- * tapped.
- */
-- (void)loadDAAIconIntoImageView:(UIImageView *)imageView;
-
-/**
  * Tells the object to open the specified URL using an appropriate mechanism.
  *
  * @param URL The URL to be opened.
  * @param controller The view controller that should be used to present the modal view controller.
- * @param completionBlock The block to be executed when the action defined by the URL has been
- * completed, returning control to the application.
  *
  * Your implementation of this method should either forward the request to the underlying
  * third-party ad object (if it has built-in support for handling ad interactions), or open an
  * in-application modal web browser or a modal App Store controller.
  */
-- (void)displayContentForURL:(NSURL *)URL
-          rootViewController:(UIViewController *)controller
-                  completion:(void (^)(BOOL success, NSError *error))completionBlock;
-
-/**
- * Determines whether MPNativeAd should track impressions
- *
- * If not implemented, this will be assumed to return NO, and MPNativeAd will track impressions.
- * If this returns YES, then MPNativeAd will defer to the MPNativeAdAdapterDelegate callbacks to
- * track impressions.
- */
-- (BOOL)enableThirdPartyImpressionTracking;
+- (void)displayContentForURL:(NSURL *)URL rootViewController:(UIViewController *)controller;
 
 /**
  * Determines whether MPNativeAd should track clicks
@@ -133,14 +129,6 @@
  * track clicks.
  */
 - (BOOL)enableThirdPartyClickTracking;
-
-/**
- * Tracks an impression for this ad.
- *
- * To avoid reporting discrepancies, you should only implement this method if the third-party ad
- * network requires impressions to be reported manually.
- */
-- (void)trackImpression;
 
 /**
  * Tracks a click for this ad.
@@ -159,17 +147,6 @@
  */
 @property (nonatomic, weak) id<MPNativeAdAdapterDelegate> delegate;
 
-/**
- * Specifies how long your ad must be on screen before an impression is tracked.
- *
- * When a view containing a native ad is rendered and presented, the MoPub SDK begins tracking the
- * amount of time the view has been visible on-screen in order to automatically record impressions.
- * This value represents the time required for an impression to be tracked.
- *
- * The default value is `kDefaultRequiredSecondsForImpression`.
- */
-@property (nonatomic, readonly) NSTimeInterval requiredSecondsForImpression;
-
 /** @name Responding to an Ad Being Attached to a View */
 
 /**
@@ -183,13 +160,9 @@
 - (void)willAttachToView:(UIView *)view;
 
 /**
- * This method will be called when your ad's content is removed from a view.
- *
- * @param view A view that did contain the ad content.
- *
- * You should implement this method if the underlying third-party ad object needs to be informed
- * of this event while not invalidating the ad.
+ * This method will be called if your implementation provides a DAA icon through the properties dictionary
+ * and the user has tapped the icon.
  */
--  (void)didDetachFromView:(UIView *)view;
+- (void)displayContentForDAAIconTap;
 
 @end

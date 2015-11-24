@@ -40,11 +40,16 @@ class PoemHistoryViewController: UITableViewController, PoemCellDelegate {
         // Log Answers Custom Event.
         Answers.logCustomEventWithName("Viewed Poem History", customAttributes: nil)
 
-        // Configure the MoPub ad positioning.
-        let positioning = MPServerAdPositioning()
+        // Create the Static Native Ad renderer configuration.
+        let staticSettings = MPStaticNativeAdRendererSettings()
+        staticSettings.renderingViewClass = NativeAdCell.self
+        staticSettings.viewSizeHandler = { (maxWidth: CGFloat) -> CGSize in
+            return CGSizeMake(maxWidth, maxWidth)
+        }
+        let staticConfiguration = MPStaticNativeAdRenderer.rendererConfigurationWithRendererSettings(staticSettings)
 
-        // Instanciate the MPTableViewAdPlacer.
-        placer = MPTableViewAdPlacer(tableView: tableView, viewController: self, adPositioning: positioning, defaultAdRenderingClass: NativeAdCell.self)
+        // Setup the ad placer.
+        placer = MPTableViewAdPlacer(tableView: tableView, viewController: self, rendererConfigurations: [staticConfiguration])
 
         // Add targeting parameters.
         let targeting = MPNativeAdRequestTargeting()

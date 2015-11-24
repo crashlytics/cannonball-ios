@@ -13,9 +13,19 @@ extern const NSTimeInterval kDefaultRequiredSecondsForImpression;
 
 /** @name MPNativeAd asset keys */
 
-extern const NSString *kAdTitleKey;
-extern const NSString *kAdTextKey;
-extern const NSString *kAdIconImageKey;
-extern const NSString *kAdMainImageKey;
-extern const NSString *kAdCTATextKey;
-extern const NSString *kAdStarRatingKey;
+extern NSString *const kAdTitleKey;
+extern NSString *const kAdTextKey;
+extern NSString *const kAdIconImageKey;
+extern NSString *const kAdMainImageKey;
+extern NSString *const kAdCTATextKey;
+extern NSString *const kAdStarRatingKey;
+extern NSString *const kVideoConfigKey;
+extern NSString *const kVASTVideoKey;
+extern NSString *const kNativeVideoAdConfigKey;
+extern NSString *const kAdDAAIconImageKey;
+extern NSString *const kDAAIconImageName;
+extern NSString *const kDAAIconTapDestinationURL;
+extern NSString *const kImpressionTrackerURLsKey;
+extern NSString *const kDefaultActionURLKey;
+extern NSString *const kClickTrackerURLKey;
+extern NSString *const kLogEventRequestPropertiesKey;

@@ -42,9 +42,12 @@ typedef void(^MPNativeAdRequestHandler)(MPNativeAdRequest *request,
  * @param identifier The ad unit identifier for this request. An ad unit is a defined placement in
  * your application set aside for advertising. Ad unit IDs are created on the MoPub website.
  *
+ * @param rendererConfigurations An array of MPNativeAdRendererConfiguration objects that control how
+ * the native ad is rendered.
+ *
  * @return An `MPNativeAdRequest` object.
  */
-+ (MPNativeAdRequest *)requestWithAdUnitIdentifier:(NSString *)identifier;
++ (MPNativeAdRequest *)requestWithAdUnitIdentifier:(NSString *)identifier rendererConfigurations:(NSArray *)rendererConfigurations;
 
 /**
  * Executes a request to the MoPub ad server.

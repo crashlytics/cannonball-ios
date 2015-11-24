@@ -97,16 +97,6 @@ typedef enum
 - (void)loadAd;
 
 /**
- * Requests a new ad from the MoPub ad server.
- *
- * If the ad view is already loading an ad, this call will be ignored. You may use `forceRefreshAd`
- * if you would like cancel any existing ad requests and force a new ad to load.
- *
- * **Warning**: This method has been deprecated. Use `loadAd` instead.
- */
-- (void)refreshAd;
-
-/**
  * Cancels any existing ad requests and requests a new ad from the MoPub ad server.
  */
 - (void)forceRefreshAd;
@@ -216,69 +206,6 @@ typedef enum
  * @see stopAutomaticallyRefreshingContents
  */
 - (void)startAutomaticallyRefreshingContents;
-
-#pragma mark - Deprecated
-
-/** @name Handling Custom Event Methods (Deprecated) */
-
-/**
- * Signals to the ad view that a custom event has caused ad content to load
- * successfully.
- *
- * @bug **Warning**: This method has been deprecated. You should instead implement banner custom
- * events using a subclass of `MPBannerCustomEvent`.
- */
-- (void)customEventDidLoadAd;
-
-/**
- * Signals to the ad view that a custom event has resulted in a failed load.
- *
- * @bug **Warning**: This method has been deprecated. You should instead implement banner custom
- * events using a subclass of `MPBannerCustomEvent`.
- */
-- (void)customEventDidFailToLoadAd;
-
-/**
- * Signals to the ad view that a user has tapped on a custom-event-triggered ad.
- *
- * @bug **Warning**: This method has been deprecated. You should instead implement banner custom
- * events using a subclass of `MPBannerCustomEvent`.
- */
-- (void)customEventActionWillBegin;
-
-/**
- * Signals to the ad view that a user has stopped interacting with a custom-event-triggered ad.
- *
- * @bug **Warning**: This method has been deprecated. You should instead implement banner custom
- * events using a subclass of `MPBannerCustomEvent`.
- */
-- (void)customEventActionDidEnd;
-
-/**
- * Replaces the content of the MPAdView with the specified view.
- *
- * @bug **Warning**: This method has been deprecated. You should instead implement banner custom
- * events using a subclass of `MPBannerCustomEvent`.
- *
- * @param view A view representing some banner content.
- */
-- (void)setAdContentView:(UIView *)view;
-
-/** @name Managing the Automatic Refreshing of Ads (Deprecated) */
-
-/**
- * A Boolean value that determines whether the ad view should ignore directions from the MoPub
- * ad server to periodically refresh its contents.
- *
- * The default value of this property is NO. Set the property to YES if you want to prevent your ad
- * view from automatically refreshing. *Note:* if you wish to set the property to YES, you should do
- * so before you call `loadAd` for the first time.
- *
- * @bug **Warning**: This property has been deprecated. You should instead use
- * `stopAutomaticallyRefreshingContents` and `startAutomaticallyRefreshingContents` to manage
- * the ad view's refresh behavior.
- */
-@property (nonatomic, assign) BOOL ignoresAutorefresh;
 
 @end
 

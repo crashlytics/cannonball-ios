@@ -17,7 +17,7 @@
 import UIKit
 import MoPub
 
-class NativeAdCell: UITableViewCell, MPNativeAdRendering {
+class NativeAdCell: UIView, MPNativeAdRendering {
 
     // MARK: Properties
 
@@ -33,14 +33,7 @@ class NativeAdCell: UITableViewCell, MPNativeAdRendering {
 
     @IBOutlet weak var containerView: UIView!
 
-    func layoutAdAssets(adObject: MPNativeAd!) {
-        // Load ad assets.
-        adObject.loadTitleIntoLabel(titleLabel)
-        adObject.loadTextIntoLabel(mainTextLabel)
-        adObject.loadCallToActionTextIntoLabel(callToActionButton.titleLabel)
-        adObject.loadImageIntoImageView(mainImageView)
-        adObject.loadIconIntoImageView(iconImageView)
-
+    override func awakeFromNib() {
         // Decorate the call to action button.
         callToActionButton.layer.masksToBounds = false
         callToActionButton.layer.borderColor = callToActionButton.titleLabel?.textColor.CGColor
@@ -54,8 +47,26 @@ class NativeAdCell: UITableViewCell, MPNativeAdRendering {
         backgroundColor = UIColor.cannonballBrownColor()
     }
 
-    class func sizeWithMaximumWidth(maximumWidth: CGFloat) -> CGSize {
-        return CGSizeMake(maximumWidth, maximumWidth)
+    // MARK: MPNativeAdRendering
+
+    func nativeMainTextLabel() -> UILabel! {
+        return self.mainTextLabel
+    }
+
+    func nativeTitleTextLabel() -> UILabel! {
+        return self.titleLabel
+    }
+
+    func nativeCallToActionTextLabel() -> UILabel! {
+        return self.callToActionButton.titleLabel
+    }
+
+    func nativeIconImageView() -> UIImageView! {
+        return self.iconImageView
+    }
+
+    func nativeMainImageView() -> UIImageView! {
+        return self.mainImageView
     }
 
     // Return the nib used for the native ad.

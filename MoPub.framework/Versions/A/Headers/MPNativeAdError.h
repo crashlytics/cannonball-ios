@@ -13,8 +13,11 @@ typedef enum MPNativeAdErrorCode {
     MPNativeAdErrorNoInventory = -1002,
     MPNativeAdErrorImageDownloadFailed = -1003,
     MPNativeAdErrorAdUnitWarmingUp = -1004,
+    MPNativeAdErrorVASTParsingFailed = -1005,
+    MPNativeAdErrorVideoConfigInvalid = -1006,
     
     MPNativeAdErrorContentDisplayError = -1100,
+    MPNativeAdErrorRenderError = -1200
 } MPNativeAdErrorCode;
 
 extern NSString * const MoPubNativeAdsSDKDomain;
@@ -27,3 +30,6 @@ NSError *MPNativeAdNSErrorForInvalidImageURL();
 NSError *MPNativeAdNSErrorForImageDownloadFailure();
 NSError *MPNativeAdNSErrorForContentDisplayErrorMissingRootController();
 NSError *MPNativeAdNSErrorForContentDisplayErrorInvalidURL();
+NSError *MPNativeAdNSErrorForVASTParsingFailure();
+NSError *MPNativeAdNSErrorForVideoConfigInvalid();
+NSError *MPNativeAdNSErrorForRenderValueTypeError();

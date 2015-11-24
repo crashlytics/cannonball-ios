@@ -5,8 +5,12 @@
 //  Copyright (c) 2014 MoPub. All rights reserved.
 //
 
-#if __has_include("MPNativeAdSampleTableViewCell.h")
-    #import "MPNativeAdSampleTableViewCell.h"
+#if __has_include("MPStaticNativeAdView.h")
+    #import "MPStaticNativeAdView.h"
+#endif
+
+#if __has_include("MPVideoNativeAdView.h")
+    #import "MPVideoNativeAdView.h"
 #endif
 
 #import "MPAdConversionTracker.h"
@@ -26,7 +30,6 @@
 #import "MPNativeAdRendering.h"
 #import "MPNativeAdRequest.h"
 #import "MPNativeAdRequestTargeting.h"
-#import "MPTableViewAdManager.h"
 #import "MPCollectionViewAdPlacer.h"
 #import "MPTableViewAdPlacer.h"
 #import "MPClientAdPositioning.h"
@@ -37,11 +40,20 @@
 #import "MPRewardedVideoReward.h"
 #import "MPRewardedVideoCustomEvent.h"
 #import "MPRewardedVideoError.h"
+#import "MPStaticNativeAdRendererSettings.h"
+#import "MPNativeAdRendererConfiguration.h"
+#import "MPNativeAdRendererSettings.h"
+#import "MPNativeAdRenderer.h"
+#import "MPStaticNativeAdRenderer.h"
+#import "MOPUBNativeVideoAdRendererSettings.h"
+#import "MOPUBNativeVideoAdRenderer.h"
+#import "MPNativeAdRenderingImageLoader.h"
 
 // Import these frameworks for module support.
 #import <AdSupport/AdSupport.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreLocation/CoreLocation.h>
+#import <CoreMedia/CoreMedia.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
