@@ -29,7 +29,11 @@ class NativeAdCell: UIView, MPNativeAdRendering {
 
     @IBOutlet weak var mainImageView: UIImageView!
 
+    @IBOutlet weak var videoView: UIView!
+
     @IBOutlet weak var iconImageView: UIImageView!
+
+    @IBOutlet weak var privacyInformationIconImageView: UIImageView!
 
     @IBOutlet weak var containerView: UIView!
 
@@ -67,6 +71,14 @@ class NativeAdCell: UIView, MPNativeAdRendering {
 
     func nativeMainImageView() -> UIImageView! {
         return self.mainImageView
+    }
+
+    func nativeVideoView() -> UIView! {
+        return self.videoView
+    }
+
+    func nativePrivacyInformationIconImageView() -> UIImageView! {
+        return self.privacyInformationIconImageView
     }
 
     // Return the nib used for the native ad.
