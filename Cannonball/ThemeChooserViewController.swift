@@ -48,7 +48,7 @@ class ThemeChooserViewController: UITableViewController {
         logoView.frame.origin.y = -logoView.frame.size.height - 10
         navigationController?.view.addSubview(logoView)
         navigationController?.view.bringSubviewToFront(logoView)
-        let logoTapRecognizer = UITapGestureRecognizer(target: self, action: Selector("logoTapped"))
+        let logoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ThemeChooserViewController.logoTapped))
         logoView.userInteractionEnabled = true
         logoView.addGestureRecognizer(logoTapRecognizer)
 

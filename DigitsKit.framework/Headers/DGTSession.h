@@ -29,10 +29,17 @@
 
 /**
  *  The phone number provided by the user, prefixed by the country code (e.g. `+15554443322`).
- *
- *  @warning The phone number is `nil` if the user logs in using their Twitter account (for example, when they are experiencing difficulties signing in with their phone number).
  */
 @property (nonatomic, copy, readonly) NSString *phoneNumber;
+
+/**
+ *  The email address provided by the user.
+ *
+ *  @warning The email address is `nil` if the user hasn't provided it to an app. Email address should be considered an optional field.
+ */
+@property (nonatomic, copy, readonly) NSString *emailAddress;
+
+@property (nonatomic, readonly) BOOL emailAddressIsVerified;
 
 /**
  *  Initializes a session object with the provided session details.
@@ -45,6 +52,20 @@
  *  @return A `DGTSession` object initialized with the provided parameters.
  */
 - (instancetype)initWithAuthToken:(NSString *)authToken authTokenSecret:(NSString *)authTokenSecret userID:(NSString *)userID phoneNumber:(NSString *)phoneNumber;
+
+/**
+ *  Initializes a session object with the provided session details.
+ *
+ *  @param authToken               The authorization token for the session.
+ *  @param authTokenSecret         The authorization token secret for the session.
+ *  @param userID                  The unique ID for the user associated with the session.
+ *  @param phoneNumber             The user's phone number, e.g. `+15554443322`.
+ *  @param emailAddress            The user's email address, e.g. `test@example.com`.
+ *  @param emailAddressIsVerified  Whether the user's email address has been verified or not
+ *
+ *  @return A `DGTSession` object initialized with the provided parameters.
+ */
+- (instancetype)initWithAuthToken:(NSString *)authToken authTokenSecret:(NSString *)authTokenSecret userID:(NSString *)userID phoneNumber:(NSString *)phoneNumber emailAddress:(NSString *)emailAddress emailAddressIsVerified:(BOOL)emailAddressIsVerified;
 
 @end
 

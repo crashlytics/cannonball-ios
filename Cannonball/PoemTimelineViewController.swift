@@ -33,15 +33,8 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         // Log Answers Custom Event.
         Answers.logCustomEventWithName("Viewed Poem Timeline", customAttributes: nil)
 
-        // Login as a guest on Twitter.
-        Twitter.sharedInstance().logInGuestWithCompletion { session, error in
-            // Check we have a valid guest session.
-            if session != nil {
-                // Assign our search query to the data source of the Search Timeline which will then be rendered.
-                let client = Twitter.sharedInstance().APIClient
-                self.dataSource = TWTRSearchTimelineDataSource(searchQuery: self.poemSearchQuery, APIClient: client)
-            }
-        }
+        let client = TWTRAPIClient()
+        self.dataSource = TWTRSearchTimelineDataSource(searchQuery: self.poemSearchQuery, APIClient: client)
 
         // Customize the table view.
         let headerHeight: CGFloat = 15

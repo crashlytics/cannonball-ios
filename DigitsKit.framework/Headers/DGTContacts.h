@@ -42,9 +42,9 @@ typedef void (^DGTDeleteAllUploadedContactsCompletion)(NSError *error);
 + (DGTContactAccessAuthorizationStatus)contactsAccessAuthorizationStatus;
 
 /**
- *  Returns an instance of DGTUsers that can make authenticated requests using the given user session. Subsequent calls to upload, lookup, and delete contacts will be scoped to the user for this session.
+ *  Returns an instance of DGTContacts that can make authenticated requests using the given user session. Subsequent calls to upload, lookup, and delete contacts will be scoped to the user for this session.
  *
- *  @return an instance of DGTUsers
+ *  @return an instance of DGTContacts
  *  @param  userSession  (required) An authenticated user session, such as from `[[Digits sharedInstance] session]`.
  */
 - (instancetype)initWithUserSession:(DGTSession *)userSession;

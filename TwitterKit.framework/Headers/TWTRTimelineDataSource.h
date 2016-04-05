@@ -5,12 +5,14 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
-#import "TWTRTimelineType.h"
+#import <TwitterKit/TWTRTimelineType.h>
+@class TWTRAPIClient;
 @class TWTRTimelineCursor;
+@class TWTRTweet;
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^TWTRLoadTimelineCompletion)(NSArray * __twtr_nullable tweets, TWTRTimelineCursor * __twtr_nullable cursor, NSError * __twtr_nullable error);
+typedef void (^TWTRLoadTimelineCompletion)(NSArray<TWTRTweet *> * _Nullable tweets, TWTRTimelineCursor * _Nullable cursor, NSError * _Nullable error);
 
 /**
  *  Responsible for building network parameters for requesting a timeline of Tweets.
@@ -28,12 +30,19 @@ typedef void (^TWTRLoadTimelineCompletion)(NSArray * __twtr_nullable tweets, TWT
  *  @param completion   (required) Invoked with the Tweets and the cursor in case of success, or nil
  *                      and an error in case of error. This must be called on the main thread.
  */
-- (void)loadPreviousTweetsBeforePosition:(NSString * __twtr_nullable)position completion:(TWTRLoadTimelineCompletion)completion;
+- (void)loadPreviousTweetsBeforePosition:(nullable NSString *)position completion:(TWTRLoadTimelineCompletion)completion;
 
 /*
  *  The type of the timeline that this data source represents.
  */
 @property (nonatomic, readonly) TWTRTimelineType timelineType;
+
+/**
+ * The API client to use with this data source. 
+ * You will, likely, not need to alter this value unless you are implementing your
+ * own timeline view controller.
+ */
+@property (nonatomic) TWTRAPIClient *APIClient;
 
 @end
 

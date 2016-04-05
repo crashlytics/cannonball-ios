@@ -61,7 +61,7 @@ class CountdownView : UIView {
         secondsRemaining = Double(countdownTime)
 
         displayLink?.invalidate()
-        displayLink = UIScreen.mainScreen().displayLinkWithTarget(self, selector: Selector("tick"))
+        displayLink = UIScreen.mainScreen().displayLinkWithTarget(self, selector: #selector(CountdownView.tick))
         displayLink!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
     }
 

@@ -4,16 +4,25 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
-#import "DGTAppearance.h"
-#import "DGTAuthenticateButton.h"
-#import "DGTContactAccessAuthorizationStatus.h"
-#import "DGTSession.h"
+#if TARGET_OS_WATCH
+#error Digits doesn't support watchOS
+#endif
+
+#import <DigitsKit/DGTAppearance.h>
+#if !TARGET_OS_TV
+#import <DigitsKit/DGTAuthenticateButton.h>
+#import <DigitsKit/DGTContactAccessAuthorizationStatus.h>
+#endif
+#import <DigitsKit/DGTSession.h>
 #import <TwitterCore/TWTRAuthConfig.h>
 
-@class UIViewController;
+@class DGTAuthenticationConfiguration;
 @class TWTRAuthConfig;
+@class UIViewController;
 @protocol DGTSessionUpdateDelegate;
 @protocol DGTCompletionViewController;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The `Digits` class contains the main methods to implement the Digits authentication flow.
@@ -50,13 +59,13 @@
  *  This value is only needed if you plan to share credentials with another application that you control or if you are
  *  using Digits with an app extension.
  */
-- (void)startWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessGroup:(NSString *)accessGroup;
+- (void)startWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessGroup:(nullable NSString *)accessGroup;
 
 /**
  *
  *  @return The Digits user session or nil if there's no authenticated user.
  */
-- (DGTSession *)session;
+- (nullable DGTSession *)session;
 
 /**
  *  Authentication configuration details. Encapsulates the `consumerKey` and `consumerSecret` credentials required to authenticate a Twitter application.
@@ -73,60 +82,31 @@
  *
  *  @param completion Block called after the authentication flow has ended.
  */
-- (void)authenticateWithCompletion:(DGTAuthenticationCompletion)completion;
+- (void)authenticateWithCompletion:(DGTAuthenticationCompletion)completion __TVOS_UNAVAILABLE;
 
 /**
- *  Starts the authentication flow UI with the standard appearance. The UI is presented as a modal off of the top-most view controller.
- *
- *  @param title      Title for the modal screens. Pass `nil` to use default app name.
- *  @param completion Block called after the authentication flow has ended.
- */
-- (void)authenticateWithTitle:(NSString *)title completion:(DGTAuthenticationCompletion)completion;
-
-/**
- *  Starts the authentication flow UI with the standard appearance.
+ *  Starts the authentication flow in a modal UI
  *
  *  @param viewController    View controller used to present the modal authentication controller. Pass `nil` to use default top-most view controller.
- *  @param title             Title for the modal screens. Pass `nil` to use default app name.
+ *  @param configuration     Options to configure the Digits experience
  *  @param completion        Block called after the authentication flow has ended.
  */
-- (void)authenticateWithViewController:(UIViewController *)viewController title:(NSString *)title completion:(DGTAuthenticationCompletion)completion;
-
-/**
- *  Starts the authentication flow UI.
- *
- *  @param appearance        Appearance of the authentication flow views. Pass `nil` to use the default appearance.
- *  @param viewController    View controller used to present the modal authentication controller. Pass `nil` to use default top-most view controller.
- *  @param title             Title for the modal screens. Pass `nil` to use default app name.
- *  @param completion        Block called after the authentication flow has ended.
- */
-- (void)authenticateWithDigitsAppearance:(DGTAppearance *)appearance viewController:(UIViewController *)viewController title:(NSString *)title completion:(DGTAuthenticationCompletion)completion;
-
-/**
- *  Starts the authentication flow UI using a predetermined phone number.
- *
- *  @param phoneNumber       Prepopulate the phone number field with this value. Value should be a string containing only numbers, and prefixed with an optional '+' character if the number includes a country dial code. If a '+' is provided, the country dial code will be parsed out and selected from the country picker. You could also pass only the country code using the '+' prefix and only the country picker will be populated, no phone number. Examples: '+15555555555' (USA, 5555555555), '5555555555' (USA, 5555555555), '+345555555555' (Spain, 5555555555), '+52' (Mexico, no number input)
- *  @param appearance        Appearance of the authentication flow views. Pass `nil` to use the default appearance.
- *  @param viewController    View controller used to present the modal authentication controller. Pass `nil` to use default top-most view controller.
- *  @param title             Title for the modal screens. Pass `nil` to use default app name.
- *  @param completion        Block called after the authentication flow has ended.
- */
-- (void)authenticateWithPhoneNumber:(NSString *)phoneNumber digitsAppearance:(DGTAppearance *)appearance viewController:(UIViewController *)viewController title:(NSString *)title completion:(DGTAuthenticationCompletion)completion;
+- (void)authenticateWithViewController:(nullable UIViewController *)viewController configuration:(DGTAuthenticationConfiguration *)configuration completion:(DGTAuthenticationCompletion)completion __TVOS_UNAVAILABLE;
 
 /**
  *  Starts the authentication flow in your own navigation UI. Digits view controllers will be pushed into the passed navigation controller and after the flow is done, success or failure; the completion view controller will be pushed into the top of the original stack.
  *
  *  @param navigationController     Navigation controller used to pushed the Digits view into.
- *  @param phoneNumber              Prepopulate the phone number field with this value. Value should be a string containing only numbers, and prefixed with an optional '+' character if the number includes a country dial code. If a '+' is provided, the country dial code will be parsed out and selected from the country picker. You could also pass only the country code using the '+' prefix and only the country picker will be populated, no phone number. Examples: '+15555555555' (USA, 5555555555), '5555555555' (USA, 5555555555), '+345555555555' (Spain, 5555555555), '+52' (Mexico, no number input)
- *  @param appearance               Appearance of the authentication flow views. Pass `nil` to use the default appearance.
- *  @param title                    Title for the auth screens.
+ *  @param configuration            Options to configure the Digits experience
  *  @param completionViewController View controller pushed to the navigation controller when the auth flow is completed
  */
-- (void)authenticateWithNavigationViewController:(UINavigationController *)navigationController phoneNumber:(NSString *)phoneNumber digitsAppearance:(DGTAppearance *)appearance title:(NSString *)title completionViewController:(UIViewController<DGTCompletionViewController> *)completionViewController;
+- (void)authenticateWithNavigationViewController:(UINavigationController *)navigationController configuration:(DGTAuthenticationConfiguration *)configuration completionViewController:(UIViewController<DGTCompletionViewController> *)completionViewController __TVOS_UNAVAILABLE;
 
 /**
- *  Deletes the local Twitter user session from this app. This will not remove the system Twitter account nor make a network request to invalidate the session. Subsequent calls to `authenticateWith` methods will start a new Digits authentication flow.
+ *  Deletes the local Digits user session from this app. This will not make a network request to invalidate the session. Subsequent calls to `authenticateWith` methods will start a new Digits authentication flow.
  */
 - (void)logOut;
 
 @end
+
+NS_ASSUME_NONNULL_END

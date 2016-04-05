@@ -52,7 +52,7 @@ class PoemCell: UITableViewCell {
         pictureImageView.layer.addSublayer(gradient)
 
         // Add share button target.
-        shareButton.addTarget(self, action: Selector("shareButtonTapped"), forControlEvents: .TouchUpInside)
+        shareButton.addTarget(self, action: #selector(PoemCell.shareButtonTapped), forControlEvents: .TouchUpInside)
     }
 
     override func layoutSubviews() {

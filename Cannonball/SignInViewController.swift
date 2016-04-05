@@ -75,12 +75,14 @@ class SignInViewController: UIViewController, UIAlertViewDelegate {
 
     @IBAction func signInWithPhone(sender: UIButton) {
         // Create a Digits appearance with Cannonball colors.
-        let appearance = DGTAppearance()
-        appearance.backgroundColor = UIColor.cannonballBeigeColor()
-        appearance.accentColor = UIColor.cannonballGreenColor()
+        let configuration = DGTAuthenticationConfiguration(accountFields: .DefaultOptionMask)
+        
+        configuration.appearance = DGTAppearance()
+        configuration.appearance.backgroundColor = UIColor.cannonballBeigeColor()
+        configuration.appearance.accentColor = UIColor.cannonballGreenColor()
 
         // Start the Digits authentication flow with the custom appearance.
-        Digits.sharedInstance().authenticateWithDigitsAppearance(appearance, viewController: nil, title: nil) { session, error in
+        Digits.sharedInstance().authenticateWithViewController(nil, configuration:configuration) { (session, error) in
             if session != nil {
                 // Navigate to the main app screen to select a theme.
                 self.navigateToMainAppScreen()

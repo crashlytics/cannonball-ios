@@ -4,13 +4,42 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <TwitterCore/TWTRSession.h>
-#import "TWTRAPIClient.h"
+#import <TwitterKit/TWTRAPIClient.h>
+#import <UIKit/UIKit.h>
 
 @class TWTRSessionStore;
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_OPTIONS(NSInteger, TWTRLoginMethod) {
+    
+    /**
+     * Attempts to log the user in with the system accounts.
+     * This log in method will only grant limited application permissions to
+     * the returned oauth token. If you would like to have more
+     * application permissions granted you must use the TWTRLoginMethodWebBased
+     * and configure your application correctly.
+     */
+    TWTRLoginMethodSystemAccounts = 1 << 0,
+    
+    /**
+     * Presents a web view that allows the user to log in.
+     * This method will allow the developer to request more application
+     * permissions. To learn more about configuring your application to 
+     * have higher levels of permissions. 
+     * Visit https://dev.twitter.com/oauth/overview/application-permission-model for
+     * more information about Twitter's application permission model.
+     */
+    TWTRLoginMethodWebBased       = 1 << 1,
+    
+    /**
+     * Picks the first available log in method. The order in which 
+     * methods are checked is TWTRLoginMethodSystemAccounts -> TWTRLoginMethodWebBased.
+     */
+    TWTRLoginMethodAll            = TWTRLoginMethodSystemAccounts | TWTRLoginMethodWebBased
+};
+
 
 /**
  *  The central class of the Twitter Kit.
@@ -48,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  This value is only needed if you plan to share credentials with another application that you control or if you are
  *  using TwitterKit with an app extension.
  */
-- (void)startWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessGroup:(twtr_nullable NSString *)accessGroup;
+- (void)startWithConsumerKey:(NSString *)consumerKey consumerSecret:(NSString *)consumerSecret accessGroup:(nullable NSString *)accessGroup;
 
 /**
  *  The current version of this kit.
@@ -58,23 +87,35 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Authentication configuration details. Encapsulates the `consumerKey` and `consumerSecret` credentials required to authenticate a Twitter application.
  */
-@property (nonatomic, strong, readonly) TWTRAuthConfig *authConfig;
+@property (nonatomic, readonly) TWTRAuthConfig *authConfig;
 
 /**
  *  Session store exposing methods to fetch and manage active sessions. Applications that need to manage
  *  multiple users should use the session store to authenticate and log out users.
  */
-@property (nonatomic, strong, readonly) TWTRSessionStore *sessionStore;
+@property (nonatomic, readonly) TWTRSessionStore *sessionStore;
 
 /**
  *  Triggers user authentication with Twitter.
  *
  *  This method will present UI to allow the user to log in if there are no saved Twitter login credentials.
+ *  This method is equivalent to calling loginWithMethods:completion: with TWTRLoginMethodAll.
  *
  *  @param completion The completion block will be called after authentication is successful or if there is an error.
  *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
  */
 - (void)logInWithCompletion:(TWTRLogInCompletion)completion;
+
+/**
+ *  Triggers user authentication with Twitter.
+ *
+ *  This method will attempt to log the user in based on the specified log in methods. If multiple methods
+ *  are specified the system account method will be attempted first.
+ *
+ *  @param completion The completion block will be called after authentication is successful or if there is an error.
+ *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
+ */
+- (void)logInWithMethods:(TWTRLoginMethod)methods completion:(TWTRLogInCompletion)completion;
 
 /**
  *  Triggers user authentication with Twitter. Allows the developer to specify the presenting view controller.
@@ -85,90 +126,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param completion The completion block will be called after authentication is successful or if there is an error.
  *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
  */
-- (void)logInWithViewController:(twtr_nullable UIViewController *)viewController completion:(TWTRLogInCompletion)completion;
-
-@end
-
-@interface Twitter (TWTRDeprecated)
+- (void)logInWithViewController:(nullable UIViewController *)viewController completion:(TWTRLogInCompletion)completion;
 
 /**
- *  The Twitter application consumer key.
- *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
- */
-@property (nonatomic, copy, readonly) NSString *consumerKey __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
-
-/**
- *  The Twitter application consumer secret.
- *  @deprecated This property is deprecated and will be removed in a later release. Please use `authConfig`.
- */
-@property (nonatomic, copy, readonly) NSString *consumerSecret __attribute__((deprecated("Use `authConfig`. This property will be removed in a later release.")));
-
-/**
- *  Log in a guest user. This can be used when the user is not a Twitter user.
+ *  Triggers user authentication with Twitter. Allows the developer to specify the presenting view controller.
  *
- *  This method will not present any UI to the user.
+ *  This method will attempt to log the user in based on the specified log in methods. If multiple methods
+ *  are specified the system account method will be attempted first.
  *
+ *  @param viewController The view controller that will be used to present the authentication view.
  *  @param completion The completion block will be called after authentication is successful or if there is an error.
  *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
- *  @warning This method will soon be deprecated; it is no longer needed. Users can use the -[Twitter guestAPIClient] directly without needing to call this method.
  */
-- (void)logInGuestWithCompletion:(TWTRGuestLogInCompletion)completion;
-
-/**
- *  Triggers user authentication with Twitter given an existing session.
- *
- *  Use this method if you have already authenticated with Twitter and are migrating to TwitterKit. This
- *  method will verify that the `authToken` and `authTokenSecret` are still valid and log the user in with
- *  the existing credentials.
- *
- *  @param authToken The existing authToken to use for authentication.
- *  @param authTokenSecret The existing authTokenSecret to use for authentication.
- *  @param completion The completion block will be called after authentication is successful or if there is an error.
- *  @warning This method requires that you have set up your `consumerKey` and `consumerSecret`.
- *  @warning This method will soon be deprecated; for a simpler approach see -[TWTRSessionStore saveSession:completion:].
- */
-- (void)logInWithExistingAuthToken:(NSString *)authToken authTokenSecret:(NSString *)authTokenSecret completion:(TWTRLogInCompletion)completion;
-
-/**
- *  Client for consuming the Twitter REST API.
- *
- *  This API client is configured with your consumer key and secret if they are available to the Twitter
- *  object (either via initialization of the Twitter instance or your application's Info.plist).
- *
- *  @warning To make authenticated requests, you need to call `loginWithCompletion:`
- *  @warning This method will soon be deprecated. Using this method does not
- *           give you control over which user you are making request on the behalf of. 
- *           It is recommended that users migrate to using -[TWTRAPIClient initWithUserID:] to have more explicit control.
- */
-@property (nonatomic, strong, readonly) TWTRAPIClient *APIClient;
-
-/**
- *  Returns the current user session or nil if there is no logged in user.
- *
- *  @return Returns the current user session or nil if there is no logged in user.
- *  @warning This method will soon be deprecated; it is recommended to use -[TWTRSessionStore session] or -[TWTRSessionStore sessionForUserID:] if they are managing multiple users
- */
-- (twtr_nullable TWTRSession *)session;
-
-/**
- *  Returns the current guest session or nil if there is no logged in guest.
- *
- *  @return Returns the current guest session or nil if there is no logged in guest.
- *  @warning This method will soon be deprecated; all network requests will fall back to using a guest session if no user session is provided.
- */
-- (twtr_nullable TWTRGuestSession *)guestSession;
-
-/**
- *  Deletes the local Twitter user session from this app. This will not remove the system Twitter account nor make a network request to invalidate the session.
- *  @warning This method will soon be deprecated; users are encouraged to call -[TWTRSessionStore logOutUserID:] instead of calling this method on the Twitter instance directly
- */
-- (void)logOut;
-
-/**
- *  Deletes the local guest session. Does not make a network request to invalidate the session.
- *  @warning This method will soon be deprecated; it is no longer needed as the guest authentication is managed by the session store.
- */
-- (void)logOutGuest;
+- (void)logInWithViewController:(nullable UIViewController *)viewController methods:(TWTRLoginMethod)methods completion:(TWTRLogInCompletion)completion;
 
 @end
 

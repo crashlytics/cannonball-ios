@@ -7,16 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TWTRTimelineDataSource.h"
+#import <TwitterKit/TWTRTimelineDataSource.h>
 
 @class TWTRAPIClient;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TWTRCollectionTimelineDataSource : NSObject <TWTRTimelineDataSource>
 
 /**
  *  The number of Tweets to request in each query to the Twitter Timeline API when fetching the next batch of Tweets.
  */
-@property (nonatomic, assign, readonly) NSInteger maxTweetsPerRequest;
+@property (nonatomic, readonly) NSInteger maxTweetsPerRequest;
+
+/**
+ *  ID of the collection.
+ */
+@property (nonatomic, copy, readonly) NSString *collectionID;
 
 /**
  *  Convenience initializer.
@@ -25,7 +32,7 @@
  *
  *  @return An instance of TWTRCollectionTimelineDataSource or nil if any of the required parameters is missing.
  */
-- (instancetype)initWithCollectionID:(NSString *)collectionID APIClient:(TWTRAPIClient *)client __attribute__((nonnull));
+- (instancetype)initWithCollectionID:(NSString *)collectionID APIClient:(TWTRAPIClient *)client;
 
 /**
  *  Designated initializer setting all supported values for Collection Timeline Data Source.
@@ -36,8 +43,10 @@
  *  
  *  @return An instance of TWTRCollectionTimelineDataSource or nil if any of the required parameters are missing.
  */
-- (instancetype)initWithCollectionID:(NSString *)collectionID APIClient:(TWTRAPIClient *)client maxTweetsPerRequest:(NSUInteger)maxTweetsPerRequest __attribute__((nonnull)) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCollectionID:(NSString *)collectionID APIClient:(TWTRAPIClient *)client maxTweetsPerRequest:(NSUInteger)maxTweetsPerRequest NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)init __unavailable;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

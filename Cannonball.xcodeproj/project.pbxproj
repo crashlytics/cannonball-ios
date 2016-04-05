@@ -492,7 +492,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Cannonball/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.fabric.samples.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cannonball;
@@ -511,7 +511,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Cannonball/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.fabric.samples.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Cannonball;

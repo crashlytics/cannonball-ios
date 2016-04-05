@@ -165,4 +165,20 @@
  */
 - (void)displayContentForDAAIconTap;
 
+/**
+ * Return your ad's privacy information icon view.
+ *
+ * You should implement this method if your ad supplies its own view for its privacy information icon.
+ */
+- (UIView *)privacyInformationIconView;
+
+/**
+ * Return your ad's main media view.
+ *
+ * You should implement this method if your ad supplies its own view for the main media view which is typically
+ * an image or video. If you implement this method, the SDK will not make any other attempts at retrieving 
+ * the main media asset.
+ */
+- (UIView *)mainMediaView;
+
 @end

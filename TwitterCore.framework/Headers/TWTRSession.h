@@ -4,9 +4,9 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
-#import "TWTRAuthConfig.h"
-#import "TWTRAuthSession.h"
-#import "TWTRGuestSession.h"
+#import <TwitterCore/TWTRAuthConfig.h>
+#import <TwitterCore/TWTRAuthSession.h>
+#import <TwitterCore/TWTRGuestSession.h>
 
 @class TWTRSession;
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param session Contains the OAuth tokens and minimal information associated with the logged in user or nil.
  *  @param error   Error that will be non nil if the authentication request failed.
  */
-typedef void (^TWTRLogInCompletion)(TWTRSession * __twtr_nullable session,  NSError * __twtr_nullable error);
+typedef void (^TWTRLogInCompletion)(TWTRSession * _Nullable session,  NSError * _Nullable error);
 
 /**
  *  TWTRSession represents a user's session authenticated with the Twitter API.
@@ -64,7 +64,7 @@ typedef void (^TWTRLogInCompletion)(TWTRSession * __twtr_nullable session,  NSEr
 /**
  *  Unavailable. Use -initWithSessionDictionary: instead.
  */
-- (instancetype)init __attribute__((unavailable("Use -initWithSessionDictionary: instead.")));
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

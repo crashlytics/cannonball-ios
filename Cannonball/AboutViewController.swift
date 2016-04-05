@@ -17,6 +17,7 @@
 import UIKit
 import Crashlytics
 import TwitterKit
+import DigitsKit
 
 class AboutViewController: UIViewController {
 
@@ -63,7 +64,10 @@ class AboutViewController: UIViewController {
 
     @IBAction func signOut(sender: AnyObject) {
         // Remove any Twitter or Digits local sessions for this app.
-        Twitter.sharedInstance().logOut()
+        let sessionStore = Twitter.sharedInstance().sessionStore
+        if let userId = sessionStore.session()?.userID {
+            sessionStore.logOutUserID(userId)
+        }
         Digits.sharedInstance().logOut()
 
         // Remove user information for any upcoming crashes in Crashlytics.

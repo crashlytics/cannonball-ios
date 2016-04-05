@@ -4,8 +4,10 @@
 //  Copyright (c) 2015 Twitter. All rights reserved.
 //
 
+#import <DigitsKit/DGTSession.h>
 #import <UIKit/UIKit.h>
-#import "DGTSession.h"
+
+@class DGTAppearance;
 
 /**
  *  A button that launches the Digits authentication flow.
