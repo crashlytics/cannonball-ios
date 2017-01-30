@@ -31,38 +31,38 @@ class AboutViewController: UIViewController {
 
     override func viewDidLoad() {
         // Add the logo view to the top (not in the navigation bar title to have it bigger).
-        logoView = UIImageView(frame: CGRectMake(0, 0, 40, 40))
-        logoView.image = UIImage(named: "Logo")?.imageWithRenderingMode(.AlwaysTemplate)
+        logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        logoView.image = UIImage(named: "Logo")?.withRenderingMode(.alwaysTemplate)
         logoView.tintColor = UIColor.cannonballGreenColor()
         logoView.frame.origin.x = (view.frame.size.width - logoView.frame.size.width) / 2
         logoView.frame.origin.y = 8
 
         // Add the logo view to the navigation controller and bring it to the front.
         navigationController?.view.addSubview(logoView)
-        navigationController?.view.bringSubviewToFront(logoView)
+        navigationController?.view.bringSubview(toFront: logoView)
 
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
         navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
         navigationController?.navigationBar.tintColor = UIColor.cannonballGreenColor()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
 
         // Log Answers Custom Event.
-        Answers.logCustomEventWithName("Viewed About", customAttributes: nil)
+        Answers.logCustomEvent(withName: "Viewed About", customAttributes: nil)
     }
 
     // MARK: IBActions
 
-    @IBAction func dismiss(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismiss(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func learnMore(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "http://t.co/cannonball")!)
+    @IBAction func learnMore(_ sender: AnyObject) {
+        UIApplication.shared.openURL(URL(string: "http://t.co/cannonball")!)
     }
 
-    @IBAction func signOut(sender: AnyObject) {
+    @IBAction func signOut(_ sender: AnyObject) {
         // Remove any Twitter or Digits local sessions for this app.
         let sessionStore = Twitter.sharedInstance().sessionStore
         if let userId = sessionStore.session()?.userID {
@@ -75,12 +75,12 @@ class AboutViewController: UIViewController {
         Crashlytics.sharedInstance().setUserName(nil)
 
         // Log Answers Custom Event.
-        Answers.logCustomEventWithName("Signed Out", customAttributes: nil)
+        Answers.logCustomEvent(withName: "Signed Out", customAttributes: nil)
 
         // Present the Sign In again.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInViewController: UIViewController! = storyboard.instantiateViewControllerWithIdentifier("SignInViewController") 
-        presentViewController(signInViewController, animated: true, completion: nil)
+        let signInViewController: UIViewController! = storyboard.instantiateViewController(withIdentifier: "SignInViewController") 
+        present(signInViewController, animated: true, completion: nil)
     }
 
 }

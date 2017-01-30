@@ -41,15 +41,15 @@ class ThemeChooserViewController: UITableViewController {
         themes = Theme.getThemes()
 
         // Add the logo view to the top (not in the navigation bar title in order to position it better).
-        logoView = UIImageView(frame: CGRectMake(0, 0, 40, 40))
-        logoView.image = UIImage(named: "Logo")?.imageWithRenderingMode(.AlwaysTemplate)
+        logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        logoView.image = UIImage(named: "Logo")?.withRenderingMode(.alwaysTemplate)
         logoView.tintColor = UIColor.cannonballGreenColor()
         logoView.frame.origin.x = (view.frame.size.width - logoView.frame.size.width) / 2
         logoView.frame.origin.y = -logoView.frame.size.height - 10
         navigationController?.view.addSubview(logoView)
-        navigationController?.view.bringSubviewToFront(logoView)
+        navigationController?.view.bringSubview(toFront: logoView)
         let logoTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ThemeChooserViewController.logoTapped))
-        logoView.userInteractionEnabled = true
+        logoView.isUserInteractionEnabled = true
         logoView.addGestureRecognizer(logoTapRecognizer)
 
         // Prevent vertical bouncing.
@@ -60,7 +60,7 @@ class ThemeChooserViewController: UITableViewController {
         let contentHeight = view.frame.size.height - headerHeight
         let navHeight = navigationController?.navigationBar.frame.height
         let navYOrigin = navigationController?.navigationBar.frame.origin.y
-        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: headerHeight))
 
         // Compute the perfect table cell height to fit the content.
         let themeTableCellHeight = (contentHeight - navHeight! - navYOrigin!) / CGFloat(themes.count)
@@ -69,16 +69,16 @@ class ThemeChooserViewController: UITableViewController {
         // Customize the navigation bar.
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.cannonballGreenColor()]
         navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : AnyObject]
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.topItem?.title = ""
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         // Animate the logo when the view appears.
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(),
             animations: {
                 // Place the frame at the correct origin position.
                 self.logoView.frame.origin.y = 8
@@ -87,19 +87,19 @@ class ThemeChooserViewController: UITableViewController {
         )
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Make sure the navigation bar is translucent.
-        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.isTranslucent = true
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         // Move the logo view off screen if a new controller was pushed.
-        if navigationController?.viewControllers.count > 1 {
-            UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+        if let vcCount = navigationController?.viewControllers.count, vcCount > 1 {
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(),
                 animations: {
                     // Place the frame at the correct origin position.
                     self.logoView.frame.origin.y = -self.logoView.frame.size.height - 10
@@ -112,37 +112,37 @@ class ThemeChooserViewController: UITableViewController {
     // MARK: UIStoryboardSegue Handling
 
     // Pass the selected theme to the poem composer.
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if sender!.isKindOfClass(ThemeCell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (sender! as AnyObject).isKind(of: ThemeCell.self) {
             let indexPath = tableView.indexPathForSelectedRow
             if let row = indexPath?.row {
                 // Pass the selected theme to the poem composer.
-                let poemComposerViewController = segue.destinationViewController as! PoemComposerViewController
+                let poemComposerViewController = segue.destination as! PoemComposerViewController
                 poemComposerViewController.theme = themes[row]
 
                 // Tie this selected theme to any crashes in Crashlytics.
                 Crashlytics.sharedInstance().setObjectValue(themes[row].name, forKey: "Theme")
 
                 // Log Answers Custom Event.
-                Answers.logCustomEventWithName("Selected Theme", customAttributes: ["Theme": themes[row].name])
+                Answers.logCustomEvent(withName: "Selected Theme", customAttributes: ["Theme": themes[row].name])
             }
         }
     }
 
     // Bring the about view when tapping the logo.
     func logoTapped() {
-        performSegueWithIdentifier("ShowAbout", sender: self)
+        performSegue(withIdentifier: "ShowAbout", sender: self)
     }
 
     // MARK: UITableViewDataSource
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return themes.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(themeTableCellReuseIdentifier, forIndexPath: indexPath) as! ThemeCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: themeTableCellReuseIdentifier, for: indexPath) as! ThemeCell
 
         // Find the corresponding theme.
         let theme = themes[indexPath.row]

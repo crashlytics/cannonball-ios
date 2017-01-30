@@ -31,20 +31,20 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         super.viewDidLoad()
 
         // Log Answers Custom Event.
-        Answers.logCustomEventWithName("Viewed Poem Timeline", customAttributes: nil)
+        Answers.logCustomEvent(withName: "Viewed Poem Timeline", customAttributes: nil)
 
         let client = TWTRAPIClient()
-        self.dataSource = TWTRSearchTimelineDataSource(searchQuery: self.poemSearchQuery, APIClient: client)
+        self.dataSource = TWTRSearchTimelineDataSource(searchQuery: self.poemSearchQuery, apiClient: client)
 
         // Customize the table view.
         let headerHeight: CGFloat = 15
-        tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, headerHeight))
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: headerHeight))
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.cannonballBeigeColor()
 
         // Customize the navigation bar.
         title = "Popular Poems"
-        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.isTranslucent = true
 
         // Add an initial offset to the table view to show the animated refresh control.
         let refreshControlOffset = refreshControl?.frame.size.height
@@ -53,39 +53,39 @@ class PoemTimelineViewController: TWTRTimelineViewController {
         refreshControl?.beginRefreshing()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Make sure the navigation bar is not translucent when scrolling the table view.
-        navigationController?.navigationBar.translucent = false
+        navigationController?.navigationBar.isTranslucent = false
 
         // Display a label on the background if there are no recent Tweets to display.
         let noTweetsLabel = UILabel()
         noTweetsLabel.text = "Sorry, there are no recent Tweets to display."
-        noTweetsLabel.textAlignment = .Center
+        noTweetsLabel.textAlignment = .center
         noTweetsLabel.textColor = UIColor.cannonballGreenColor()
         noTweetsLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(14))
         tableView.backgroundView = noTweetsLabel
-        tableView.backgroundView?.hidden = true
+        tableView.backgroundView?.isHidden = true
         tableView.backgroundView?.alpha = 0
         toggleNoTweetsLabel()
     }
 
     // MARK: Utilities
 
-    private func toggleNoTweetsLabel() {
-        if tableView.numberOfRowsInSection(0) == 0 {
-            UIView.animateWithDuration(0.15) {
-                self.tableView.backgroundView!.hidden = false
+    fileprivate func toggleNoTweetsLabel() {
+        if tableView.numberOfRows(inSection: 0) == 0 {
+            UIView.animate(withDuration: 0.15, animations: {
+                self.tableView.backgroundView!.isHidden = false
                 self.tableView.backgroundView!.alpha = 1
-            }
+            }) 
         } else {
-            UIView.animateWithDuration(0.15,
+            UIView.animate(withDuration: 0.15,
                 animations: {
                     self.tableView.backgroundView!.alpha = 0
                 },
                 completion: { finished in
-                    self.tableView.backgroundView!.hidden = true
+                    self.tableView.backgroundView!.isHidden = true
                 }
             )
         }

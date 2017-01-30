@@ -16,7 +16,7 @@
 
 import Foundation
 
-public class Theme {
+open class Theme {
 
     let name: String
 
@@ -40,21 +40,21 @@ public class Theme {
         }
     }
 
-    public func getRandomWords(wordCount: Int) -> [String] {
+    open func getRandomWords(_ wordCount: Int) -> [String] {
         var wordsCopy = [String](words)
 
         // Sort randomly the elements of the dictionary.
-        wordsCopy.sortInPlace({ (_,_) in return arc4random() < arc4random() })
+        wordsCopy.sort(by: { (_,_) in return arc4random() < arc4random() })
 
         // Return the desired number of words.
         return Array(wordsCopy[0..<wordCount])
     }
 
-    public func getRandomPicture() -> String? {
+    open func getRandomPicture() -> String? {
         var picturesCopy = [String](pictures)
 
         // Sort randomly the pictures.
-        picturesCopy.sortInPlace({ (_,_) in return arc4random() < arc4random() })
+        picturesCopy.sort(by: { (_,_) in return arc4random() < arc4random() })
 
         // Return the first picture.
         return picturesCopy.first
@@ -62,9 +62,9 @@ public class Theme {
 
     class func getThemes() -> [Theme] {
         var themes = [Theme]()
-        let path = NSBundle.mainBundle().pathForResource("Themes", ofType: "json")!
-        if let jsonData = try? NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe),
-           let jsonArray = (try? NSJSONSerialization.JSONObjectWithData(jsonData, options: [])) as? [AnyObject] {
+        let path = Bundle.main.path(forResource: "Themes", ofType: "json")!
+        if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe),
+           let jsonArray = (try? JSONSerialization.jsonObject(with: jsonData, options: [])) as? [AnyObject] {
             themes = jsonArray.flatMap() {
                 return Theme(jsonDictionary: $0 as! [String : AnyObject])
             }

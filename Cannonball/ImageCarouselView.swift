@@ -17,8 +17,8 @@
 import UIKit
 
 protocol ImageCarouselDataSource: class {
-    func numberOfImagesInImageCarousel(imageCarousel: ImageCarouselView) -> Int
-    func imageCarousel(imageCarousel: ImageCarouselView, imageAtIndex index: Int) -> UIImage
+    func numberOfImagesInImageCarousel(_ imageCarousel: ImageCarouselView) -> Int
+    func imageCarousel(_ imageCarousel: ImageCarouselView, imageAtIndex index: Int) -> UIImage
 }
 
 class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -28,15 +28,15 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.reloadData()
     }
 
-    private(set) var currentImageIndex: Int = 0
+    fileprivate(set) var currentImageIndex: Int = 0
 
     // MARK: Private
 
-    private var collectionViewLayout: UICollectionViewFlowLayout!
+    fileprivate var collectionViewLayout: UICollectionViewFlowLayout!
 
-    private var collectionView: UICollectionView!
+    fileprivate var collectionView: UICollectionView!
 
-    private let CellReuseID = "ImageCarouselCell"
+    fileprivate let CellReuseID = "ImageCarouselCell"
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -50,18 +50,18 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
         commonInit()
     }
 
-    private func commonInit() {
+    fileprivate func commonInit() {
         collectionViewLayout = UICollectionViewFlowLayout()
-        collectionViewLayout.scrollDirection = .Horizontal
+        collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.minimumLineSpacing = 0
 
         collectionView = UICollectionView(frame: bounds, collectionViewLayout: collectionViewLayout)
-        collectionView.pagingEnabled = true
+        collectionView.isPagingEnabled = true
 
         collectionView.showsHorizontalScrollIndicator = false
 
-        collectionView.registerClass(ImageCarouselCollectionViewCell.self, forCellWithReuseIdentifier: CellReuseID)
+        collectionView.register(ImageCarouselCollectionViewCell.self, forCellWithReuseIdentifier: CellReuseID)
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -80,30 +80,30 @@ class ImageCarouselView: UIView, UICollectionViewDelegate, UICollectionViewDataS
 
     // MARK: UICollectionView
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return delegate?.numberOfImagesInImageCarousel(self) ?? 0
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         precondition(delegate != nil, "Delegate should be set by now")
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellReuseID, forIndexPath: indexPath) as! ImageCarouselCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellReuseID, for: indexPath) as! ImageCarouselCollectionViewCell
 
         cell.image = delegate?.imageCarousel(self, imageAtIndex: indexPath.row)
 
         return cell
     }
 
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Update the currently displayed picture.
         // Note: indexPathsForVisibleItems() can return multiple items hence the calculation below for accuracy.
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
-        let visiblePoint = CGPointMake(CGRectGetMidX(visibleRect), CGRectGetMidY(visibleRect))
-        let indexPath = collectionView.indexPathForItemAtPoint(visiblePoint)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        let indexPath = collectionView.indexPathForItem(at: visiblePoint)
         currentImageIndex = indexPath!.row
     }
 

@@ -23,35 +23,35 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     var theme: Theme! {
         didSet {
             // Randomize the order of pictures.
-            themePictures = theme.pictures.sort { (_, _) in arc4random() < arc4random() }
+            themePictures = theme.pictures.sorted { (_, _) in arc4random() < arc4random() }
         }
     }
 
     // MARK: Properties
 
-    private var poem: Poem
+    fileprivate var poem: Poem
 
-    private var themePictures: [String] = []
+    fileprivate var themePictures: [String] = []
 
-    private var bankWords: [String] = []
+    fileprivate var bankWords: [String] = []
 
-    private let countdownView: CountdownView
+    fileprivate let countdownView: CountdownView
 
-    private let wordCount = 20
+    fileprivate let wordCount = 20
 
-    private let timeoutSeconds = 60
+    fileprivate let timeoutSeconds = 60
 
-    @IBOutlet private weak var doneButton: UIBarButtonItem!
+    @IBOutlet fileprivate weak var doneButton: UIBarButtonItem!
 
-    @IBOutlet private weak var shuffleButton: UIButton!
+    @IBOutlet fileprivate weak var shuffleButton: UIButton!
 
-    @IBOutlet private weak var bankCollectionView: UICollectionView!
+    @IBOutlet fileprivate weak var bankCollectionView: UICollectionView!
 
-    @IBOutlet private weak var poemCollectionView: UICollectionView!
+    @IBOutlet fileprivate weak var poemCollectionView: UICollectionView!
 
-    @IBOutlet private weak var poemHeightContraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var poemHeightContraint: NSLayoutConstraint!
 
-    @IBOutlet private weak var imageCarousel: ImageCarouselView!
+    @IBOutlet fileprivate weak var imageCarousel: ImageCarouselView!
 
     // MARK: IBActions
 
@@ -60,7 +60,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         bankCollectionView.reloadData()
 
         // Log Answers Custom Event.
-        Answers.logCustomEventWithName("Shuffled Words", customAttributes: nil)
+        Answers.logCustomEvent(withName: "Shuffled Words", customAttributes: nil)
     }
 
     // MARK: View Life Cycle
@@ -80,28 +80,28 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         refreshWordBank()
 
         // Customize the navigation bar.
-        navigationItem.rightBarButtonItem?.enabled = false
-        navigationController?.navigationBar.translucent = true
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationController?.navigationBar.isTranslucent = true
 
         // Add the countdown view.
         countdownView.frame.origin.x = (view.frame.size.width - countdownView.frame.size.width) / 2
         countdownView.frame.origin.y = -countdownView.frame.size.height - 10
         navigationController?.view.addSubview(countdownView)
-        navigationController?.view.bringSubviewToFront(countdownView)
+        navigationController?.view.bringSubview(toFront: countdownView)
 
         countdownView.countdownTime = timeoutSeconds
 
         imageCarousel.delegate = self
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Make sure the navigation bar is translucent.
-        navigationController?.navigationBar.translucent = true
+        navigationController?.navigationBar.isTranslucent = true
 
         // Animate the countdown to make it appear and start the timer when the view appears.
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(),
             animations: {
                 // Place the countdown frame at the correct origin position.
                 self.countdownView.frame.origin.y = 10
@@ -112,13 +112,13 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         )
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         if !(navigationController?.viewControllers)!.contains(self) {
             // Back was pressed because self is no longer in the navigation stack.
             // Log Answers Custom Event.
-            Answers.logCustomEventWithName("Stopped Composing Poem",
+            Answers.logCustomEvent(withName: "Stopped Composing Poem",
                 customAttributes: [
                     "Poem": poem.getSentence(),
                     "Theme": theme.name,
@@ -131,7 +131,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         countdownView.stop()
 
         // Animate the countdown off screen.
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(),
             animations: {
                 // Place the frame at the correct origin position.
                 self.countdownView.frame.origin.y = -self.countdownView.frame.size.height - 10
@@ -143,7 +143,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: UIStoryboardSegue Handling
 
     // Only perform the segue to the history if there is a composed poem.
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "ShowHistory" {
             return poem.words.count > 0
         }
@@ -151,7 +151,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     // Prepare for the segue to the history.
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Save the poem.
         savePoem()
 
@@ -159,7 +159,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         CLSLogv("Finished Poem: %d words in theme %@ with picture %@.", getVaList([poem.words.count, poem.theme, poem.picture]))
 
         // Log Answers Custom Event.
-        Answers.logCustomEventWithName("Finished Composing Poem",
+        Answers.logCustomEvent(withName: "Finished Composing Poem",
             customAttributes: [
                 "Poem": poem.getSentence(),
                 "Theme": poem.theme,
@@ -171,19 +171,19 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
 
     // MARK: CountdownViewDelegate
 
-    func countdownView(countdownView: CountdownView, didCountdownTo second: Int) {
+    func countdownView(_ countdownView: CountdownView, didCountdownTo second: Int) {
         switch(second) {
         case 0:
             if poem.words.count > 0 {
                 // Perform the segue to go the poem history.
-                performSegueWithIdentifier("ShowHistory", sender: countdownView)
+                performSegue(withIdentifier: "ShowHistory", sender: countdownView)
             } else {
                 // Go back to the theme chooser.
-                navigationController?.popViewControllerAnimated(true)
+                _ = navigationController?.popViewController(animated: true)
             }
         case 10:
             // Change the color of Shuffle to red as well.
-            shuffleButton.setTitleColor(UIColor(red: 238/255, green: 103/255, blue: 100/255, alpha: 1.0), forState: .Normal)
+            shuffleButton.setTitleColor(UIColor(red: 238/255, green: 103/255, blue: 100/255, alpha: 1.0), for: UIControlState())
         default:
             break
         }
@@ -191,7 +191,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
 
     // MARK: UICollectionViewDataSource
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == bankCollectionView {
             return bankWords.count
         } else if collectionView == poemCollectionView {
@@ -201,11 +201,11 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         return 0
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PoemComposerWordCell", forIndexPath: indexPath) as! PoemComposerWordCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PoemComposerWordCell", for: indexPath) as! PoemComposerWordCell
 
         cell.contentView.frame = cell.bounds
-        cell.contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        cell.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         var word = ""
         if collectionView == bankCollectionView {
@@ -220,7 +220,7 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
 
         // Draw the border using the same color as the word.
         cell.layer.masksToBounds = false
-        cell.layer.borderColor = cell.word.textColor.CGColor
+        cell.layer.borderColor = cell.word.textColor.cgColor
         cell.layer.borderWidth = 2
         cell.layer.cornerRadius = 3
 
@@ -230,30 +230,30 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         }
 
         // Make sure the cell is not hidden.
-        cell.hidden = false
+        cell.isHidden = false
 
         return cell
     }
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
     // MARK: UICollectionViewDelegate
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         if collectionView == bankCollectionView {
             // A word in the bank has been tapped.
 
             // Fade out and hide the word in the bank.
-            if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
-                UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .CurveEaseInOut,
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: UIViewAnimationOptions(),
                     animations: {
                         cell.alpha = 0
                     },
                     completion: { finished in
-                        cell.hidden = true
+                        cell.isHidden = true
                     }
                 )
             }
@@ -269,14 +269,14 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
             // A word in the poem has been tapped.
 
             // Fade out then remove the word from the poem.
-            if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
-                UIView.animateWithDuration(0.15,
+            if let cell = collectionView.cellForItem(at: indexPath) {
+                UIView.animate(withDuration: 0.15,
                     animations: {
                         cell.alpha = 0
                     },
                     completion: { finished in
                         collectionView.performBatchUpdates({
-                            collectionView.deleteItemsAtIndexPaths([indexPath])
+                            collectionView.deleteItems(at: [indexPath])
                             },
                             completion: { _ in
                                 self.resizePoemToFitContentSize()
@@ -292,14 +292,14 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
             displayWord(word, inCollectionView: bankCollectionView)
 
             // Remove the word from the poem.
-            poem.words.removeAtIndex(indexPath.row)
+            poem.words.remove(at: indexPath.row)
         }
 
         // Update the tick icon state.
-        navigationItem.rightBarButtonItem?.enabled = poem.words.count > 0
+        navigationItem.rightBarButtonItem?.isEnabled = poem.words.count > 0
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var word = ""
         if collectionView == bankCollectionView {
             word = bankWords[indexPath.row]
@@ -311,20 +311,20 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
 
     // MARK: UICollectionView Utilities
 
-    func sizeForWord(word: String) -> CGSize {
+    func sizeForWord(_ word: String) -> CGSize {
         return CGSize(width: 18 + word.characters.count * 10, height: 32)
     }
 
     func resizePoemToFitContentSize() {
-        UIView.animateWithDuration(0.15) {
+        UIView.animate(withDuration: 0.15, animations: {
             self.poemHeightContraint.constant = self.poemCollectionView.contentSize.height
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
 
     func savePoem() {
         // Save the poem current completion date.
-        poem.date = NSDate()
+        poem.date = Date()
 
         // Save the theme name for the poem.
         poem.theme = theme.name
@@ -340,21 +340,21 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
         bankWords = theme.getRandomWords(wordCount - poem.words.count) as [String]
     }
 
-    func displayWord(word: String, inCollectionView collectionView: UICollectionView!) {
+    func displayWord(_ word: String, inCollectionView collectionView: UICollectionView!) {
 
         if collectionView == bankCollectionView {
 
             // Look for the word in the word bank.
-            for (index, bankWord) in bankWords.enumerate() {
+            for (index, bankWord) in bankWords.enumerated() {
                 if word == bankWord {
                     // Find the corresponding cell in the collection view and unhide it.
-                    if let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0)) {
-                        if cell.hidden {
+                    if let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) {
+                        if cell.isHidden {
                             // Unhide and animate the cell again.
-                            cell.hidden = false
-                            UIView.animateWithDuration(0.15) {
+                            cell.isHidden = false
+                            UIView.animate(withDuration: 0.15, animations: {
                                 cell.alpha = 1
-                            }
+                            }) 
                             // Return since we found it.
                             return
                         }
@@ -366,17 +366,17 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
             bankWords.append(word)
 
             // Display the new word accordingly at the last position.
-            let bankIndexPath = NSIndexPath(forItem: bankWords.count - 1, inSection: 0)
-            collectionView.insertItemsAtIndexPaths([bankIndexPath])
+            let bankIndexPath = IndexPath(item: bankWords.count - 1, section: 0)
+            collectionView.insertItems(at: [bankIndexPath])
 
         } else if collectionView == poemCollectionView {
 
             // Retrieve the index path of the last word of the poem.
-            let poemIndexPath = NSIndexPath(forItem: poem.words.count - 1, inSection: 0)
+            let poemIndexPath = IndexPath(item: poem.words.count - 1, section: 0)
 
             // Insert the cell for this word.
             collectionView.performBatchUpdates({
-                collectionView.insertItemsAtIndexPaths([poemIndexPath])
+                collectionView.insertItems(at: [poemIndexPath])
                 },
                 completion: { _ in
                     self.resizePoemToFitContentSize()
@@ -384,22 +384,22 @@ class PoemComposerViewController: UIViewController, UICollectionViewDataSource, 
             )
 
             // Fade in so it appears more smoothly.
-            if let cell = collectionView.cellForItemAtIndexPath(poemIndexPath) {
+            if let cell = collectionView.cellForItem(at: poemIndexPath) {
                 cell.alpha = 0
-                UIView.animateWithDuration(0.15) {
+                UIView.animate(withDuration: 0.15, animations: {
                     cell.alpha = 1
-                }
+                }) 
             }
         }
     }
 
     // MARK: ImageCarouselViewDelegate
 
-    func numberOfImagesInImageCarousel(imageCarousel: ImageCarouselView) -> Int {
+    func numberOfImagesInImageCarousel(_ imageCarousel: ImageCarouselView) -> Int {
         return themePictures.count
     }
 
-    func imageCarousel(imageCarousel: ImageCarouselView, imageAtIndex index: Int) -> UIImage {
+    func imageCarousel(_ imageCarousel: ImageCarouselView, imageAtIndex index: Int) -> UIImage {
         return UIImage(named: themePictures[index])!
     }
 
