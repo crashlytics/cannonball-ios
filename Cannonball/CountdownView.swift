@@ -20,7 +20,7 @@ import QuartzCore
 // Custom protocol for classes to implement the countdown.
 protocol CountdownViewDelegate: class {
 
-    func countdownView(countdown: CountdownView, didCountdownTo second: Int)
+    func countdownView(_ countdown: CountdownView, didCountdownTo second: Int)
 
 }
 
@@ -36,7 +36,7 @@ class CountdownView : UIView {
 
     var countdownTime: Int
 
-    private var secondsRemaining: Double {
+    fileprivate var secondsRemaining: Double {
         didSet {
             progress = secondsRemaining / Double(countdownTime)
 
@@ -44,8 +44,8 @@ class CountdownView : UIView {
             secondsLabel.text = String(wholeSeconds)
 
             if wholeSeconds <= 10 {
-                backgroundCircle.strokeColor = UIColor.cannonballRedLightColor().CGColor
-                foregroundCircle.strokeColor = UIColor.cannonballRedColor().CGColor
+                backgroundCircle.strokeColor = UIColor.cannonballRedLightColor().cgColor
+                foregroundCircle.strokeColor = UIColor.cannonballRedColor().cgColor
                 secondsLabel.textColor = UIColor.cannonballRedColor()
             }
 
@@ -55,14 +55,14 @@ class CountdownView : UIView {
         }
     }
 
-    private var displayLink: CADisplayLink?
+    fileprivate var displayLink: CADisplayLink?
 
     func start() {
         secondsRemaining = Double(countdownTime)
 
         displayLink?.invalidate()
-        displayLink = UIScreen.mainScreen().displayLinkWithTarget(self, selector: #selector(CountdownView.tick))
-        displayLink!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        displayLink = UIScreen.main.displayLink(withTarget: self, selector: #selector(CountdownView.tick))
+        displayLink!.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
     }
 
     func stop() {
@@ -70,7 +70,7 @@ class CountdownView : UIView {
     }
 
     // [1, 0]
-    private var progress: Double = 1 {
+    fileprivate var progress: Double = 1 {
         didSet {
             // Update remaining time circle and label.
             foregroundCircle.strokeEnd = (CGFloat) (progress)
@@ -96,7 +96,7 @@ class CountdownView : UIView {
         secondsLabel.text = String(countdownTime)
         secondsLabel.font = UIFont(name: "Avenir", size: 16)
         secondsLabel.textColor = UIColor.cannonballGreenColor()
-        secondsLabel.textAlignment = NSTextAlignment.Center
+        secondsLabel.textAlignment = NSTextAlignment.center
 
         // Define the path for the circle strokes.
         let arcCenter = CGPoint(x: bounds.width / 2, y: bounds.width / 2)
@@ -106,17 +106,17 @@ class CountdownView : UIView {
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
 
         // Define the background circle.
-        backgroundCircle.path = path.CGPath
-        backgroundCircle.fillColor = UIColor.clearColor().CGColor
-        backgroundCircle.strokeColor = UIColor.cannonballGreenLightColor().CGColor
+        backgroundCircle.path = path.cgPath
+        backgroundCircle.fillColor = UIColor.clear.cgColor
+        backgroundCircle.strokeColor = UIColor.cannonballGreenLightColor().cgColor
         backgroundCircle.strokeStart = 0
         backgroundCircle.strokeEnd = 1
         backgroundCircle.lineWidth = 2
 
         // Define the foreground circle indicating elapsing time.
-        foregroundCircle.path = path.CGPath
-        foregroundCircle.fillColor = UIColor.clearColor().CGColor
-        foregroundCircle.strokeColor = UIColor.cannonballGreenColor().CGColor
+        foregroundCircle.path = path.cgPath
+        foregroundCircle.fillColor = UIColor.clear.cgColor
+        foregroundCircle.strokeColor = UIColor.cannonballGreenColor().cgColor
         foregroundCircle.strokeStart = 0
         foregroundCircle.strokeEnd = 1
         foregroundCircle.lineWidth = 2

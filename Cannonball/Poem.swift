@@ -16,12 +16,12 @@
 
 import Foundation
 
-public class Poem: NSObject, NSCoding {
+open class Poem: NSObject, NSCoding {
 
     // MARK: Types
 
     // String constants used to archive the stored properties of a poem.
-    private struct SerializationKeys {
+    fileprivate struct SerializationKeys {
         static let words = "words"
         static let picture = "picture"
         static let theme = "theme"
@@ -30,19 +30,19 @@ public class Poem: NSObject, NSCoding {
     }
 
     // The words composing a poem.
-    public var words: [String] = []
+    open var words: [String] = []
 
     // The picture used as a background of a poem.
-    public var picture: String = ""
+    open var picture: String = ""
 
     // The theme name of the poem.
-    public var theme: String = ""
+    open var theme: String = ""
 
     // The date a poem is completed.
-    public var date = NSDate()
+    open var date = Date()
 
     // An underlying identifier for each poem.
-    public private(set) var UUID = NSUUID()
+    open fileprivate(set) var UUID = Foundation.UUID()
 
     // MARK: Initialization
 
@@ -51,7 +51,7 @@ public class Poem: NSObject, NSCoding {
     }
 
     // Initialize a Poem instance will all its properties, including a UUID.
-    private init(words: [String], picture: String, theme: String, date: NSDate, UUID: NSUUID) {
+    fileprivate init(words: [String], picture: String, theme: String, date: Date, UUID: Foundation.UUID) {
         self.words = words
         self.picture = picture
         self.theme = theme
@@ -60,37 +60,37 @@ public class Poem: NSObject, NSCoding {
     }
 
     // Initialize a Poem instance with all its public properties.
-    convenience init(words: [String], picture: String, theme: String, date: NSDate) {
-        self.init(words: words, picture: picture, theme: theme, date: date, UUID: NSUUID())
+    convenience init(words: [String], picture: String, theme: String, date: Date) {
+        self.init(words: words, picture: picture, theme: theme, date: date, UUID: Foundation.UUID())
     }
 
     // Retrieve the poem words as one sentence.
     func getSentence() -> String {
-        return words.joinWithSeparator(" ")
+        return words.joined(separator: " ")
     }
 
     // MARK: NSCoding
 
     required public init?(coder aDecoder: NSCoder) {
-        words = aDecoder.decodeObjectForKey(SerializationKeys.words) as! [String]
-        picture = aDecoder.decodeObjectForKey(SerializationKeys.picture) as! String
-        theme = aDecoder.decodeObjectForKey(SerializationKeys.theme) as! String
-        date = aDecoder.decodeObjectForKey(SerializationKeys.date) as! NSDate
-        UUID = aDecoder.decodeObjectForKey(SerializationKeys.uuid) as! NSUUID
+        words = aDecoder.decodeObject(forKey: SerializationKeys.words) as! [String]
+        picture = aDecoder.decodeObject(forKey: SerializationKeys.picture) as! String
+        theme = aDecoder.decodeObject(forKey: SerializationKeys.theme) as! String
+        date = aDecoder.decodeObject(forKey: SerializationKeys.date) as! Date
+        UUID = aDecoder.decodeObject(forKey: SerializationKeys.uuid) as! Foundation.UUID
     }
 
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(words, forKey: SerializationKeys.words)
-        aCoder.encodeObject(picture, forKey: SerializationKeys.picture)
-        aCoder.encodeObject(theme, forKey: SerializationKeys.theme)
-        aCoder.encodeObject(date, forKey: SerializationKeys.date)
-        aCoder.encodeObject(UUID, forKey: SerializationKeys.uuid)
+    open func encode(with aCoder: NSCoder) {
+        aCoder.encode(words, forKey: SerializationKeys.words)
+        aCoder.encode(picture, forKey: SerializationKeys.picture)
+        aCoder.encode(theme, forKey: SerializationKeys.theme)
+        aCoder.encode(date, forKey: SerializationKeys.date)
+        aCoder.encode(UUID, forKey: SerializationKeys.uuid)
     }
 
     // MARK: Overrides
 
     // Two poems are equal only if their UUIDs match.
-    override public func isEqual(object: AnyObject?) -> Bool {
+    override open func isEqual(_ object: Any?) -> Bool {
         if let poem = object as? Poem {
             return UUID == poem.UUID
         }

@@ -20,19 +20,19 @@ class ThemeCell: UITableViewCell {
 
     // MARK: Properties
 
-    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
 
-    @IBOutlet private weak var pictureImageView: UIImageView!
+    @IBOutlet fileprivate weak var pictureImageView: UIImageView!
 
-    private var gradient: CAGradientLayer!
+    fileprivate var gradient: CAGradientLayer!
 
     override func awakeFromNib() {
         // Add the gradient to the picture image view.
         gradient = CAGradientLayer()
-        let colors: [AnyObject] = [UIColor.clearColor().CGColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).CGColor]
+        let colors: [AnyObject] = [UIColor.clear.cgColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor]
         gradient.colors = colors
-        gradient.startPoint = CGPointMake(0.0, 0.4)
-        gradient.endPoint = CGPointMake(0.0, 1.0)
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.4)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
         pictureImageView.layer.addSublayer(gradient)
     }
 
@@ -41,7 +41,7 @@ class ThemeCell: UITableViewCell {
         gradient.frame = bounds
     }
 
-    func configureWithTheme(theme: Theme) {
+    func configureWithTheme(_ theme: Theme) {
         // Add category name.
         nameLabel.text = "#\(theme.name)"
 

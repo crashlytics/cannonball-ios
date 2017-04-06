@@ -30,7 +30,7 @@ class PoemPersistenceTests: XCTestCase {
     // Tests overwritePoems method.
 
     func testNoPoems() {
-        let poem = Poem(words: ["Test test test", "test"], picture: "falseURL", theme: "Romance", date: NSDate())
+        let poem = Poem(words: ["Test test test", "test"], picture: "falseURL", theme: "Romance", date: Date())
         poemPersistence.persistPoem(poem)
         poemPersistence.overwritePoems([])
         let poems: [Poem] = poemPersistence.retrievePoems()
@@ -39,7 +39,7 @@ class PoemPersistenceTests: XCTestCase {
 
     // Tests persistPoem as well as retrievePoems.
     func testPersistPoem() {
-        let poem = Poem(words: ["Test test test", "test"], picture: "falseURL", theme: "Romance", date: NSDate())
+        let poem = Poem(words: ["Test test test", "test"], picture: "falseURL", theme: "Romance", date: Date())
         poemPersistence.persistPoem(poem)
         var poems: [Poem] = poemPersistence.retrievePoems()
         XCTAssertNotNil(poems, "Poem not persisted")

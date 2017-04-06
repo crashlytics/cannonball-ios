@@ -18,7 +18,7 @@ import UIKit
 
 protocol PoemCellDelegate : class {
 
-    func poemCellWantsToSharePoem(poemCell: PoemCell)
+    func poemCellWantsToSharePoem(_ poemCell: PoemCell)
 
 }
 
@@ -28,31 +28,31 @@ class PoemCell: UITableViewCell {
 
     weak var delegate: PoemCellDelegate?
 
-    @IBOutlet private weak var pictureImageView: UIImageView!
+    @IBOutlet fileprivate weak var pictureImageView: UIImageView!
 
-    @IBOutlet private weak var themeLabel: UILabel!
+    @IBOutlet fileprivate weak var themeLabel: UILabel!
 
-    @IBOutlet private weak var poemLabel: UILabel!
+    @IBOutlet fileprivate weak var poemLabel: UILabel!
 
-    @IBOutlet private weak var shareButton: UIButton!
+    @IBOutlet fileprivate weak var shareButton: UIButton!
 
-    private var gradient: CAGradientLayer!
+    fileprivate var gradient: CAGradientLayer!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         // Create gradient.
         gradient = CAGradientLayer()
-        let colors: [AnyObject] = [UIColor.clearColor().CGColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).CGColor]
+        let colors: [AnyObject] = [UIColor.clear.cgColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor]
         gradient.colors = colors
-        gradient.startPoint = CGPointMake(0.0, 0.4)
-        gradient.endPoint = CGPointMake(0.0, 1.0)
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.4)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
 
         // Add gradient to ImageView.
         pictureImageView.layer.addSublayer(gradient)
 
         // Add share button target.
-        shareButton.addTarget(self, action: #selector(PoemCell.shareButtonTapped), forControlEvents: .TouchUpInside)
+        shareButton.addTarget(self, action: #selector(PoemCell.shareButtonTapped), for: .touchUpInside)
     }
 
     override func layoutSubviews() {
@@ -60,7 +60,7 @@ class PoemCell: UITableViewCell {
         gradient.frame = bounds
     }
 
-    func configureWithPoem(poem: Poem) {
+    func configureWithPoem(_ poem: Poem) {
         themeLabel.text = "#\(poem.theme)"
         poemLabel.text = poem.getSentence()
         pictureImageView.image = UIImage(named: poem.picture)
@@ -68,18 +68,18 @@ class PoemCell: UITableViewCell {
 
     func capturePoemImage() -> UIImage {
         // Hide the share button.
-        shareButton.hidden = true
+        shareButton.isHidden = true
 
         // Capture a PNG of the view.
         UIGraphicsBeginImageContextWithOptions(frame.size, false, 0)
-        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
         let containerViewImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         // Show the share button.
-        shareButton.hidden = false
+        shareButton.isHidden = false
 
-        return containerViewImage
+        return containerViewImage!
     }
 
     func shareButtonTapped() {

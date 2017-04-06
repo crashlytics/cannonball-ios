@@ -24,7 +24,7 @@ class ImageCarouselCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    private var imageView: UIImageView!
+    fileprivate var imageView: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +38,7 @@ class ImageCarouselCollectionViewCell: UICollectionViewCell {
         commonInit()
     }
 
-    private func commonInit() {
+    fileprivate func commonInit() {
         imageView = UIImageView()
         contentView.addSubview(imageView)
     }

@@ -40,7 +40,7 @@ class NativeAdCell: UIView, MPNativeAdRendering {
     override func awakeFromNib() {
         // Decorate the call to action button.
         callToActionButton.layer.masksToBounds = false
-        callToActionButton.layer.borderColor = callToActionButton.titleLabel?.textColor.CGColor
+        callToActionButton.layer.borderColor = callToActionButton.titleLabel?.textColor.cgColor
         callToActionButton.layer.borderWidth = 2
         callToActionButton.layer.cornerRadius = 6
 

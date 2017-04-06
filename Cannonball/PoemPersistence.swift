@@ -18,9 +18,9 @@ import Foundation
 
 private let SingletonSharedInstance = PoemPersistence()
 
-public class PoemPersistence {
+open class PoemPersistence {
 
-    private let userDefaultsKey = "io.fabric.samples.cannonball.poems"
+    fileprivate let userDefaultsKey = "io.fabric.samples.cannonball.poems"
 
     class var sharedInstance : PoemPersistence {
         return SingletonSharedInstance
@@ -29,35 +29,35 @@ public class PoemPersistence {
     // MARK: Poem Persistence Utilities
 
     // Save a new poem.
-    func persistPoem(poem: Poem) {
+    func persistPoem(_ poem: Poem) {
         // Retrieve the currently saved poems.
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = UserDefaults.standard
         var poems: [Poem]
-        if let poemsArchived: AnyObject = userDefaults.objectForKey(userDefaultsKey) {
-            poems = NSKeyedUnarchiver.unarchiveObjectWithData(poemsArchived as! NSData) as! [Poem]
+        if let poemsArchived: AnyObject = userDefaults.object(forKey: userDefaultsKey) as AnyObject? {
+            poems = NSKeyedUnarchiver.unarchiveObject(with: poemsArchived as! Data) as! [Poem]
         } else {
             poems = []
         }
 
         // Append the newly created poem.
-        poems.insert(poem, atIndex: 0)
+        poems.insert(poem, at: 0)
 
         // Save the poems.
-        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(poems), forKey: userDefaultsKey)
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: poems), forKey: userDefaultsKey)
     }
 
     // Overwrite the poems.
-    func overwritePoems(poems: [Poem]) {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(poems), forKey: userDefaultsKey)
+    func overwritePoems(_ poems: [Poem]) {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: poems), forKey: userDefaultsKey)
     }
 
     // Retrieve the poems.
     func retrievePoems()  -> [Poem] {
         var poems: [Poem]
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let poemsArchived: AnyObject = userDefaults.objectForKey(userDefaultsKey) {
-            poems = NSKeyedUnarchiver.unarchiveObjectWithData(poemsArchived as! NSData) as! [Poem]
+        let userDefaults = UserDefaults.standard
+        if let poemsArchived: AnyObject = userDefaults.object(forKey: userDefaultsKey) as AnyObject? {
+            poems = NSKeyedUnarchiver.unarchiveObject(with: poemsArchived as! Data) as! [Poem]
         } else {
             poems = []
         }
