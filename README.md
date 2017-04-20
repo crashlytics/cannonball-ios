@@ -44,6 +44,6 @@ Cannonball for iOS is compatible with iOS 8+.
 
 ## License
 
-Copyright 2014-2015 Twitter, Inc. and contributors.
+Copyright 2014-2017 Google, Inc. and contributors.
 
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
