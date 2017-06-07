@@ -1,4 +1,4 @@
-# Cannonball for iOS
+# Cannonball for iOS [![Build Status](https://travis-ci.org/twitterdev/cannonball-ios.svg?branch=master)](https://travis-ci.org/twitterdev/cannonball-ios)
 
 This repository contains the source code for Cannonball, an iOS application written in Swift built with [Fabric](https://get.fabric.io/).
 
